@@ -1,0 +1,150 @@
+{
+  "title": "Cifrado, hashes y TLS",
+  "lessons": [
+    {
+      "title": "¿Qué es el cifrado?",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/encryption",
+        "https://csrc.nist.gov/glossary/term/plaintext",
+        "https://csrc.nist.gov/glossary/term/ciphertext"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔐", "text": "El cifrado es la transformación criptográfica de datos (texto plano) en una forma llamada texto cifrado." },
+        { "type": "choice", "q": "¿Qué es el texto plano (plaintext)?", "options": ["Los datos que entran en un proceso de cifrado", "El resultado del cifrado", "Una clave secreta"], "answer": 0, "why": "NIST: plaintext es el dato de entrada de un proceso de cifrado." },
+        { "type": "card", "emoji": "📦", "text": "El texto cifrado (ciphertext) es el dato en su forma cifrada.", "analogy": "Un mensaje dentro de una caja con candado." },
+        { "type": "match", "q": "Une cada término con su descripción", "pairs": [
+          { "term": "Texto plano", "desc": "Dato de entrada del cifrado" },
+          { "term": "Cifrado", "desc": "Transformación criptográfica de los datos" },
+          { "term": "Texto cifrado", "desc": "Dato en su forma cifrada" }
+        ], "why": "Son las definiciones del glosario de NIST." },
+        { "type": "truefalse", "statement": "El texto cifrado es el resultado de aplicar el cifrado al texto plano.", "answer": true, "why": "NIST lo define como la forma cifrada del texto plano." },
+        { "type": "choice", "q": "Un mensaje pasa de texto plano a texto cifrado. ¿Qué proceso ocurrió?", "options": ["Cifrado", "Compresión", "Redirección"], "answer": 0, "why": "El cifrado transforma el texto plano en texto cifrado." }
+      ]
+    },
+    {
+      "title": "Cifrado simétrico y asimétrico",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/symmetric_key_algorithm",
+        "https://csrc.nist.gov/glossary/term/asymmetric_cryptography",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Public-key_cryptography"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔑", "text": "Cifrado simétrico: se usa la misma clave secreta para cifrar y para descifrar." },
+        { "type": "choice", "q": "En criptografía simétrica, ¿qué clave se usa para cifrar y descifrar?", "options": ["La misma clave secreta", "Dos claves distintas", "Ninguna clave"], "answer": 0, "why": "NIST: un algoritmo simétrico emplea la misma clave secreta para una operación y su complementaria." },
+        { "type": "card", "emoji": "🗝️", "text": "Criptografía asimétrica: usa dos claves separadas, un par de clave pública y clave privada.", "analogy": "Un buzón: todos pueden dejar cartas, solo tú las abres." },
+        { "type": "truefalse", "statement": "En la criptografía asimétrica las claves vienen en pares.", "answer": true, "why": "MDN: en la criptografía de clave pública, o asimétrica, las claves vienen en pares." },
+        { "type": "match", "q": "Une cada tipo con su característica", "pairs": [
+          { "term": "Simétrica", "desc": "Una misma clave secreta" },
+          { "term": "Asimétrica", "desc": "Un par de claves, pública y privada" },
+          { "term": "Cifrado", "desc": "Texto plano a texto cifrado" }
+        ], "why": "NIST y MDN definen así ambos tipos de criptografía." },
+        { "type": "scenario", "situation": "Necesitas cifrar y descifrar datos usando una única clave secreta compartida.", "q": "¿Qué tipo de criptografía es?", "options": ["Simétrica", "Asimétrica", "Ninguna de las dos"], "answer": 0, "why": "Es la definición de criptografía simétrica: la misma clave para cifrar y descifrar." }
+      ]
+    },
+    {
+      "title": "Hashes: qué son y por qué no son cifrado",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/hash_function",
+        "https://csrc.nist.gov/glossary/term/hash_value",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Hash_function"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "#️⃣", "text": "Una función hash convierte una entrada de cualquier longitud en una salida de longitud fija.", "analogy": "Como una huella dactilar de los datos." },
+        { "type": "choice", "q": "¿Qué caracteriza la salida de una función hash?", "options": ["Tiene longitud fija, sea cual sea la entrada", "Crece con el tamaño de la entrada", "Siempre se puede descifrar con una clave"], "answer": 0, "why": "NIST: una función hash asigna una cadena de bits de longitud arbitraria a una de longitud fija." },
+        { "type": "card", "emoji": "➡️", "text": "Las funciones hash criptográficas son de una sola vía y resistentes a colisiones." },
+        { "type": "match", "q": "Une cada propiedad con su significado", "pairs": [
+          { "term": "Una sola vía", "desc": "Es inviable hallar una entrada que dé una salida concreta" },
+          { "term": "Resistente a colisiones", "desc": "Es inviable hallar dos entradas con la misma salida" },
+          { "term": "Longitud fija", "desc": "La salida mide siempre lo mismo" }
+        ], "why": "Son las propiedades que describe el glosario de NIST." },
+        { "type": "truefalse", "statement": "Un hash criptográfico se puede revertir fácilmente para recuperar la entrada original.", "answer": false, "why": "Es de una sola vía: es computacionalmente inviable hallar una entrada que produzca una salida dada." },
+        { "type": "choice", "q": "¿Por qué un hash no es lo mismo que cifrar?", "options": ["Es de una sola vía; el cifrado se puede descifrar con la clave", "Porque usa la misma clave que el cifrado simétrico", "Porque produce texto plano"], "answer": 0, "why": "El cifrado tiene operación complementaria (descifrar con la clave), mientras que el hash es de una sola vía." }
+      ]
+    },
+    {
+      "title": "Firma digital",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/digital_signature",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Digital_signature"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "✍️", "text": "Una firma digital da autenticidad, integridad y soporte de no repudio. No da confidencialidad.", "analogy": "Como un sello de lacre." },
+        { "type": "choice", "q": "¿Cuál de estas garantías NO da una firma digital?", "options": ["Confidencialidad", "Integridad", "Autenticidad"], "answer": 0, "why": "NIST SP 800-63-4: las firmas digitales dan protección de autenticidad e integridad y soporte de no repudio, pero no confidencialidad." },
+        { "type": "card", "emoji": "🔏", "text": "La clave privada firma los datos y la clave pública verifica la firma." },
+        { "type": "truefalse", "statement": "La firma digital se verifica con la clave pública.", "answer": true, "why": "NIST: la clave privada se usa para firmar los datos y la pública para verificar la firma." },
+        { "type": "match", "q": "Une cada elemento con su papel", "pairs": [
+          { "term": "Clave privada", "desc": "Firma los datos" },
+          { "term": "Clave pública", "desc": "Verifica la firma" },
+          { "term": "Firma digital", "desc": "Autentica el origen y la integridad de los datos" }
+        ], "why": "Son las descripciones del glosario de NIST." },
+        { "type": "scenario", "situation": "Quieres comprobar que un documento lo envió su autor y que nadie lo modificó.", "q": "¿Qué mecanismo encaja mejor?", "options": ["Una firma digital", "Cifrarlo con una clave simétrica", "Comprimirlo"], "answer": 0, "why": "Una firma digital permite verificar el origen y la integridad de los datos. Cifrar con clave simétrica protege la confidencialidad, no prueba quién lo envió." }
+      ]
+    },
+    {
+      "title": "Certificados digitales",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/public_key_certificate",
+        "https://csrc.nist.gov/glossary/term/certification_authority",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Digital_certificate",
+        "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Transport_Layer_Security"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📜", "text": "Un certificado digital vincula una clave pública con su propietario, por ejemplo una organización." },
+        { "type": "choice", "q": "¿Qué hace un certificado digital?", "options": ["Vincula una clave pública con su propietario", "Cifra todos los datos del disco", "Traduce dominios a IP"], "answer": 0, "why": "MDN: un certificado digital es un archivo de datos que vincula una clave criptográfica pública con una organización." },
+        { "type": "card", "emoji": "🏛️", "text": "Una autoridad de certificación (CA) es una entidad autorizada para crear, firmar, emitir y revocar certificados." },
+        { "type": "truefalse", "statement": "Un certificado está firmado digitalmente por una autoridad de certificación.", "answer": true, "why": "NIST: el certificado está firmado digitalmente por una CA, una parte de confianza, lo que vincula la clave pública con su propietario." },
+        { "type": "card", "emoji": "🌐", "text": "Para autenticar un sitio con TLS, el sitio necesita un certificado que vincule sus claves con su nombre de dominio." },
+        { "type": "match", "q": "Une cada elemento con su descripción", "pairs": [
+          { "term": "Certificado", "desc": "Vincula una clave pública con su propietario" },
+          { "term": "CA", "desc": "Firma y emite certificados" },
+          { "term": "Let's Encrypt", "desc": "CA sin fines de lucro con certificados TLS gratuitos" }
+        ], "why": "MDN describe a Let's Encrypt como una CA sin fines de lucro que emite certificados TLS gratuitos." },
+        { "type": "scenario", "situation": "Tu sitio quiere usar HTTPS y necesita demostrar su identidad a los navegadores.", "q": "¿Qué necesita?", "options": ["Una cookie HttpOnly", "Un certificado digital firmado por una CA", "Un token bearer"], "answer": 1, "why": "Para soportar autenticación del servidor, el sitio debe tener un certificado digital, que vincula sus claves con su dominio." }
+      ]
+    },
+    {
+      "title": "HTTPS y TLS",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Transport_Layer_Security",
+        "https://www.rfc-editor.org/rfc/rfc8446"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔒", "text": "TLS permite que un cliente se comunique de forma segura con un servidor a través de una red no confiable." },
+        { "type": "choice", "q": "¿Qué es HTTPS?", "options": ["HTTP asegurado con TLS", "Un servidor DNS", "Un formato de datos"], "answer": 0, "why": "MDN: TLS se usa para asegurar las conexiones HTTP, y el protocolo resultante se llama HTTPS." },
+        { "type": "card", "emoji": "🛡️", "text": "TLS ofrece tres cosas: cifrado (confidencialidad), integridad y autenticación." },
+        { "type": "match", "q": "Une cada propiedad de TLS 1.3 con su significado", "pairs": [
+          { "term": "Confidencialidad", "desc": "Los datos solo son visibles para los extremos" },
+          { "term": "Integridad", "desc": "No se pueden modificar sin que se detecte" },
+          { "term": "Autenticación", "desc": "El servidor siempre se autentica" }
+        ], "why": "Son las propiedades que describe el RFC 8446 (TLS 1.3)." },
+        { "type": "card", "emoji": "🤝", "text": "En el handshake inicial, cliente y servidor acuerdan una clave secreta para cifrar y descifrar los mensajes." },
+        { "type": "order", "q": "Ordena las fases del handshake de TLS 1.3", "items": ["Intercambio de claves", "Parámetros del servidor", "Autenticación"], "why": "El RFC 8446 describe tres fases: Key Exchange, Server Parameters y Authentication." },
+        { "type": "scenario", "situation": "Un atacante intenta modificar datos que viajan entre tu navegador y un sitio HTTPS.", "q": "¿Qué propiedad de TLS lo cubre?", "options": ["Integridad: los cambios no pasan sin detección", "La redirección 301", "El atributo HttpOnly"], "answer": 0, "why": "RFC 8446: los datos enviados por el canal no pueden ser modificados por atacantes sin que se detecte." },
+        { "type": "truefalse", "statement": "En TLS 1.3, el servidor siempre se autentica en el canal.", "answer": true, "why": "RFC 8446: el lado del servidor del canal siempre está autenticado." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/hash_function",
+        "https://csrc.nist.gov/glossary/term/digital_signature",
+        "https://csrc.nist.gov/glossary/term/public_key_certificate",
+        "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Transport_Layer_Security"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: cifrado, hashes, firma digital, certificados y TLS." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Hash", "desc": "Salida de longitud fija y de una sola vía" },
+          { "term": "Firma digital", "desc": "Autentica el origen y la integridad de los datos" },
+          { "term": "Certificado", "desc": "Vincula una clave pública con su propietario" }
+        ], "why": "Son las definiciones de NIST y MDN." },
+        { "type": "choice", "q": "¿Qué tipo de criptografía usa la misma clave para cifrar y descifrar?", "options": ["Simétrica", "Asimétrica", "Ninguna"], "answer": 0, "why": "Es la definición de criptografía simétrica." },
+        { "type": "truefalse", "statement": "Un hash criptográfico es de una sola vía.", "answer": true, "why": "Es computacionalmente inviable hallar una entrada que produzca una salida dada." },
+        { "type": "fillblank", "q": "Completa la frase sobre el handshake de TLS.", "code": "Cliente y servidor acuerdan una ___ secreta para cifrar y descifrar los mensajes.", "options": ["clave", "cookie", "firma"], "answer": 0, "why": "MDN: cliente y servidor acuerdan una clave secreta para cifrar y descifrar los mensajes." },
+        { "type": "scenario", "situation": "Quieres que los navegadores confíen en la identidad de tu sitio web.", "q": "¿Qué necesitas?", "options": ["Un certificado digital firmado por una CA", "Un hash de tu página", "Una cookie Secure"], "answer": 0, "why": "El certificado vincula las claves del sitio con su dominio y está firmado por una autoridad de certificación." },
+        { "type": "choice", "q": "¿Qué firma los datos y qué verifica la firma?", "options": ["La clave privada firma; la clave pública verifica", "La clave pública firma; la privada verifica", "Ambas firman"], "answer": 0, "why": "NIST: la clave privada se usa para firmar y la pública para verificar la firma." },
+        { "type": "truefalse", "statement": "HTTPS es HTTP asegurado mediante TLS.", "answer": true, "why": "MDN: TLS se usa para asegurar conexiones HTTP, y el resultado se llama HTTPS." }
+      ]
+    }
+  ]
+}

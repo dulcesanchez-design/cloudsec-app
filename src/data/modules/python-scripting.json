@@ -1,0 +1,154 @@
+{
+  "title": "Python y scripting básico",
+  "lessons": [
+    {
+      "title": "Qué es Python y cómo se ejecuta un script",
+      "source": [
+        "https://docs.python.org/3/faq/general.html",
+        "https://docs.python.org/3/tutorial/interpreter.html",
+        "https://docs.python.org/3/using/cmdline.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🐍", "text": "Python es un lenguaje de programación interpretado, interactivo y orientado a objetos." },
+        { "type": "choice", "q": "¿Cómo describe la documentación oficial a Python?", "options": ["Un lenguaje interpretado, interactivo y orientado a objetos", "Un sistema operativo", "Una base de datos"], "answer": 0, "why": "La FAQ de Python lo define como «un lenguaje de programación interpretado, interactivo y orientado a objetos»." },
+        { "type": "card", "emoji": "📜", "text": "Un script es un archivo con código Python. Si le pasas el nombre del archivo al intérprete, lo lee y lo ejecuta." },
+        { "type": "fillblank", "q": "Ejecuta el script myscript.py desde la terminal.", "code": "$ ___ myscript.py", "options": ["python", "cat", "mkdir"], "answer": 0, "why": "La documentación usa «python myscript.py» como la forma más común de invocar un script." },
+        { "type": "card", "emoji": "💬", "text": "En modo interactivo, el intérprete lee comandos desde una terminal y muestra el prompt principal, normalmente >>>." },
+        { "type": "truefalse", "statement": "Cuando llamas al intérprete con el nombre de un archivo, lee y ejecuta el script de ese archivo.", "answer": true, "why": "Así lo indica la documentación del intérprete." },
+        { "type": "scenario", "situation": "Escribiste tus instrucciones en un archivo llamado informe.py y quieres ejecutarlas todas de una vez.", "q": "¿Qué comando usas?", "options": ["python informe.py", "cat informe.py", "mkdir informe.py"], "answer": 0, "why": "python seguido del nombre del archivo lee y ejecuta el script. cat solo muestra el texto del archivo." }
+      ]
+    },
+    {
+      "title": "Variables y tipos de datos",
+      "source": "https://docs.python.org/3/tutorial/introduction.html",
+      "steps": [
+        { "type": "card", "emoji": "📦", "text": "Una variable guarda un valor. El signo = asigna un valor a una variable.", "analogy": "Una caja con etiqueta." },
+        { "type": "fillblank", "q": "Asigna el valor 5 a la variable edad.", "code": "edad ___ 5", "options": ["=", "==", "#"], "answer": 0, "why": "El signo igual (=) asigna un valor a una variable." },
+        { "type": "card", "emoji": "🔢", "text": "Los números enteros (2, 4, 20) son de tipo int. Los que tienen parte fraccionaria (5.0, 1.6) son de tipo float." },
+        { "type": "match", "q": "Une cada tipo con un ejemplo", "pairs": [
+          { "term": "int", "desc": "Número entero, como 20" },
+          { "term": "float", "desc": "Número con parte fraccionaria, como 1.6" },
+          { "term": "Texto (str)", "desc": "Entre comillas simples o dobles" }
+        ], "why": "Así lo describe el tutorial de Python. Los textos pueden ir entre comillas simples o dobles con el mismo resultado." },
+        { "type": "card", "emoji": "💭", "text": "Un comentario empieza con # y llega hasta el final de la línea física." },
+        { "type": "choice", "q": "¿Cuál es un comentario válido en Python?", "options": ["# esto es un comentario", "// esto es un comentario", "-- esto es un comentario"], "answer": 0, "why": "Los comentarios de Python empiezan con #. El operador // se usa para la división entera." },
+        { "type": "truefalse", "statement": "El operador // hace división entera (floor division).", "answer": true, "why": "El tutorial indica que // sirve para hacer una división entera y obtener un resultado entero." }
+      ]
+    },
+    {
+      "title": "Condicionales y bucles",
+      "source": [
+        "https://docs.python.org/3/tutorial/controlflow.html",
+        "https://docs.python.org/3/tutorial/introduction.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔀", "text": "if ejecuta código según una condición. Puede haber cero o más partes elif, y la parte else es opcional." },
+        { "type": "fillblank", "q": "Completa la parte que se ejecuta cuando la condición no se cumple.", "code": "edad = 20\nif edad >= 18:\n    print('mayor')\n___:\n    print('menor')", "options": ["else", "elif", "for"], "answer": 0, "why": "else es la parte opcional sin condición. elif necesitaría su propia condición." },
+        { "type": "card", "emoji": "🔁", "text": "for recorre los elementos de una secuencia (una lista o un texto) en el orden en que aparecen." },
+        { "type": "fillblank", "q": "Completa el bucle para repetir tres veces.", "code": "for i in ___(3):\n    print(i)", "options": ["range", "def", "while"], "answer": 0, "why": "La función range() genera una secuencia de números." },
+        { "type": "card", "emoji": "♾️", "text": "while se ejecuta mientras su condición siga siendo verdadera." },
+        { "type": "truefalse", "statement": "El valor final que se le da a range() forma parte de la secuencia generada.", "answer": false, "why": "El tutorial indica que el punto final dado nunca forma parte de la secuencia generada." },
+        { "type": "choice", "q": "En Python, ¿cómo se indica el cuerpo de una función?", "options": ["Con sangría (indentación)", "Con llaves { }", "Con punto y coma"], "answer": 0, "why": "El tutorial dice que las instrucciones del cuerpo de la función deben ir con sangría." }
+      ]
+    },
+    {
+      "title": "Funciones",
+      "source": "https://docs.python.org/3/tutorial/controlflow.html",
+      "steps": [
+        { "type": "card", "emoji": "🧩", "text": "La palabra clave def introduce la definición de una función. return devuelve un valor desde ella." },
+        { "type": "fillblank", "q": "Completa la definición de la función.", "code": "___ saludar(nombre):\n    return 'Hola ' + nombre", "options": ["def", "for", "if"], "answer": 0, "why": "def introduce una definición de función." },
+        { "type": "card", "emoji": "📏", "text": "Las instrucciones del cuerpo empiezan en la línea siguiente y deben ir con sangría. El tutorial recomienda 4 espacios, sin tabuladores." },
+        { "type": "findbug", "q": "Esta función tiene un error de sintaxis. ¿Qué línea es?", "hint": "Toca la línea con el error", "lines": ["def sumar(a, b):", "return a + b", "", "print(sumar(2, 3))"], "answer": 1, "why": "El cuerpo de la función debe ir con sangría; la línea del return no está indentada." },
+        { "type": "card", "emoji": "🔙", "text": "return termina la función y devuelve un valor a quien la llamó." },
+        { "type": "choice", "q": "¿Qué hace la instrucción return?", "options": ["Devuelve un valor desde la función", "Define una función nueva", "Repite un bloque de código"], "answer": 0, "why": "El tutorial: la instrucción return regresa de una función con un valor." }
+      ]
+    },
+    {
+      "title": "Listas y diccionarios",
+      "source": [
+        "https://docs.python.org/3/tutorial/datastructures.html",
+        "https://docs.python.org/3/tutorial/introduction.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📋", "text": "Una lista son valores separados por comas entre corchetes. El método append añade un elemento al final." },
+        { "type": "fillblank", "q": "Añade 'kiwi' al final de la lista.", "code": "frutas = ['pera', 'uva']\nfrutas.___('kiwi')", "options": ["append", "range", "def"], "answer": 0, "why": "list.append añade un elemento al final de la lista." },
+        { "type": "card", "emoji": "🗂️", "text": "Un diccionario es un conjunto de pares clave: valor. Las claves pueden ser de cualquier tipo inmutable." },
+        { "type": "match", "q": "Une cada estructura con su descripción", "pairs": [
+          { "term": "Lista", "desc": "Valores entre corchetes" },
+          { "term": "Diccionario", "desc": "Pares clave: valor" },
+          { "term": "in", "desc": "Comprueba si una clave está en el diccionario" }
+        ], "why": "Son las descripciones del tutorial de estructuras de datos." },
+        { "type": "card", "emoji": "🔑", "text": "Las claves deben ser de un tipo inmutable: no puedes usar una lista como clave." },
+        { "type": "truefalse", "statement": "Una lista puede usarse como clave de un diccionario.", "answer": false, "why": "El tutorial indica que no se pueden usar listas como claves." },
+        { "type": "choice", "q": "¿Qué estructura usarías para asociar nombres con edades?", "options": ["Un diccionario (pares clave: valor)", "Un entero", "Un comentario"], "answer": 0, "why": "Un diccionario asocia claves con valores." }
+      ]
+    },
+    {
+      "title": "Archivos y JSON",
+      "source": [
+        "https://docs.python.org/3/tutorial/inputoutput.html",
+        "https://docs.python.org/3/library/json.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📂", "text": "open(nombre, modo) abre un archivo. Modos: 'r' solo lee, 'w' solo escribe (borra el archivo existente) y 'a' añade al final." },
+        { "type": "match", "q": "Une cada modo con su efecto", "pairs": [
+          { "term": "'r'", "desc": "Solo lectura" },
+          { "term": "'w'", "desc": "Solo escritura; borra el archivo existente" },
+          { "term": "'a'", "desc": "Añade al final del archivo" }
+        ], "why": "Son los modos que describe el tutorial de Python." },
+        { "type": "card", "emoji": "🔒", "text": "Usa la palabra clave with con archivos: se cierran correctamente al terminar, incluso si hay una excepción." },
+        { "type": "fillblank", "q": "Completa para abrir el archivo de forma segura.", "code": "___ open('notas.txt', 'r') as f:\n    texto = f.read()", "options": ["with", "for", "def"], "answer": 0, "why": "El tutorial recomienda usar with al trabajar con archivos." },
+        { "type": "card", "emoji": "🧾", "text": "El módulo json convierte datos de Python a texto JSON con dumps y los lee con loads. dump y load trabajan con archivos." },
+        { "type": "fillblank", "q": "Convierte un diccionario en texto JSON.", "code": "import json\ntexto = json.___({'a': 1})", "options": ["dumps", "loads", "read"], "answer": 0, "why": "dumps serializa un objeto a una cadena con formato JSON." },
+        { "type": "scenario", "situation": "Tienes un texto JSON en una variable y quieres convertirlo en datos de Python.", "q": "¿Qué función usas?", "options": ["json.loads", "json.dumps", "open con el modo 'w'"], "answer": 0, "why": "loads deserializa una cadena JSON a un objeto de Python. dumps hace lo contrario." },
+        { "type": "truefalse", "statement": "El modo 'w' borra un archivo existente con el mismo nombre.", "answer": true, "why": "El tutorial indica que 'w' borra el archivo existente con el mismo nombre." }
+      ]
+    },
+    {
+      "title": "Secretos: no en el código",
+      "source": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+        "https://docs.python.org/3/library/os.html",
+        "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🚫", "text": "No pongas access keys ni credenciales en los archivos de tu aplicación. AWS lo advierte expresamente." },
+        { "type": "findbug", "q": "Este script tiene un secreto escrito en el código. ¿Qué línea es?", "hint": "Toca la línea con el secreto", "lines": ["import requests", "", "API_KEY = 'MI-CLAVE-DE-EJEMPLO'", "r = requests.get(url, headers={'X-Key': API_KEY})"], "answer": 2, "why": "OWASP y GitHub desaconsejan escribir secretos en el código fuente; AWS indica no poner access keys en los archivos de la aplicación." },
+        { "type": "card", "emoji": "🌿", "text": "Alternativa: leer el secreto del entorno. os.environ es un mapeo de las variables de entorno del proceso." },
+        { "type": "fillblank", "q": "Lee la clave desde una variable de entorno.", "code": "import os\nclave = os.___('API_KEY')", "options": ["getenv", "open", "dumps"], "answer": 0, "why": "os.getenv devuelve el valor de la variable de entorno si existe, o un valor por defecto si no." },
+        { "type": "card", "emoji": "⚠️", "text": "Ojo: OWASP advierte que las variables de entorno suelen ser accesibles a todos los procesos. GitHub también cita servicios de gestión de secretos." },
+        { "type": "scenario", "situation": "Vas a subir tu script a un repositorio y contiene una clave de API escrita en el código.", "q": "¿Qué haces antes de subirlo?", "options": ["Quitar la clave del código y leerla desde el entorno", "Dejarla porque el repositorio es privado", "Escribirla dentro de un comentario"], "answer": 0, "why": "GitHub recomienda evitar secretos escritos en el código; OWASP recomienda evitar subir secretos al código antes del commit." },
+        { "type": "truefalse", "statement": "os.getenv devuelve el valor de la variable de entorno si existe, o un valor por defecto si no.", "answer": true, "why": "Es la descripción de la documentación de Python." }
+      ]
+    },
+    {
+      "title": "Repaso y lab local",
+      "source": [
+        "https://docs.python.org/3/tutorial/controlflow.html",
+        "https://docs.python.org/3/tutorial/datastructures.html",
+        "https://docs.python.org/3/tutorial/inputoutput.html",
+        "https://docs.python.org/3/using/cmdline.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: scripts, variables, condicionales, bucles, funciones, listas, diccionarios, archivos y secretos." },
+        { "type": "match", "q": "Une cada elemento con su función", "pairs": [
+          { "term": "def", "desc": "Introduce la definición de una función" },
+          { "term": "with", "desc": "Cierra el archivo correctamente al terminar" },
+          { "term": "os.environ", "desc": "Mapeo de variables de entorno del proceso" }
+        ], "why": "Son las descripciones del tutorial y de la documentación de os." },
+        { "type": "fillblank", "q": "Comprueba si la clave 'a' está en el diccionario.", "code": "d = {'a': 1}\nprint('a' ___ d)", "options": ["in", "def", "as"], "answer": 0, "why": "La palabra clave in comprueba si una clave está en el diccionario." },
+        { "type": "scenario", "situation": "Tienes un archivo datos.json abierto como f y quieres cargarlo como datos de Python.", "q": "¿Qué usas?", "options": ["json.load(f)", "json.dumps(f)", "f.write()"], "answer": 0, "why": "json.load deserializa el contenido de un archivo a un objeto de Python." },
+        { "type": "truefalse", "statement": "range(3) incluye el número 3.", "answer": false, "why": "El punto final dado nunca forma parte de la secuencia generada." },
+        { "type": "choice", "q": "¿De qué tipo es el valor 1.6?", "options": ["float", "int", "str"], "answer": 0, "why": "Los números con parte fraccionaria son de tipo float." },
+        { "type": "lab", "title": "Ejecutar tu primer script (opcional)", "objective": "Crear y ejecutar un script de Python en tu propia computadora.", "local": true, "steps": [
+          "Comprueba que tienes Python instalado (este lab no cubre la instalación).",
+          "Crea un archivo llamado hola.py con una línea: print('Hola, nube')",
+          "Abre una terminal en la carpeta del archivo y ejecuta: python hola.py (según tu instalación, el nombre del comando puede variar).",
+          "Comprueba que aparece el texto en la terminal.",
+          "Cambia el script para guardar un nombre en una variable (nombre = 'Ana') y usarla en el print. Ejecútalo otra vez."
+        ], "cleanup": "No hay nada en la nube que eliminar. Puedes borrar hola.py cuando quieras." }
+      ]
+    }
+  ]
+}

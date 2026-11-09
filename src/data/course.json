@@ -25,10 +25,40 @@
           "file": "so-virtualizacion-contenedores.json"
         },
         {
+          "id": "como-funciona-la-web",
+          "title": "04 Cómo funciona la web",
+          "description": "Cliente y servidor, HTTP, APIs y JSON, cookies, tokens y OAuth.",
+          "file": "como-funciona-la-web.json"
+        },
+        {
           "id": "03-seguridad-basica",
-          "title": "04 Seguridad básica",
+          "title": "05 Seguridad básica",
           "description": "Confidencialidad, integridad, disponibilidad, autenticación y amenazas comunes.",
           "file": "03-seguridad-basica.json"
+        },
+        {
+          "id": "cifrado-hashes-tls",
+          "title": "06 Cifrado, hashes y TLS",
+          "description": "Cifrado simétrico y asimétrico, hashes, firma digital, certificados y TLS.",
+          "file": "cifrado-hashes-tls.json"
+        },
+        {
+          "id": "python-scripting",
+          "title": "07 Python y scripting básico",
+          "description": "Scripts, variables, control de flujo, funciones, archivos, JSON y secretos.",
+          "file": "python-scripting.json"
+        },
+        {
+          "id": "git-control-versiones",
+          "title": "08 Git y control de versiones",
+          "description": "Repositorios, commits, ramas, remotos, GitHub y .gitignore.",
+          "file": "git-control-versiones.json"
+        },
+        {
+          "id": "bases-de-datos-sql",
+          "title": "09 Bases de datos y SQL",
+          "description": "Tablas, SELECT, INSERT/UPDATE/DELETE, claves e inyección SQL.",
+          "file": "bases-de-datos-sql.json"
         }
       ]
     },

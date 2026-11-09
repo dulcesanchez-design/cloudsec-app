@@ -241,7 +241,7 @@ export function FindBug({ step, onDone }) {
   return (
     <>
       <h2>{step.q}</h2>
-      <p className="hint">Toca la línea insegura</p>
+      <p className="hint">{step.hint || 'Toca la línea insegura'}</p>
       <div className="code">
         {step.lines.map((line, i) => {
           let cls = 'code-line'

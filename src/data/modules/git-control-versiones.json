@@ -1,0 +1,132 @@
+{
+  "title": "Git y control de versiones",
+  "lessons": [
+    {
+      "title": "Qué es el control de versiones",
+      "source": [
+        "https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control",
+        "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🕰️", "text": "El control de versiones registra los cambios en archivos a lo largo del tiempo para poder recuperar versiones concretas." },
+        { "type": "choice", "q": "¿Qué es el control de versiones?", "options": ["Un sistema que registra los cambios en archivos para recuperar versiones concretas", "Un tipo de antivirus", "Un formato de imagen"], "answer": 0, "why": "El libro de Git lo define así." },
+        { "type": "card", "emoji": "🌍", "text": "En un sistema distribuido, cada clon refleja el repositorio completo con todo su historial. Cada clon es una copia de seguridad completa." },
+        { "type": "truefalse", "statement": "En un sistema de control de versiones distribuido, cada clon incluye el historial completo.", "answer": true, "why": "El libro de Git lo explica: los clientes reflejan por completo el repositorio, incluido su historial." },
+        { "type": "card", "emoji": "📸", "text": "Git piensa en sus datos como una serie de instantáneas (snapshots) de un sistema de archivos en miniatura." },
+        { "type": "choice", "q": "¿Cómo piensa Git en sus datos?", "options": ["Como una serie de instantáneas", "Como una sola copia sin historial", "Como una base de datos relacional"], "answer": 0, "why": "El libro de Git: Git ve sus datos como una serie de instantáneas de un sistema de archivos en miniatura." },
+        { "type": "match", "q": "Une cada tipo de sistema con su característica", "pairs": [
+          { "term": "Local", "desc": "Una base de datos simple con los cambios" },
+          { "term": "Centralizado", "desc": "Un solo servidor con todos los archivos versionados" },
+          { "term": "Distribuido", "desc": "Cada clon refleja el repositorio completo" }
+        ], "why": "Son las tres generaciones de sistemas de control de versiones que describe el libro de Git." }
+      ]
+    },
+    {
+      "title": "Repositorio y commit",
+      "source": [
+        "https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository",
+        "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository",
+        "https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup",
+        "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📁", "text": "git init crea un subdirectorio .git con el esqueleto de un repositorio Git." },
+        { "type": "fillblank", "q": "Quieres empezar a usar Git en la carpeta actual.", "code": "$ git ___", "options": ["init", "commit", "push"], "answer": 0, "why": "git init crea el subdirectorio .git con los archivos de un repositorio." },
+        { "type": "card", "emoji": "🏷️", "text": "Cada commit usa tu nombre y correo. Se configuran con git config --global user.name y git config --global user.email." },
+        { "type": "match", "q": "Une cada estado de un archivo con su significado", "pairs": [
+          { "term": "Modificado", "desc": "Cambiaste el archivo pero aún no lo confirmaste" },
+          { "term": "En staging", "desc": "Marcado para ir en tu próximo commit" },
+          { "term": "Confirmado", "desc": "Guardado de forma segura en tu base de datos local" }
+        ], "why": "Son los tres estados principales de Git: modified, staged y committed." },
+        { "type": "card", "emoji": "➕", "text": "git add empieza a seguir un archivo nuevo. git commit -m «mensaje» confirma con un mensaje en la misma línea." },
+        { "type": "fillblank", "q": "Confirma los cambios con un mensaje.", "code": "$ git commit ___ 'Primer commit'", "options": ["-m", "init", "add"], "answer": 0, "why": "La opción -m permite escribir el mensaje del commit en la misma línea." },
+        { "type": "scenario", "situation": "Creaste un archivo nuevo, notas.txt, y quieres que Git empiece a seguirlo.", "q": "¿Qué comando usas?", "options": ["git add notas.txt", "git init", "git clone"], "answer": 0, "why": "git add empieza a seguir un archivo nuevo. git init crea el repositorio y git clone copia uno existente." },
+        { "type": "truefalse", "statement": "git status te muestra en qué estado está cada archivo.", "answer": true, "why": "Es la herramienta principal para saber qué archivos están en cada estado." }
+      ]
+    },
+    {
+      "title": "Ramas",
+      "source": "https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell",
+      "steps": [
+        { "type": "card", "emoji": "🌿", "text": "Una rama en Git es un puntero ligero y movible a uno de los commits." },
+        { "type": "choice", "q": "¿Qué es una rama en Git?", "options": ["Un puntero ligero y movible a un commit", "Una copia completa del disco", "Un archivo comprimido"], "answer": 0, "why": "El libro de Git: una rama es simplemente un puntero ligero y movible a uno de los commits." },
+        { "type": "card", "emoji": "📍", "text": "HEAD es un puntero especial a la rama local en la que estás." },
+        { "type": "truefalse", "statement": "HEAD apunta a la rama local en la que estás trabajando.", "answer": true, "why": "Así lo describe el libro de Git." },
+        { "type": "card", "emoji": "🆕", "text": "git branch nombre crea un puntero nuevo al commit actual, pero no cambia de rama. git switch -c nombre crea la rama y cambia a ella." },
+        { "type": "fillblank", "q": "Crea una rama nueva y cámbiate a ella.", "code": "$ git switch ___ nueva-rama", "options": ["-c", "-m", "-v"], "answer": 0, "why": "git switch -c crea una rama nueva y cambia a ella." },
+        { "type": "scenario", "situation": "Quieres probar un cambio sin tocar la rama en la que estás trabajando.", "q": "¿Qué haces?", "options": ["Crear una rama y cambiar a ella con git switch -c", "Borrar el repositorio y empezar de cero", "Hacer el cambio directamente y rezar"], "answer": 0, "why": "Una rama nueva es un puntero ligero: puedes trabajar en ella sin mover tu rama anterior." }
+      ]
+    },
+    {
+      "title": "Repositorios remotos y GitHub",
+      "source": [
+        "https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes",
+        "https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository",
+        "https://docs.github.com/en/get-started/start-your-journey/about-github-and-git"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🌐", "text": "Los repositorios remotos son versiones de tu proyecto alojadas en Internet o en una red." },
+        { "type": "choice", "q": "¿Qué es un repositorio remoto?", "options": ["Una versión de tu proyecto alojada en Internet o en una red", "Un archivo oculto de configuración", "Un tipo de rama"], "answer": 0, "why": "El libro de Git los define así." },
+        { "type": "card", "emoji": "📥", "text": "git clone <url> descarga una copia casi completa de los datos del servidor. El remoto por defecto se llama origin." },
+        { "type": "fillblank", "q": "Descarga una copia de un repositorio existente.", "code": "$ git ___ https://ejemplo.com/proyecto.git", "options": ["clone", "init", "switch"], "answer": 0, "why": "git clone <url> descarga una copia del repositorio." },
+        { "type": "card", "emoji": "⬆️", "text": "git push <remoto> <rama> envía tu rama al remoto. git fetch solo descarga datos; git pull descarga y fusiona." },
+        { "type": "match", "q": "Une cada comando con su efecto", "pairs": [
+          { "term": "git fetch", "desc": "Descarga datos sin fusionarlos" },
+          { "term": "git pull", "desc": "Descarga y fusiona en tu rama actual" },
+          { "term": "git push", "desc": "Envía tu rama al remoto" }
+        ], "why": "Son las descripciones del libro de Git." },
+        { "type": "card", "emoji": "🐙", "text": "GitHub se basa en Git: aloja tus repositorios Git en la nube." },
+        { "type": "truefalse", "statement": "GitHub y Git son exactamente lo mismo.", "answer": false, "why": "Git es el software de control de versiones; GitHub es una plataforma que aloja repositorios Git en la nube." }
+      ]
+    },
+    {
+      "title": ".gitignore y secretos",
+      "source": [
+        "https://git-scm.com/docs/gitignore",
+        "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository",
+        "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🙈", "text": "Un archivo .gitignore lista patrones de archivos que Git debe ignorar: archivos sin seguimiento a propósito." },
+        { "type": "choice", "q": "¿Para qué sirve .gitignore?", "options": ["Para indicar archivos que Git debe ignorar", "Para borrar el repositorio", "Para cifrar los commits"], "answer": 0, "why": "La documentación: un archivo gitignore especifica archivos intencionalmente sin seguimiento que Git debe ignorar." },
+        { "type": "card", "emoji": "⚠️", "text": "Los archivos que Git ya sigue no se ven afectados por .gitignore. Para dejar de seguir uno, usa git rm --cached." },
+        { "type": "truefalse", "statement": "Añadir a .gitignore un archivo que Git ya sigue hace que deje de seguirlo automáticamente.", "answer": false, "why": "Los archivos ya seguidos no se ven afectados; hay que quitarlos del índice con git rm --cached." },
+        { "type": "card", "emoji": "🔑", "text": "No subas secretos al repositorio. GitHub aconseja evitar secretos escritos en el código y ofrece secret scanning para detectar fugas." },
+        { "type": "scenario", "situation": "Hiciste commit y push de un archivo con una clave de acceso a un repositorio de GitHub.", "q": "¿Qué haces primero?", "options": ["Revocar o rotar la clave", "Borrar el archivo en un commit nuevo y dar el asunto por cerrado", "Esperar a que nadie lo vea"], "answer": 0, "why": "GitHub indica que, si es un secreto, debes revocarlo o rotarlo; una vez hecho, ya no sirve para acceder. Reescribir el historial exige coordinación y puede dejar copias accesibles en otros sitios." },
+        { "type": "fillblank", "q": "Quita un archivo del seguimiento de Git (del índice).", "code": "$ git rm ___ clave.txt", "options": ["--cached", "-m", "--init"], "answer": 0, "why": "git rm --cached quita el archivo del índice, según la documentación de gitignore." },
+        { "type": "truefalse", "statement": "Reescribir el historial de un repositorio requiere una coordinación cuidadosa con los colaboradores.", "answer": true, "why": "Así lo advierte GitHub en su guía para eliminar datos sensibles." }
+      ]
+    },
+    {
+      "title": "Repaso y lab local",
+      "source": [
+        "https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository",
+        "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository",
+        "https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup",
+        "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: repositorio, commit, ramas, remotos, .gitignore y secretos." },
+        { "type": "match", "q": "Une cada comando con su efecto", "pairs": [
+          { "term": "git init", "desc": "Crea el subdirectorio .git" },
+          { "term": "git add", "desc": "Empieza a seguir un archivo nuevo" },
+          { "term": "git commit -m", "desc": "Confirma con un mensaje en la misma línea" }
+        ], "why": "Son las descripciones del libro de Git." },
+        { "type": "choice", "q": "¿Qué es una rama?", "options": ["Un puntero ligero y movible a un commit", "Un servidor remoto", "Un archivo ignorado"], "answer": 0, "why": "El libro de Git define una rama como un puntero ligero y movible a un commit." },
+        { "type": "scenario", "situation": "Estás a punto de hacer commit y notas que config.py contiene una clave de acceso escrita en el código.", "q": "¿Qué haces?", "options": ["Quitar la clave del código antes de confirmar", "Hacer commit y quitarla después", "Subirla porque el repositorio es privado"], "answer": 0, "why": "GitHub aconseja evitar secretos escritos en el código; si aún no se ha subido, los cambios se pueden deshacer en local." },
+        { "type": "fillblank", "q": "Consulta el estado de tus archivos.", "code": "$ git ___", "options": ["status", "clone", "push"], "answer": 0, "why": "git status es la herramienta principal para saber en qué estado está cada archivo." },
+        { "type": "truefalse", "statement": "Cada commit de Git usa el nombre y el correo que configuraste.", "answer": true, "why": "El libro de Git explica que cada commit usa esa información." },
+        { "type": "lab", "title": "Tu primer repositorio local (opcional)", "objective": "Crear un repositorio con git init y hacer un primer commit en tu propia computadora.", "local": true, "steps": [
+          "Crea una carpeta nueva y entra en ella desde la terminal.",
+          "Ejecuta git init (crea el subdirectorio .git).",
+          "Si no lo has hecho, configura git config --global user.name y git config --global user.email.",
+          "Crea un archivo, por ejemplo notas.txt, con una línea de texto.",
+          "Ejecuta git status: el archivo aparece como sin seguimiento (untracked).",
+          "Ejecuta git add notas.txt y luego git commit -m \"Primer commit\".",
+          "Ejecuta git status otra vez para ver cómo cambió el estado."
+        ], "cleanup": "No hay nada en la nube que eliminar. No añadas claves ni contraseñas a este repositorio de práctica. Puedes borrar la carpeta cuando quieras." }
+      ]
+    }
+  ]
+}

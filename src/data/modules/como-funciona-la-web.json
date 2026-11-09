@@ -1,0 +1,155 @@
+{
+  "title": "Cómo funciona la web",
+  "lessons": [
+    {
+      "title": "Cliente y servidor",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+        "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🌐", "text": "HTTP es un protocolo cliente-servidor: el cliente, normalmente el navegador, envía peticiones y el servidor responde.", "analogy": "El cliente pide, el servidor sirve." },
+        { "type": "choice", "q": "¿Quién inicia siempre la comunicación en HTTP?", "options": ["El navegador (el cliente)", "El servidor", "El firewall"], "answer": 0, "why": "MDN: el navegador es siempre la entidad que inicia la petición; nunca es el servidor." },
+        { "type": "card", "emoji": "🖥️", "text": "Un servidor web puede ser hardware, software o ambos. Como mínimo incluye un servidor HTTP." },
+        { "type": "truefalse", "statement": "En HTTP, el servidor es quien siempre inicia la petición.", "answer": false, "why": "Las peticiones las inicia el cliente; el servidor responde." },
+        { "type": "card", "emoji": "🧠", "text": "HTTP no guarda estado: no hay vínculo entre dos peticiones sucesivas realizadas en la misma conexión." },
+        { "type": "choice", "q": "¿Qué significa que HTTP sea «stateless» (sin estado)?", "options": ["No hay vínculo entre dos peticiones sucesivas", "No usa Internet", "Todo el tráfico va cifrado"], "answer": 0, "why": "MDN: en HTTP no hay vínculo entre dos peticiones que se realizan sucesivamente en la misma conexión." },
+        { "type": "match", "q": "Une cada elemento con su papel", "pairs": [
+          { "term": "Cliente", "desc": "Envía las peticiones (normalmente el navegador)" },
+          { "term": "Servidor", "desc": "Entrega el documento pedido" },
+          { "term": "Respuesta", "desc": "Mensaje con el que contesta el servidor" }
+        ], "why": "Los mensajes del cliente son peticiones y los del servidor, respuestas." }
+      ]
+    },
+    {
+      "title": "Petición y respuesta HTTP",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages",
+      "steps": [
+        { "type": "card", "emoji": "📤", "text": "Una petición empieza con una línea de inicio: método, destino y versión de HTTP. Ejemplo: POST /users HTTP/1.1." },
+        { "type": "fillblank", "q": "Completa el método de esta línea de inicio.", "code": "___ /users HTTP/1.1", "options": ["POST", "404", "json"], "answer": 0, "why": "La línea de inicio de una petición tiene método, destino y versión. POST es un método; 404 es un código de estado." },
+        { "type": "card", "emoji": "🏷️", "text": "Los encabezados son pares «nombre: valor». El nombre no distingue mayúsculas de minúsculas." },
+        { "type": "truefalse", "statement": "Los nombres de los encabezados HTTP distinguen mayúsculas de minúsculas.", "answer": false, "why": "MDN: cada encabezado es una cadena que no distingue mayúsculas de minúsculas, seguida de dos puntos y un valor." },
+        { "type": "card", "emoji": "📥", "text": "Una respuesta empieza con la línea de estado: versión, código de estado y texto. Ejemplo: HTTP/1.1 201 Created." },
+        { "type": "fillblank", "q": "Completa la línea de estado de esta respuesta.", "code": "HTTP/1.1 ___ Created", "options": ["201", "404", "500"], "answer": 0, "why": "El ejemplo de MDN es «HTTP/1.1 201 Created»." },
+        { "type": "choice", "q": "Según MDN, ¿qué peticiones tienen cuerpo?", "options": ["Solo las de PATCH, POST y PUT", "Solo las de GET", "Todas las peticiones"], "answer": 0, "why": "MDN: solo las peticiones PATCH, POST y PUT tienen cuerpo." }
+      ]
+    },
+    {
+      "title": "Métodos y códigos de estado",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Safe/HTTP",
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔧", "text": "Un método HTTP indica qué quieres hacer. GET pide una representación del recurso; DELETE lo elimina." },
+        { "type": "match", "q": "Une cada método con su descripción", "pairs": [
+          { "term": "GET", "desc": "Pide una representación del recurso" },
+          { "term": "POST", "desc": "Envía una entidad, a menudo con cambios en el servidor" },
+          { "term": "DELETE", "desc": "Elimina el recurso" }
+        ], "why": "Son las descripciones de MDN para cada método." },
+        { "type": "card", "emoji": "🛡️", "text": "Un método es seguro si no altera el estado del servidor. GET es seguro; POST no lo es." },
+        { "type": "truefalse", "statement": "GET es un método seguro: no altera el estado del servidor.", "answer": true, "why": "MDN marca GET como seguro e idempotente." },
+        { "type": "card", "emoji": "🔢", "text": "Los códigos de estado se agrupan en 1xx informativos, 2xx éxito, 3xx redirección, 4xx error del cliente y 5xx error del servidor." },
+        { "type": "choice", "q": "¿A qué clase pertenece el código 404?", "options": ["Redirección (3xx)", "Error del cliente (4xx)", "Error del servidor (5xx)"], "answer": 1, "why": "404 significa que el servidor no encuentra el recurso pedido, y está en el rango 400–499, errores del cliente." },
+        { "type": "card", "emoji": "🔐", "text": "401 significa, en la práctica, «no autenticado». 403 significa que el cliente no tiene derechos de acceso, aunque el servidor conoce su identidad." },
+        { "type": "scenario", "situation": "Ya iniciaste sesión y el servidor te conoce, pero responde que no tienes derechos de acceso a ese contenido.", "q": "¿Qué código de estado esperas?", "options": ["401", "403", "500"], "answer": 1, "why": "403: el cliente no tiene derechos de acceso, y a diferencia de 401 su identidad es conocida por el servidor." },
+        { "type": "match", "q": "Une cada código con su significado", "pairs": [
+          { "term": "200", "desc": "La petición tuvo éxito" },
+          { "term": "201", "desc": "Se creó un nuevo recurso" },
+          { "term": "500", "desc": "El servidor encontró una situación que no sabe manejar" }
+        ], "why": "Son las descripciones de MDN para 200 OK, 201 Created y 500." }
+      ]
+    },
+    {
+      "title": "APIs y JSON",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Glossary/API",
+        "https://developer.mozilla.org/en-US/docs/Glossary/JSON",
+        "https://www.rfc-editor.org/rfc/rfc8259"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔌", "text": "Una API (Application Programming Interface) es un conjunto de funciones y reglas dentro de un programa.", "analogy": "Como el menú de un restaurante." },
+        { "type": "choice", "q": "¿Qué es una API?", "options": ["Un conjunto de funciones y reglas que existen dentro de un programa", "Un tipo de cable de red", "Un lenguaje de estilos"], "answer": 0, "why": "MDN: una API es un conjunto de características y reglas que existen dentro de un programa de software." },
+        { "type": "card", "emoji": "📄", "text": "JSON (JavaScript Object Notation) es un formato ligero de intercambio de datos, basado en texto e independiente del lenguaje." },
+        { "type": "choice", "q": "¿Qué es JSON?", "options": ["Un formato de intercambio de datos basado en texto", "Un sistema operativo", "Un protocolo de cifrado"], "answer": 0, "why": "RFC 8259: JSON es un formato de intercambio de datos ligero, basado en texto e independiente del lenguaje." },
+        { "type": "card", "emoji": "🧩", "text": "JSON puede representar números, booleanos, cadenas, null, arreglos (secuencias ordenadas) y objetos (asignaciones de nombre a valor)." },
+        { "type": "match", "q": "Une cada elemento de JSON con su descripción", "pairs": [
+          { "term": "Arreglo", "desc": "Secuencia ordenada de valores" },
+          { "term": "Objeto", "desc": "Asignación de nombres a valores" },
+          { "term": "true, false, null", "desc": "Valores literales de JSON" }
+        ], "why": "Según MDN y el RFC 8259, JSON admite arreglos, objetos y los valores literales false, null y true." },
+        { "type": "truefalse", "statement": "JSON es un formato de texto, independiente del lenguaje de programación.", "answer": true, "why": "Así lo define el RFC 8259." }
+      ]
+    },
+    {
+      "title": "Cookies y sesiones",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies",
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🍪", "text": "Una cookie es un pequeño dato que un servidor envía al navegador del usuario." },
+        { "type": "choice", "q": "¿Qué encabezado usa el servidor para enviar una cookie?", "options": ["Set-Cookie", "Authorization", "Content-Length"], "answer": 0, "why": "El servidor envía uno o más encabezados Set-Cookie en la respuesta." },
+        { "type": "card", "emoji": "↩️", "text": "El navegador suele devolver al servidor las cookies guardadas del dominio, dentro del encabezado Cookie." },
+        { "type": "truefalse", "statement": "El navegador devuelve las cookies guardadas al servidor en el encabezado Cookie.", "answer": true, "why": "Así lo describe MDN." },
+        { "type": "card", "emoji": "🔗", "text": "Aunque HTTP no guarda estado, las cookies permiten sesiones con estado. Usos: gestión de sesiones, personalización y seguimiento." },
+        { "type": "choice", "q": "Según OWASP, ¿qué es una sesión web?", "options": ["Una secuencia de peticiones y respuestas HTTP asociadas al mismo usuario", "Un tipo de método HTTP", "Un formato de datos"], "answer": 0, "why": "OWASP la define así. Las aplicaciones dan al usuario un identificador de sesión asignado al crearla." },
+        { "type": "card", "emoji": "🔒", "text": "Secure envía la cookie solo en peticiones cifradas por HTTPS. HttpOnly impide que JavaScript acceda a ella." },
+        { "type": "match", "q": "Une cada atributo con su efecto", "pairs": [
+          { "term": "Secure", "desc": "Solo se envía en peticiones HTTPS" },
+          { "term": "HttpOnly", "desc": "JavaScript no puede acceder a ella" },
+          { "term": "SameSite", "desc": "Controla si se envía en peticiones entre sitios" }
+        ], "why": "Son las descripciones de los atributos en MDN." },
+        { "type": "scenario", "situation": "Tu cookie de sesión podría viajar por una conexión sin cifrar y quieres que solo se envíe por HTTPS.", "q": "¿Qué atributo añades?", "options": ["Secure", "HttpOnly", "SameSite=None"], "answer": 0, "why": "Secure hace que la cookie solo se envíe con peticiones cifradas por HTTPS. HttpOnly bloquea el acceso desde JavaScript y SameSite=None permite envíos entre sitios." }
+      ]
+    },
+    {
+      "title": "Tokens y la idea de OAuth",
+      "source": [
+        "https://www.rfc-editor.org/rfc/rfc6749",
+        "https://www.rfc-editor.org/rfc/rfc6750",
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🎟️", "text": "Un token de acceso es una credencial para acceder a recursos protegidos: una cadena que representa una autorización." },
+        { "type": "choice", "q": "¿Qué es un token de acceso en OAuth 2.0?", "options": ["Una credencial para acceder a recursos protegidos", "Un tipo de cookie HttpOnly", "Un nombre de dominio"], "answer": 0, "why": "RFC 6749: los tokens de acceso son credenciales usadas para acceder a recursos protegidos." },
+        { "type": "card", "emoji": "🧳", "text": "OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP." },
+        { "type": "choice", "q": "¿Para qué sirve el marco OAuth 2.0?", "options": ["Para que una aplicación de terceros obtenga acceso limitado a un servicio HTTP", "Para cifrar discos duros", "Para traducir dominios a IP"], "answer": 0, "why": "Es lo que dice el resumen del RFC 6749." },
+        { "type": "card", "emoji": "🎭", "text": "Roles: propietario del recurso, cliente, servidor de autorización (emite tokens) y servidor de recursos (los acepta)." },
+        { "type": "match", "q": "Une cada rol con su definición", "pairs": [
+          { "term": "Propietario del recurso", "desc": "Puede conceder acceso a un recurso protegido" },
+          { "term": "Cliente", "desc": "Aplicación que pide recursos en nombre del propietario" },
+          { "term": "Servidor de autorización", "desc": "Emite tokens de acceso al cliente" }
+        ], "why": "Son las definiciones del RFC 6749." },
+        { "type": "card", "emoji": "🪙", "text": "Un token bearer sirve a quien lo posea. Se envía en el encabezado Authorization con el esquema Bearer." },
+        { "type": "fillblank", "q": "Completa el encabezado para enviar un token de acceso.", "code": "Authorization: ___ <token>", "options": ["Bearer", "Set-Cookie", "Token"], "answer": 0, "why": "El RFC 6750 usa el esquema Bearer en el encabezado Authorization." },
+        { "type": "truefalse", "statement": "Quien posea un token bearer puede usarlo para acceder a los recursos asociados.", "answer": true, "why": "RFC 6750: cualquier parte en posesión de un token bearer puede usarlo para obtener acceso a los recursos asociados." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status",
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies",
+        "https://developer.mozilla.org/en-US/docs/Glossary/JSON",
+        "https://www.rfc-editor.org/rfc/rfc6750"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: cliente y servidor, peticiones, métodos, estados, JSON, cookies y tokens." },
+        { "type": "match", "q": "Une cada elemento con su descripción", "pairs": [
+          { "term": "404", "desc": "El servidor no encuentra el recurso" },
+          { "term": "Set-Cookie", "desc": "Encabezado con el que el servidor envía una cookie" },
+          { "term": "JSON", "desc": "Formato de intercambio de datos" }
+        ], "why": "Son las descripciones de MDN." },
+        { "type": "choice", "q": "¿Qué significa en la práctica el código 401?", "options": ["No autenticado", "El recurso se movió", "Error interno del servidor"], "answer": 0, "why": "MDN: aunque el estándar dice «unauthorized», semánticamente significa «unauthenticated»." },
+        { "type": "truefalse", "statement": "HTTP guarda el estado entre dos peticiones sucesivas.", "answer": false, "why": "HTTP no tiene estado; las cookies permiten sesiones con estado." },
+        { "type": "fillblank", "q": "Completa el encabezado con el que un servidor envía una cookie.", "code": "___: sesion=abc123; HttpOnly", "options": ["Set-Cookie", "Authorization", "Accept"], "answer": 0, "why": "El servidor envía cookies con el encabezado Set-Cookie." },
+        { "type": "scenario", "situation": "Tu aplicación recibe un código 500 de una API.", "q": "¿Qué significa?", "options": ["El servidor encontró una situación que no sabe manejar", "Tu petición no estaba autenticada", "El recurso no existe"], "answer": 0, "why": "500 es un error genérico del servidor: encontró una situación que no sabe manejar." },
+        { "type": "choice", "q": "¿Qué atributo de cookie impide que JavaScript acceda a ella?", "options": ["HttpOnly", "Secure", "SameSite"], "answer": 0, "why": "Una cookie con el atributo HttpOnly no es accesible desde JavaScript." },
+        { "type": "truefalse", "statement": "OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP.", "answer": true, "why": "Es la descripción del RFC 6749." }
+      ]
+    }
+  ]
+}

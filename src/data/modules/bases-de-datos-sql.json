@@ -1,0 +1,147 @@
+{
+  "title": "Bases de datos y SQL",
+  "lessons": [
+    {
+      "title": "Qué es una base de datos",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/database",
+        "https://www.sqlite.org/about.html",
+        "https://www.sqlite.org/lang.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🗄️", "text": "Una base de datos es un repositorio de información o datos. Puede ser, o no, un sistema relacional tradicional.", "analogy": "Un archivador ordenado." },
+        { "type": "choice", "q": "Según NIST, ¿qué es una base de datos?", "options": ["Un repositorio de información o datos", "Un lenguaje de programación", "Un protocolo de red"], "answer": 0, "why": "El glosario de NIST (NISTIR 7693) la define como un repositorio de información o datos, que puede o no ser un sistema relacional tradicional." },
+        { "type": "card", "emoji": "🪶", "text": "SQLite es un motor de base de datos SQL integrado en tu programa. No tiene un proceso servidor separado." },
+        { "type": "truefalse", "statement": "SQLite necesita un proceso servidor separado para funcionar.", "answer": false, "why": "Según su documentación, a diferencia de la mayoría de bases de datos SQL, SQLite no tiene un proceso servidor separado." },
+        { "type": "card", "emoji": "💬", "text": "SQL es el lenguaje de las sentencias SELECT, INSERT, UPDATE, DELETE y CREATE TABLE, entre otras." },
+        { "type": "match", "q": "Une cada sentencia con su función", "pairs": [
+          { "term": "SELECT", "desc": "Consulta la base de datos" },
+          { "term": "INSERT", "desc": "Crea filas nuevas" },
+          { "term": "DELETE", "desc": "Elimina registros de una tabla" }
+        ], "why": "Son las descripciones de la documentación de SQLite." }
+      ]
+    },
+    {
+      "title": "Tablas, filas y columnas",
+      "source": [
+        "https://www.sqlite.org/lang_createtable.html",
+        "https://www.sqlite.org/foreignkeys.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📊", "text": "Una tabla se compone de columnas. El comando CREATE TABLE crea una tabla nueva." },
+        { "type": "choice", "q": "¿Qué incluye la definición de cada columna?", "options": ["Su nombre y, opcionalmente, su tipo declarado", "Solo su valor", "Una contraseña"], "answer": 0, "why": "La documentación: cada definición de columna consiste en el nombre de la columna, opcionalmente seguido del tipo declarado." },
+        { "type": "card", "emoji": "🧱", "text": "Cada columna tiene un nombre y, opcionalmente, un tipo, como INTEGER o TEXT. Cada fila es un registro de la tabla." },
+        { "type": "fillblank", "q": "Completa la sentencia para crear una tabla.", "code": "___ TABLE alumnos(id INTEGER, nombre TEXT);", "options": ["CREATE", "SELECT", "DELETE"], "answer": 0, "why": "El comando CREATE TABLE se usa para crear una tabla nueva." },
+        { "type": "card", "emoji": "🔖", "text": "Cada tabla de SQLite puede tener como máximo una clave primaria (PRIMARY KEY)." },
+        { "type": "match", "q": "Une cada elemento con su descripción", "pairs": [
+          { "term": "Tabla", "desc": "Se crea con CREATE TABLE" },
+          { "term": "Columna", "desc": "Tiene un nombre y un tipo declarado opcional" },
+          { "term": "Fila", "desc": "Un registro de la tabla" }
+        ], "why": "Son las descripciones de la documentación de CREATE TABLE." },
+        { "type": "truefalse", "statement": "Una tabla de SQLite puede tener como máximo una clave primaria.", "answer": true, "why": "Así lo indica la documentación de CREATE TABLE." }
+      ]
+    },
+    {
+      "title": "SELECT y WHERE",
+      "source": [
+        "https://www.sqlite.org/lang_select.html",
+        "https://www.sqlite.org/lang_update.html",
+        "https://www.sqlite.org/lang_delete.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔍", "text": "SELECT sirve para consultar la base de datos. Una sentencia SELECT no hace cambios en ella." },
+        { "type": "choice", "q": "¿Modifica datos una sentencia SELECT?", "options": ["No: solo consulta", "Sí: borra filas", "Sí: crea tablas"], "answer": 0, "why": "La documentación de SQLite: una sentencia SELECT no hace ningún cambio en la base de datos." },
+        { "type": "card", "emoji": "🎯", "text": "WHERE añade una expresión booleana: solo se consideran las filas para las que esa expresión es verdadera." },
+        { "type": "fillblank", "q": "Consulta solo la fila con id 1.", "code": "SELECT * FROM alumnos ___ id = 1;", "options": ["WHERE", "INSERT", "DELETE"], "answer": 0, "why": "WHERE filtra las filas con una expresión booleana." },
+        { "type": "scenario", "situation": "Quieres consultar solo al alumno con id 1, sin cambiar nada en la tabla.", "q": "¿Qué sentencia usas?", "options": ["SELECT * FROM alumnos WHERE id = 1;", "DELETE FROM alumnos WHERE id = 1;", "UPDATE alumnos SET nombre = 'X';"], "answer": 0, "why": "SELECT consulta sin modificar. DELETE y UPDATE cambian datos." },
+        { "type": "truefalse", "statement": "SELECT cambia los datos de la tabla.", "answer": false, "why": "SELECT solo consulta la base de datos." }
+      ]
+    },
+    {
+      "title": "INSERT, UPDATE y DELETE",
+      "source": [
+        "https://www.sqlite.org/lang_insert.html",
+        "https://www.sqlite.org/lang_update.html",
+        "https://www.sqlite.org/lang_delete.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "➕", "text": "INSERT INTO tabla VALUES(...) crea una o más filas nuevas en una tabla existente." },
+        { "type": "fillblank", "q": "Inserta una fila nueva.", "code": "___ INTO alumnos VALUES(1, 'Ana');", "options": ["INSERT", "UPDATE", "DELETE"], "answer": 0, "why": "INSERT INTO ... VALUES crea nuevas filas en una tabla existente." },
+        { "type": "card", "emoji": "✏️", "text": "UPDATE modifica filas. Sin WHERE modifica todas las de la tabla; con WHERE, solo las que cumplen la condición." },
+        { "type": "fillblank", "q": "Cambia el nombre solo de la fila con id 1.", "code": "UPDATE alumnos SET nombre = 'Eva' ___ id = 1;", "options": ["WHERE", "FROM", "INTO"], "answer": 0, "why": "Con WHERE, el UPDATE afecta solo a las filas para las que la expresión es verdadera." },
+        { "type": "card", "emoji": "🗑️", "text": "DELETE FROM elimina registros. Si no hay WHERE, se eliminan todos los registros de la tabla." },
+        { "type": "scenario", "situation": "Vas a ejecutar DELETE FROM alumnos; sin ninguna cláusula WHERE.", "q": "¿Qué pasará?", "options": ["Se eliminan todos los registros de la tabla", "Solo se elimina la primera fila", "No ocurre nada"], "answer": 0, "why": "La documentación: si la cláusula WHERE no está presente, se eliminan todos los registros de la tabla." },
+        { "type": "truefalse", "statement": "UPDATE sin WHERE modifica todas las filas de la tabla.", "answer": true, "why": "Así lo indica la documentación de UPDATE." }
+      ]
+    },
+    {
+      "title": "Claves primarias y relaciones",
+      "source": [
+        "https://www.sqlite.org/lang_createtable.html",
+        "https://www.sqlite.org/foreignkeys.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔑", "text": "En SQLite, cada fila tiene un rowid, un entero de 64 bits que la identifica de forma única en su tabla.", "analogy": "Como un número de documento." },
+        { "type": "choice", "q": "¿Cuántas claves primarias puede tener una tabla en SQLite?", "options": ["Como máximo una", "Tantas como columnas", "Ninguna"], "answer": 0, "why": "La documentación: cada tabla de SQLite puede tener como máximo una PRIMARY KEY." },
+        { "type": "card", "emoji": "🔗", "text": "Una clave foránea (FOREIGN KEY) impone relaciones de «existe» entre tablas. La tabla hija contiene la cláusula REFERENCES." },
+        { "type": "match", "q": "Une cada elemento con su descripción", "pairs": [
+          { "term": "Tabla padre", "desc": "La tabla a la que se refiere la clave foránea" },
+          { "term": "Tabla hija", "desc": "La que contiene la cláusula REFERENCES" },
+          { "term": "Clave foránea", "desc": "Impone relaciones de «existe» entre tablas" }
+        ], "why": "Son las definiciones de la documentación de claves foráneas de SQLite." },
+        { "type": "card", "emoji": "⚠️", "text": "En SQLite las claves foráneas están desactivadas por defecto. Se activan en cada conexión con PRAGMA foreign_keys = ON." },
+        { "type": "fillblank", "q": "Activa las claves foráneas en la conexión.", "code": "PRAGMA foreign_keys = ___;", "options": ["ON", "DELETE", "WHERE"], "answer": 0, "why": "Se activan con el comando PRAGMA foreign_keys." },
+        { "type": "truefalse", "statement": "En SQLite, las claves foráneas están activadas por defecto.", "answer": false, "why": "Están desactivadas por defecto y deben activarse en cada conexión." }
+      ]
+    },
+    {
+      "title": "Inyección SQL y consultas parametrizadas",
+      "source": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+        "https://community.owasp.org/attacks/SQL_Injection",
+        "https://docs.python.org/3/library/sqlite3.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "💉", "text": "En una inyección SQL, datos no confiables pasan a formar parte de la sintaxis SQL de una consulta." },
+        { "type": "choice", "q": "¿Qué es una inyección SQL?", "options": ["Datos no confiables que pasan a formar parte de la consulta SQL", "Un tipo de copia de seguridad", "Una forma de cifrar tablas"], "answer": 0, "why": "OWASP: ocurre cuando datos no confiables, normalmente cadenas, pasan a formar parte de la sintaxis SQL de una consulta." },
+        { "type": "card", "emoji": "🛡️", "text": "Defensa principal: consultas parametrizadas. Defines la estructura SQL por separado y enlazas los valores mediante la API de la base de datos." },
+        { "type": "findbug", "q": "Esta consulta está construida de forma insegura. ¿Qué línea es?", "hint": "Toca la línea vulnerable", "lines": ["nombre = input('Nombre: ')", "cur = con.cursor()", "cur.execute(f\"SELECT * FROM alumnos WHERE nombre = '{nombre}'\")"], "answer": 2, "why": "Los valores se mezclan con el SQL mediante formato de cadena. La documentación de sqlite3 manda usar marcadores en lugar de dar formato a la cadena para evitar la inyección SQL." },
+        { "type": "card", "emoji": "❓", "text": "En sqlite3 usas marcadores (?) en la consulta y pasas los valores aparte, en una tupla." },
+        { "type": "fillblank", "q": "Usa un marcador en vez de pegar el valor en el texto.", "code": "cur.execute('SELECT * FROM alumnos WHERE nombre = ___', (nombre,))", "options": ["?", "nombre", "'+nombre+'"], "answer": 0, "why": "sqlite3 usa el estilo qmark: un ? marca el lugar del valor y los valores se pasan aparte." },
+        { "type": "scenario", "situation": "Tu aplicación arma consultas concatenando lo que escribe el usuario.", "q": "¿Qué cambias?", "options": ["Usar consultas parametrizadas con marcadores", "Escribir el SQL en mayúsculas", "Quitar la cláusula WHERE"], "answer": 0, "why": "Las consultas parametrizadas separan la estructura SQL de los valores." },
+        { "type": "truefalse", "statement": "Los marcadores de parámetro representan valores de datos, no nombres de tablas, columnas ni palabras clave de SQL.", "answer": true, "why": "Así lo indica la guía de OWASP." }
+      ]
+    },
+    {
+      "title": "Repaso y lab local con sqlite3",
+      "source": [
+        "https://www.sqlite.org/lang_update.html",
+        "https://www.sqlite.org/foreignkeys.html",
+        "https://docs.python.org/3/library/sqlite3.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: tablas, SELECT, WHERE, INSERT, UPDATE, DELETE, claves y consultas parametrizadas." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "PRIMARY KEY", "desc": "Como máximo una por tabla" },
+          { "term": "FOREIGN KEY", "desc": "Relaciona una tabla hija con una padre" },
+          { "term": "Marcador ?", "desc": "Enlaza valores sin concatenar SQL" }
+        ], "why": "Son las descripciones de SQLite, la documentación de sqlite3 y OWASP." },
+        { "type": "fillblank", "q": "Elimina solo la fila con id 3.", "code": "___ FROM alumnos WHERE id = 3;", "options": ["DELETE", "UPDATE", "INSERT"], "answer": 0, "why": "DELETE FROM con WHERE elimina solo las filas para las que la expresión es verdadera." },
+        { "type": "scenario", "situation": "Ejecutas UPDATE alumnos SET nombre = 'X'; sin cláusula WHERE.", "q": "¿Qué ocurre?", "options": ["Se modifican todas las filas de la tabla", "Solo se modifica la primera fila", "Se borra la tabla"], "answer": 0, "why": "Sin WHERE, todas las filas de la tabla se modifican." },
+        { "type": "truefalse", "statement": "SELECT no hace cambios en la base de datos.", "answer": true, "why": "La documentación lo indica así." },
+        { "type": "choice", "q": "¿Qué hace PRAGMA foreign_keys = ON?", "options": ["Activa las claves foráneas en la conexión", "Borra las claves primarias", "Crea una tabla nueva"], "answer": 0, "why": "Las claves foráneas están desactivadas por defecto y se activan con ese comando en cada conexión." },
+        { "type": "lab", "title": "Tu primera base de datos con sqlite3 (opcional)", "objective": "Crear una tabla, insertar una fila y consultarla con el módulo sqlite3 de Python, en tu propia computadora.", "local": true, "steps": [
+          "Comprueba que tienes Python instalado. sqlite3 es parte de la biblioteca estándar de Python (la documentación aclara que es un módulo opcional, así que podría faltar en algunas instalaciones).",
+          "Crea un archivo practica_sql.py.",
+          "Escribe: import sqlite3, luego con = sqlite3.connect('practica.db') y cur = con.cursor().",
+          "Crea la tabla: cur.execute('CREATE TABLE alumnos(id INTEGER PRIMARY KEY, nombre TEXT)')",
+          "Inserta una fila con marcadores: cur.execute('INSERT INTO alumnos VALUES(?, ?)', (1, 'Ana'))",
+          "Confirma los cambios con con.commit().",
+          "Consulta con un marcador y muestra el resultado: for fila in cur.execute('SELECT * FROM alumnos WHERE id = ?', (1,)): print(fila)",
+          "Cierra con con.close() y ejecuta el script con: python practica_sql.py"
+        ], "cleanup": "No hay nada en la nube que eliminar. Si vuelves a ejecutar el script, borra antes el archivo practica.db (la tabla ya existiría). Puedes borrar ambos archivos al terminar." }
+      ]
+    }
+  ]
+}
