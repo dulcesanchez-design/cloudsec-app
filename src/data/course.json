@@ -1,40 +1,68 @@
 {
-  "modules": [
+  "courses": [
     {
-      "id": "01-nube",
-      "title": "01 ¿Qué es la nube?",
-      "description": "Computación en la nube, pago por uso, IaaS, PaaS y SaaS.",
-      "file": "01-que-es-la-nube.json"
+      "id": "fundamentos-ti",
+      "title": "Fundamentos de TI para la nube",
+      "description": "Las bases que necesitas antes de la nube: redes, Linux, contenedores y seguridad.",
+      "recommended": true,
+      "modules": [
+        {
+          "id": "04-redes-basicas",
+          "title": "01 Redes básicas",
+          "description": "IP, DNS, HTTP/HTTPS, puertos y firewalls.",
+          "file": "04-redes-basicas.json"
+        },
+        {
+          "id": "linux-cli",
+          "title": "02 Linux y línea de comandos",
+          "description": "Linux, el sistema de archivos, comandos básicos, permisos y procesos.",
+          "file": "linux-cli.json"
+        },
+        {
+          "id": "so-virtualizacion-contenedores",
+          "title": "03 Sistemas operativos, virtualización y contenedores",
+          "description": "Sistema operativo, procesos, máquinas virtuales, contenedores y Docker.",
+          "file": "so-virtualizacion-contenedores.json"
+        },
+        {
+          "id": "03-seguridad-basica",
+          "title": "04 Seguridad básica",
+          "description": "Confidencialidad, integridad, disponibilidad, autenticación y amenazas comunes.",
+          "file": "03-seguridad-basica.json"
+        }
+      ]
     },
     {
-      "id": "02-aws-desde-cero",
-      "title": "02 AWS desde cero",
-      "description": "Tu cuenta, la consola, regiones y zonas de disponibilidad.",
-      "file": "02-aws-desde-cero.json"
-    },
-    {
-      "id": "03-seguridad-basica",
-      "title": "03 Seguridad básica",
-      "description": "Confidencialidad, integridad, disponibilidad, autenticación y amenazas comunes.",
-      "file": "03-seguridad-basica.json"
-    },
-    {
-      "id": "04-redes-basicas",
-      "title": "04 Redes básicas",
-      "description": "IP, DNS, HTTP/HTTPS, puertos y firewalls.",
-      "file": "04-redes-basicas.json"
-    },
-    {
-      "id": "05-responsabilidad-compartida",
-      "title": "05 Responsabilidad compartida",
-      "description": "Qué protege AWS y qué proteges tú.",
-      "file": "05-responsabilidad-compartida.json"
-    },
-    {
-      "id": "06-iam",
-      "title": "06 IAM: fundamentos (AWS)",
-      "description": "Usuario root, MFA, mínimo privilegio y roles.",
-      "file": "06-iam-fundamentos.json"
+      "id": "cloud-security-aws",
+      "title": "Cloud Security con AWS",
+      "description": "La nube, AWS desde cero, responsabilidad compartida e IAM.",
+      "recommended": false,
+      "modules": [
+        {
+          "id": "01-nube",
+          "title": "01 ¿Qué es la nube?",
+          "description": "Computación en la nube, pago por uso, IaaS, PaaS y SaaS.",
+          "file": "01-que-es-la-nube.json"
+        },
+        {
+          "id": "02-aws-desde-cero",
+          "title": "02 AWS desde cero",
+          "description": "Tu cuenta, la consola, regiones y zonas de disponibilidad.",
+          "file": "02-aws-desde-cero.json"
+        },
+        {
+          "id": "05-responsabilidad-compartida",
+          "title": "03 Responsabilidad compartida",
+          "description": "Qué protege AWS y qué proteges tú.",
+          "file": "05-responsabilidad-compartida.json"
+        },
+        {
+          "id": "06-iam",
+          "title": "04 IAM: fundamentos (AWS)",
+          "description": "Usuario root, MFA, mínimo privilegio y roles.",
+          "file": "06-iam-fundamentos.json"
+        }
+      ]
     }
   ]
 }

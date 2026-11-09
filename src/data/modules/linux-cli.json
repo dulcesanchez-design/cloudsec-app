@@ -1,0 +1,146 @@
+{
+  "title": "Linux y línea de comandos",
+  "lessons": [
+    {
+      "title": "¿Qué es Linux? Kernel y distribución",
+      "source": [
+        "https://www.kernel.org/linux.html",
+        "https://www.debian.org/doc/manuals/debian-faq/basic-defs.en.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🐧", "text": "Linux es un clon del sistema operativo Unix, escrito desde cero por Linus Torvalds." },
+        { "type": "choice", "q": "¿Quién escribió Linux desde cero, según kernel.org?", "options": ["Linus Torvalds", "Un equipo de Microsoft", "Un banco"], "answer": 0, "why": "kernel.org indica que Linux es un clon de Unix escrito desde cero por Linus Torvalds." },
+        { "type": "card", "emoji": "🧠", "text": "El kernel es solo un componente de un sistema Linux completo.", "analogy": "Es el motor, no el coche." },
+        { "type": "truefalse", "statement": "El kernel es solo un componente de un sistema Linux en funcionamiento.", "answer": true, "why": "kernel.org lo describe así: el kernel es solo un componente de un sistema Linux completo." },
+        { "type": "card", "emoji": "📦", "text": "Una distribución de Linux es un sistema Linux completo. Debian, por ejemplo, es una distribución." },
+        { "type": "choice", "q": "¿Qué es una distribución de Linux, según kernel.org?", "options": ["Un sistema Linux completo", "Solo el kernel", "Un tipo de virus"], "answer": 0, "why": "kernel.org: una distribución de Linux es un sistema Linux completo." },
+        { "type": "truefalse", "statement": "Debian es una distribución de Linux.", "answer": true, "why": "La FAQ de Debian la describe como una distribución particular del sistema operativo Linux." }
+      ]
+    },
+    {
+      "title": "El sistema de archivos y la ruta",
+      "source": [
+        "https://man7.org/linux/man-pages/man7/hier.7.html",
+        "https://man7.org/linux/man-pages/man7/path_resolution.7.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🌳", "text": "En Linux todo cuelga de un árbol que empieza en el directorio raíz, escrito /.", "analogy": "Como las ramas de un árbol." },
+        { "type": "choice", "q": "¿Qué es el directorio /?", "options": ["La raíz: donde empieza todo el árbol de directorios", "Un archivo oculto", "El directorio de un usuario"], "answer": 0, "why": "La página hier(7) dice: «This is the root directory. This is where the whole tree starts»." },
+        { "type": "card", "emoji": "🗂️", "text": "Algunos directorios comunes: /etc guarda configuración local, /home los directorios de usuario y /tmp archivos temporales." },
+        { "type": "match", "q": "Une cada directorio con su uso", "pairs": [
+          { "term": "/etc", "desc": "Archivos de configuración de la máquina" },
+          { "term": "/home", "desc": "Directorios de los usuarios" },
+          { "term": "/tmp", "desc": "Archivos temporales" }
+        ], "why": "Según hier(7): /etc contiene configuración local, /home suele contener los directorios de los usuarios y /tmp archivos temporales." },
+        { "type": "card", "emoji": "🧭", "text": "Una ruta absoluta empieza por /. Una ruta relativa se interpreta desde el directorio de trabajo actual." },
+        { "type": "choice", "q": "¿Cuál de estas rutas es absoluta?", "options": ["/etc/hosts", "documentos/notas.txt", "../fotos"], "answer": 0, "why": "Una ruta que empieza por / se resuelve desde el directorio raíz, por eso es absoluta." },
+        { "type": "card", "emoji": "⬆️", "text": "Todo directorio tiene las entradas «.» (él mismo) y «..» (su directorio padre)." },
+        { "type": "truefalse", "statement": "«..» se refiere al directorio padre.", "answer": true, "why": "Por convención, «.» es el propio directorio y «..» su padre." }
+      ]
+    },
+    {
+      "title": "Navegar: pwd, ls y cd",
+      "source": [
+        "https://man7.org/linux/man-pages/man1/pwd.1.html",
+        "https://man7.org/linux/man-pages/man1/ls.1.html",
+        "https://man7.org/linux/man-pages/man1/cd.1p.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📍", "text": "pwd imprime la ruta completa del directorio de trabajo actual.", "analogy": "Tu «estás aquí» en el mapa." },
+        { "type": "choice", "q": "¿Qué hace el comando pwd?", "options": ["Imprime la ruta completa del directorio actual", "Cambia de directorio", "Borra archivos"], "answer": 0, "why": "Según su página de manual: imprime el nombre completo del directorio de trabajo actual." },
+        { "type": "card", "emoji": "📃", "text": "ls lista el contenido del directorio actual. Con -l muestra formato largo y con -a incluye entradas que empiezan por punto." },
+        { "type": "fillblank", "q": "Quieres ver también los archivos ocultos (los que empiezan por punto). Completa el comando.", "code": "$ ls ___", "options": ["-a", "-l", "-x"], "answer": 0, "why": "La opción -a (--all) no ignora las entradas que empiezan por «.». La opción -l solo cambia el formato a largo." },
+        { "type": "card", "emoji": "🚶", "text": "cd cambia el directorio de trabajo. Sin argumentos vuelve al directorio indicado en HOME." },
+        { "type": "fillblank", "q": "Estás en /home/ana/docs y quieres subir al directorio padre. Completa el comando.", "code": "$ cd ___", "options": ["..", ".", "/tmp"], "answer": 0, "why": "«..» es el directorio padre. «.» es el directorio actual." },
+        { "type": "scenario", "situation": "Abres una terminal y no sabes en qué directorio estás.", "q": "¿Qué comando ejecutas primero?", "options": ["pwd", "cd", "ls -a"], "answer": 0, "why": "pwd imprime la ruta del directorio de trabajo actual. Los otros comandos no te la muestran." }
+      ]
+    },
+    {
+      "title": "Crear y ver archivos",
+      "source": [
+        "https://man7.org/linux/man-pages/man1/mkdir.1.html",
+        "https://man7.org/linux/man-pages/man1/touch.1.html",
+        "https://man7.org/linux/man-pages/man1/cat.1.html",
+        "https://man7.org/linux/man-pages/man1/rm.1.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📁", "text": "mkdir crea directorios, si todavía no existen." },
+        { "type": "fillblank", "q": "Quieres crear un directorio llamado proyectos. Completa el comando.", "code": "$ ___ proyectos", "options": ["mkdir", "cat", "rm"], "answer": 0, "why": "mkdir crea directorios. cat muestra archivos y rm los elimina." },
+        { "type": "card", "emoji": "📄", "text": "touch crea un archivo vacío si no existe; si existe, actualiza sus fechas de acceso y modificación." },
+        { "type": "choice", "q": "¿Qué hace touch notas.txt si notas.txt no existe?", "options": ["Lo crea vacío", "Da un error siempre", "Borra el directorio"], "answer": 0, "why": "Un archivo que no existe se crea vacío, salvo que se usen opciones como -c." },
+        { "type": "card", "emoji": "👀", "text": "cat concatena archivos y los imprime en la salida estándar. Sirve para ver el contenido de un archivo corto." },
+        { "type": "fillblank", "q": "Quieres ver el contenido de notas.txt. Completa el comando.", "code": "$ ___ notas.txt", "options": ["cat", "mkdir", "touch"], "answer": 0, "why": "cat imprime el contenido de los archivos en la salida estándar." },
+        { "type": "card", "emoji": "🗑️", "text": "rm elimina archivos. Por defecto no elimina directorios." },
+        { "type": "truefalse", "statement": "Por defecto, rm elimina también los directorios.", "answer": false, "why": "La página de manual indica que, por defecto, rm no elimina directorios." }
+      ]
+    },
+    {
+      "title": "Permisos, usuarios y grupos",
+      "source": [
+        "https://man7.org/linux/man-pages/man1/chmod.1.html",
+        "https://man7.org/linux/man-pages/man1/chown.1.html",
+        "https://man7.org/linux/man-pages/man1/id.1.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔐", "text": "chmod cambia los permisos de un archivo: lectura (r), escritura (w) y ejecución (x)." },
+        { "type": "choice", "q": "¿Qué letras representan lectura, escritura y ejecución?", "options": ["r, w, x", "a, b, c", "u, g, o"], "answer": 0, "why": "Según chmod: read (r), write (w), execute (x). Las letras u, g, o designan a quién se aplican." },
+        { "type": "card", "emoji": "👥", "text": "Los permisos se aplican a u (dueño), g (otros usuarios del grupo del archivo), o (el resto) y a (todos)." },
+        { "type": "match", "q": "Une cada clase con quién representa", "pairs": [
+          { "term": "u", "desc": "El usuario dueño del archivo" },
+          { "term": "g", "desc": "Otros usuarios del grupo del archivo" },
+          { "term": "o", "desc": "Usuarios fuera del grupo" }
+        ], "why": "Así lo define la página de manual de chmod." },
+        { "type": "card", "emoji": "🔢", "text": "Un modo numérico usa dígitos octales que suman los valores 4 (r), 2 (w) y 1 (x)." },
+        { "type": "fillblank", "q": "Quieres dar lectura y escritura (4 + 2) al dueño y nada a los demás. Completa el comando.", "code": "$ chmod ___00 archivo", "options": ["6", "7", "4"], "answer": 0, "why": "Lectura (4) + escritura (2) = 6. Un 7 sumaría también ejecución (4+2+1) y un 4 sería solo lectura." },
+        { "type": "card", "emoji": "🪪", "text": "id muestra los IDs de usuario y grupo. chown cambia el usuario o grupo dueño de un archivo." },
+        { "type": "scenario", "situation": "Un script no se ejecuta porque le falta el permiso de ejecución para su dueño.", "q": "¿Qué comando usas para añadir ese permiso?", "options": ["chmod u+x script.sh", "cat script.sh", "touch script.sh"], "answer": 0, "why": "chmod cambia los permisos. «u+x» añade ejecución (x) para el usuario dueño (u)." }
+      ]
+    },
+    {
+      "title": "Procesos y servicios",
+      "source": [
+        "https://man7.org/linux/man-pages/man1/ps.1.html",
+        "https://man7.org/linux/man-pages/man1/kill.1.html",
+        "https://www.freedesktop.org/software/systemd/man/latest/systemctl.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "⚙️", "text": "ps muestra una instantánea de los procesos activos." },
+        { "type": "choice", "q": "¿Qué hace el comando ps?", "options": ["Muestra información sobre los procesos activos", "Crea directorios", "Cambia permisos"], "answer": 0, "why": "La página de manual: ps informa de una instantánea de los procesos actuales." },
+        { "type": "card", "emoji": "✋", "text": "kill envía una señal a un proceso. Si no indicas la señal, envía TERM, que pide terminarlo." },
+        { "type": "truefalse", "statement": "Sin indicar señal, kill envía la señal TERM.", "answer": true, "why": "La página de manual lo dice: si no se especifica señal, se envía TERM." },
+        { "type": "card", "emoji": "🛎️", "text": "systemctl controla systemd, el gestor del sistema y de servicios. start activa y stop desactiva una unidad." },
+        { "type": "fillblank", "q": "Quieres ver el estado de un servicio. Completa el comando.", "code": "$ systemctl ___ nginx", "options": ["status", "mkdir", "chmod"], "answer": 0, "why": "status muestra el estado en ejecución de las unidades y los últimos registros del journal." },
+        { "type": "scenario", "situation": "Un servicio está instalado pero detenido y quieres arrancarlo ahora mismo.", "q": "¿Qué subcomando de systemctl usas?", "options": ["start", "enable", "status"], "answer": 0, "why": "start activa las unidades indicadas. enable las habilita pero, según la documentación, no las arranca por sí solo." }
+      ]
+    },
+    {
+      "title": "Repaso y lab en WSL2",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/wsl/install",
+        "https://learn.microsoft.com/en-us/windows/wsl/about",
+        "https://man7.org/linux/man-pages/man1/ls.1.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: kernel y distribución, rutas, pwd, ls, cd, archivos, permisos y procesos." },
+        { "type": "match", "q": "Une cada comando con lo que hace", "pairs": [
+          { "term": "pwd", "desc": "Imprime el directorio de trabajo actual" },
+          { "term": "mkdir", "desc": "Crea directorios" },
+          { "term": "chmod", "desc": "Cambia los permisos de un archivo" }
+        ], "why": "Son las descripciones de sus páginas de manual." },
+        { "type": "choice", "q": "¿Qué diferencia hay entre el kernel y una distribución?", "options": ["La distribución es un sistema Linux completo; el kernel es un componente", "Son lo mismo", "El kernel incluye todas las aplicaciones"], "answer": 0, "why": "kernel.org: el kernel es solo un componente; una distribución es un sistema Linux completo." },
+        { "type": "fillblank", "q": "Quieres listar en formato largo. Completa el comando.", "code": "$ ls ___", "options": ["-l", "-a", ".."], "answer": 0, "why": "-l usa el formato de lista larga." },
+        { "type": "scenario", "situation": "Quieres comprobar en qué directorio estás y luego entrar a /etc.", "q": "¿Qué secuencia es correcta?", "options": ["pwd y luego cd /etc", "ls y luego mkdir /etc", "cat y luego touch /etc"], "answer": 0, "why": "pwd muestra el directorio actual y cd /etc cambia al directorio /etc (ruta absoluta)." },
+        { "type": "truefalse", "statement": "Una ruta que empieza por / es absoluta.", "answer": true, "why": "Se resuelve desde el directorio raíz." },
+        { "type": "lab", "title": "Probar comandos básicos en WSL2 (opcional)", "objective": "Instalar WSL (Linux dentro de Windows) y practicar pwd, ls, cd, mkdir, touch y cat.", "local": true, "steps": [
+          "Comprueba que usas Windows 10 versión 2004 o superior (compilación 19041 o más) o Windows 11, y abre PowerShell.",
+          "Ejecuta: wsl --install (habilita WSL e instala la distribución Ubuntu). Luego reinicia el equipo. Solo funciona si WSL no está instalado todavía.",
+          "Abre la distribución Ubuntu instalada y sigue sus indicaciones de primer uso.",
+          "Ejecuta pwd y luego ls para ver dónde estás y qué hay.",
+          "Ejecuta mkdir practica y cd practica.",
+          "Ejecuta touch notas.txt y luego ls -l para ver el archivo.",
+          "Ejecuta cat notas.txt (estará vacío) y cd .. para volver."
+        ], "cleanup": "No hay recursos en la nube que eliminar. Puedes borrar los archivos de práctica (rm elimina archivos; por defecto no elimina directorios) y dejar WSL instalado." }
+      ]
+    }
+  ]
+}

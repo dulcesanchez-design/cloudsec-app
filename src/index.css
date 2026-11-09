@@ -479,3 +479,70 @@ header .progress {
 .btn:disabled.primary {
   opacity: 0.4;
 }
+
+/* --- XP y racha --- */
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.result .stats {
+  justify-content: center;
+}
+
+.xp-earned {
+  color: var(--ok);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.reset {
+  align-self: center;
+  margin-top: 24px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* --- Aprobación por módulo --- */
+.module-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ok);
+}
+
+.btn.module-btn.retry {
+  border-color: #f59e0b;
+}
+
+.btn.module-btn.retry .module-status {
+  color: #f59e0b;
+}
+
+.center {
+  text-align: center;
+}
+
+/* --- Cursos --- */
+.badge {
+  align-self: flex-start;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
+}

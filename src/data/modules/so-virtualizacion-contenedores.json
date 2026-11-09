@@ -1,0 +1,135 @@
+{
+  "title": "Sistemas operativos, virtualización y contenedores",
+  "lessons": [
+    {
+      "title": "¿Qué hace un sistema operativo?",
+      "source": "https://csrc.nist.gov/glossary/term/operating_system",
+      "steps": [
+        { "type": "card", "emoji": "🖥️", "text": "Un sistema operativo es un conjunto de software que gestiona los recursos de hardware y ofrece servicios comunes a los programas." },
+        { "type": "choice", "q": "¿Qué hace un sistema operativo?", "options": ["Gestiona los recursos de hardware y da servicios comunes a los programas", "Solo dibuja ventanas", "Escribe tus aplicaciones por ti"], "answer": 0, "why": "NIST (SP 800-152) lo define como una colección de software que gestiona los recursos de hardware y ofrece servicios comunes a los programas." },
+        { "type": "card", "emoji": "🎭", "text": "También se describe como un programa que ofrece una plataforma de software sobre la que se ejecutan otros programas.", "analogy": "Como el escenario de un teatro." },
+        { "type": "truefalse", "statement": "Un sistema operativo ofrece una plataforma de software sobre la que se ejecutan otros programas.", "answer": true, "why": "Es la definición de NIST SP 800-86." },
+        { "type": "choice", "q": "¿Cuál NO es una función del sistema operativo según NIST?", "options": ["Gestionar recursos de hardware", "Ofrecer servicios comunes a los programas", "Escribir por ti el código de tus aplicaciones"], "answer": 2, "why": "Las definiciones de NIST hablan de gestionar hardware y dar servicios a los programas, no de escribirlos." },
+        { "type": "truefalse", "statement": "El sistema operativo gestiona los recursos de hardware del equipo.", "answer": true, "why": "Así lo define NIST SP 800-152." }
+      ]
+    },
+    {
+      "title": "Proceso y usuario",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/process",
+        "https://man7.org/linux/man-pages/man7/credentials.7.html",
+        "https://man7.org/linux/man-pages/man1/id.1.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "▶️", "text": "Un proceso es un programa en ejecución.", "analogy": "La receta es el programa; cocinar es el proceso." },
+        { "type": "choice", "q": "¿Qué es un proceso?", "options": ["Un programa en ejecución", "Un archivo guardado en disco", "Un tipo de hardware"], "answer": 0, "why": "NIST SP 800-86 define un proceso como un programa en ejecución." },
+        { "type": "card", "emoji": "👤", "text": "En Linux, cada proceso tiene IDs de usuario y de grupo asociados. Son números enteros." },
+        { "type": "truefalse", "statement": "En Linux, cada proceso tiene IDs de usuario y de grupo asociados.", "answer": true, "why": "Lo indica credentials(7): cada proceso tiene varios IDs de usuario y de grupo asociados." },
+        { "type": "card", "emoji": "🧾", "text": "Los IDs reales determinan quién es el dueño del proceso. El kernel usa los efectivos para decidir sus permisos." },
+        { "type": "choice", "q": "¿Para qué usa el kernel los IDs efectivos de un proceso?", "options": ["Para determinar los permisos que tendrá el proceso", "Para elegir el nombre del archivo", "Para cambiar el color de la terminal"], "answer": 0, "why": "credentials(7): el kernel usa los IDs efectivos para determinar los permisos del proceso." },
+        { "type": "scenario", "situation": "Quieres ver los IDs de usuario y de grupo con los que corre tu sesión actual en Linux.", "q": "¿Qué comando usas?", "options": ["id", "touch", "mkdir"], "answer": 0, "why": "id imprime los IDs reales y efectivos de usuario y grupo del proceso actual." }
+      ]
+    },
+    {
+      "title": "Máquinas virtuales",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/virtual_machine",
+        "https://aws.amazon.com/what-is/virtualization/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🪟", "text": "Una máquina virtual (VM) es un entorno simulado creado por virtualización." },
+        { "type": "choice", "q": "¿Qué es una máquina virtual?", "options": ["Un entorno simulado creado por virtualización", "Un cable de red", "Un navegador"], "answer": 0, "why": "NIST la define como un entorno simulado creado por virtualización." },
+        { "type": "card", "emoji": "🧰", "text": "También es software que permite a un único host ejecutar uno o más sistemas operativos invitados." },
+        { "type": "truefalse", "statement": "Una VM se ejecuta con un sistema operativo propio, separado del de la computadora física.", "answer": true, "why": "AWS la describe como una computadora definida por software que corre en una física con un sistema operativo separado." },
+        { "type": "card", "emoji": "🎛️", "text": "El hipervisor es un componente de software que gestiona varias máquinas virtuales en una computadora." },
+        { "type": "choice", "q": "¿Qué gestiona un hipervisor?", "options": ["Varias máquinas virtuales en una computadora", "Las contraseñas de los usuarios", "Los nombres de dominio"], "answer": 0, "why": "AWS: el hipervisor es un componente de software que gestiona varias máquinas virtuales en una computadora." },
+        { "type": "match", "q": "Une cada tipo de hipervisor con su descripción", "pairs": [
+          { "term": "Tipo 1", "desc": "Se instala directamente en el hardware" },
+          { "term": "Tipo 2 (hospedado)", "desc": "Se instala sobre un sistema operativo" },
+          { "term": "Hipervisor", "desc": "Gestiona varias VM en una computadora" }
+        ], "why": "AWS describe el tipo 1 instalado directamente en el hardware y el tipo 2, o hospedado, instalado sobre un sistema operativo." }
+      ]
+    },
+    {
+      "title": "Contenedores y en qué se diferencian de una VM",
+      "source": [
+        "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/",
+        "https://aws.amazon.com/compare/the-difference-between-containers-and-virtual-machines/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📦", "text": "Un contenedor es un proceso aislado con todos los archivos que necesita para ejecutarse.", "analogy": "Una caja con todo lo necesario." },
+        { "type": "choice", "q": "Según Docker, ¿qué es un contenedor?", "options": ["Un proceso aislado con todos los archivos que necesita", "Un sistema operativo completo con su propio kernel", "Un tipo de hardware"], "answer": 0, "why": "Docker: un contenedor es simplemente un proceso aislado con todos los archivos que necesita para ejecutarse." },
+        { "type": "card", "emoji": "🔗", "text": "Si ejecutas varios contenedores, todos comparten el mismo kernel." },
+        { "type": "truefalse", "statement": "Varios contenedores ejecutándose juntos comparten el mismo kernel.", "answer": true, "why": "Es lo que indica la documentación de Docker." },
+        { "type": "card", "emoji": "🖥️", "text": "Una VM, en cambio, es un sistema operativo completo, con su propio kernel y controladores de hardware." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Contenedor", "desc": "Proceso aislado; varios comparten el kernel" },
+          { "term": "Máquina virtual", "desc": "Sistema operativo completo con su propio kernel" },
+          { "term": "Hipervisor", "desc": "Gestiona varias máquinas virtuales" }
+        ], "why": "Docker contrasta los contenedores (procesos aislados que comparten kernel) con las VM (un sistema operativo completo con su propio kernel)." },
+        { "type": "scenario", "situation": "Quieres aislar cada componente de tu aplicación sin arrancar un sistema operativo completo por cada uno.", "q": "¿Qué opción encaja mejor?", "options": ["Contenedores", "Una VM por componente", "Apagar el aislamiento"], "answer": 0, "why": "Docker describe los contenedores como procesos aislados por componente. AWS indica que los contenedores Linux no copian el sistema operativo completo a su entorno virtualizado." }
+      ]
+    },
+    {
+      "title": "¿Qué es Docker?",
+      "source": [
+        "https://docs.docker.com/get-started/docker-overview/",
+        "https://docs.docker.com/engine/security/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🐳", "text": "Docker es una plataforma abierta para desarrollar, distribuir y ejecutar aplicaciones." },
+        { "type": "choice", "q": "¿Qué es Docker?", "options": ["Una plataforma abierta para desarrollar, distribuir y ejecutar aplicaciones", "Un sistema de archivos", "Un navegador web"], "answer": 0, "why": "Así lo describe la documentación oficial de Docker." },
+        { "type": "card", "emoji": "🤝", "text": "Docker usa una arquitectura cliente-servidor: el cliente docker habla con el daemon, que hace el trabajo pesado." },
+        { "type": "match", "q": "Une cada pieza de Docker con su función", "pairs": [
+          { "term": "Cliente docker", "desc": "Forma principal de interactuar con Docker" },
+          { "term": "Daemon", "desc": "Gestiona imágenes, contenedores, redes y volúmenes" },
+          { "term": "Registro (registry)", "desc": "Almacena imágenes de Docker" }
+        ], "why": "Son las descripciones de la documentación de Docker." },
+        { "type": "card", "emoji": "🧱", "text": "Docker usa namespaces de Linux para crear el espacio de trabajo aislado que es el contenedor." },
+        { "type": "truefalse", "statement": "El cliente docker se comunica con el daemon de Docker.", "answer": true, "why": "Docker usa una arquitectura cliente-servidor en la que el cliente habla con el daemon." }
+      ]
+    },
+    {
+      "title": "Imagen vs. contenedor",
+      "source": [
+        "https://docs.docker.com/get-started/docker-overview/",
+        "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/",
+        "https://docs.docker.com/reference/cli/docker/container/run/",
+        "https://docs.docker.com/reference/cli/docker/image/ls/",
+        "https://docs.docker.com/reference/cli/docker/container/ls/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📋", "text": "Una imagen es una plantilla de solo lectura con instrucciones para crear un contenedor.", "analogy": "Un molde de pasteles." },
+        { "type": "choice", "q": "¿Qué es una imagen de Docker?", "options": ["Una plantilla de solo lectura con instrucciones para crear un contenedor", "Un contenedor en ejecución", "Una foto de la pantalla"], "answer": 0, "why": "Docker: una imagen es una plantilla de solo lectura con instrucciones para crear un contenedor." },
+        { "type": "card", "emoji": "🏃", "text": "Un contenedor es una instancia ejecutable de una imagen.", "analogy": "El pastel hecho con el molde." },
+        { "type": "truefalse", "statement": "Un contenedor es una instancia ejecutable de una imagen.", "answer": true, "why": "Es la definición de la documentación de Docker." },
+        { "type": "card", "emoji": "🧅", "text": "Las imágenes son inmutables: una vez creadas, no se pueden modificar. Se componen de capas." },
+        { "type": "fillblank", "q": "Quieres crear y ejecutar un contenedor a partir de una imagen. Completa el comando.", "code": "$ docker ___ nombre-de-imagen", "options": ["run", "images", "ps"], "answer": 0, "why": "docker run crea y ejecuta un nuevo contenedor a partir de una imagen. docker images lista imágenes y docker ps lista contenedores." },
+        { "type": "scenario", "situation": "Quieres ver qué imágenes tienes en tu equipo.", "q": "¿Qué comando usas?", "options": ["docker image ls", "docker container ls", "docker run"], "answer": 0, "why": "docker image ls lista imágenes. docker container ls lista contenedores." },
+        { "type": "truefalse", "statement": "Por defecto, docker container ls muestra todos los contenedores, incluso los detenidos.", "answer": false, "why": "Por defecto muestra solo los contenedores en ejecución; con la opción -a se muestran todos." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/process",
+        "https://csrc.nist.gov/glossary/term/virtual_machine",
+        "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/",
+        "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: sistema operativo, proceso, máquina virtual, contenedor, imagen y Docker." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Proceso", "desc": "Un programa en ejecución" },
+          { "term": "Máquina virtual", "desc": "Entorno simulado creado por virtualización" },
+          { "term": "Contenedor", "desc": "Proceso aislado con los archivos que necesita" }
+        ], "why": "Son las definiciones de NIST (proceso y VM) y de Docker (contenedor)." },
+        { "type": "choice", "q": "¿Qué comparten varios contenedores en un mismo host?", "options": ["El mismo kernel", "Un sistema operativo completo cada uno", "Nada en absoluto"], "answer": 0, "why": "Docker: si ejecutas varios contenedores, todos comparten el mismo kernel." },
+        { "type": "truefalse", "statement": "Una imagen de Docker se puede modificar después de crearla.", "answer": false, "why": "Las imágenes son inmutables: una vez creadas, no se pueden modificar." },
+        { "type": "fillblank", "q": "Quieres listar los contenedores en ejecución. Completa el comando.", "code": "$ docker ___", "options": ["ps", "run", "images"], "answer": 0, "why": "docker ps es un alias de docker container ls, que por defecto muestra solo los contenedores en ejecución." },
+        { "type": "scenario", "situation": "Necesitas ejecutar tu aplicación en un entorno aislado, sin arrancar un sistema operativo completo para cada componente.", "q": "¿Qué eliges?", "options": ["Contenedores", "Una VM por componente", "Ninguna de las dos"], "answer": 0, "why": "Los contenedores son procesos aislados que comparten el kernel. Una VM incluye un sistema operativo completo." },
+        { "type": "truefalse", "statement": "Una máquina virtual incluye su propio sistema operativo.", "answer": true, "why": "AWS: las imágenes de VM contienen su propio sistema operativo." }
+      ]
+    }
+  ]
+}

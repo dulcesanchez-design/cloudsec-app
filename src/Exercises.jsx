@@ -27,26 +27,36 @@ export function Card({ step }) {
   )
 }
 
+// Mezcla las opciones una sola vez al montar el ejercicio (useState inicial)
+// y marca la correcta por contenido, no por posición.
+function useShuffledOptions(step) {
+  const [opts] = useState(() =>
+    shuffle(step.options.map((text, i) => ({ text, correct: i === step.answer }))),
+  )
+  return opts
+}
+
 export function Choice({ step, onDone }) {
-  const [picked, setPicked] = useState(null)
+  const opts = useShuffledOptions(step)
+  const [picked, setPicked] = useState(null) // índice dentro de opts (ya mezclado)
   const choose = (i) => {
     if (picked !== null) return
     setPicked(i)
-    onDone(i === step.answer)
+    onDone(opts[i].correct)
   }
   return (
     <>
       <h2>{step.q}</h2>
       <div className="options">
-        {step.options.map((opt, i) => {
+        {opts.map((opt, i) => {
           let cls = 'btn option'
           if (picked !== null) {
-            if (i === step.answer) cls += ' correct'
+            if (opt.correct) cls += ' correct'
             else if (i === picked) cls += ' wrong'
           }
           return (
-            <button key={i} className={cls} disabled={picked !== null} onClick={() => choose(i)}>
-              {opt}
+            <button key={opt.text} className={cls} disabled={picked !== null} onClick={() => choose(i)}>
+              {opt.text}
             </button>
           )
         })}
@@ -147,6 +157,7 @@ export function Order({ step, onDone }) {
 
 export function Match({ step, onDone }) {
   const [rights] = useState(() => shuffle(step.pairs.map((p) => p.desc)))
+  const [lefts] = useState(() => shuffle(step.pairs.map((_, i) => i)))
   const [sel, setSel] = useState(null)
   const [matched, setMatched] = useState([])
   const [flash, setFlash] = useState(null)
@@ -178,7 +189,8 @@ export function Match({ step, onDone }) {
       <p className="hint">Toca un concepto y luego su descripción</p>
       <div className="match-grid">
         <div className="options">
-          {step.pairs.map((p, i) => {
+          {lefts.map((i) => {
+            const p = step.pairs[i]
             let cls = 'btn option'
             if (matched.includes(i)) cls += ' correct'
             else if (sel === i) cls += ' selected'
@@ -249,16 +261,17 @@ export function FindBug({ step, onDone }) {
 }
 
 export function FillBlank({ step, onDone }) {
+  const opts = useShuffledOptions(step)
   const [picked, setPicked] = useState(null)
   const choose = (i) => {
     if (picked !== null) return
     setPicked(i)
-    onDone(i === step.answer)
+    onDone(opts[i].correct)
   }
   const [before, after] = step.code.split('___')
-  const shown = picked === null ? '___' : step.options[picked]
+  const shown = picked === null ? '___' : opts[picked].text
   const blankCls =
-    picked === null ? 'blank' : picked === step.answer ? 'blank correct' : 'blank wrong'
+    picked === null ? 'blank' : opts[picked].correct ? 'blank correct' : 'blank wrong'
   return (
     <>
       <h2>{step.q}</h2>
@@ -268,15 +281,15 @@ export function FillBlank({ step, onDone }) {
         {after}
       </pre>
       <div className="options">
-        {step.options.map((opt, i) => {
+        {opts.map((opt, i) => {
           let cls = 'btn option'
           if (picked !== null) {
-            if (i === step.answer) cls += ' correct'
+            if (opt.correct) cls += ' correct'
             else if (i === picked) cls += ' wrong'
           }
           return (
-            <button key={i} className={cls} disabled={picked !== null} onClick={() => choose(i)}>
-              {opt}
+            <button key={opt.text} className={cls} disabled={picked !== null} onClick={() => choose(i)}>
+              {opt.text}
             </button>
           )
         })}
@@ -304,6 +317,20 @@ export function Lab({ step, onComplete }) {
         <strong>Objetivo:</strong> {step.objective}
       </p>
 
+      {step.local ? (
+        <div className="lab-warning">
+          <strong>💻 Lab local, solo en tu computadora</strong>
+          <ul>
+            <li>Se hace únicamente en tu computadora, no en la nube de AWS: no genera costos de AWS.</li>
+            <li>Es opcional: puedes saltarlo y hacerlo más tarde.</li>
+            <li>No guardes claves ni contraseñas reales en archivos de práctica.</li>
+          </ul>
+          <label className="check">
+            <input type="checkbox" checked={ack} onChange={(e) => setAck(e.target.checked)} />
+            <span>Lo entendí</span>
+          </label>
+        </div>
+      ) : (
       <div className="lab-warning">
         <strong>⚠️ Antes de empezar: costos y seguridad</strong>
         <ul>
@@ -324,6 +351,7 @@ export function Lab({ step, onComplete }) {
           <span>Lo entendí y ya tengo mi alerta de presupuesto</span>
         </label>
       </div>
+      )}
 
       {ack && (
         <>
