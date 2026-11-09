@@ -2,117 +2,88 @@
   "title": "01 ¿Qué es la nube?",
   "lessons": [
     {
-      "title": "Computación en la nube y pago por uso",
-      "term": "Pago por uso",
-      "explanation": "La computación en la nube es la entrega bajo demanda de recursos de TI (por ejemplo servidores, almacenamiento o bases de datos) a través de Internet, con precios de pago por uso. Pago por uso significa que pagas por los servicios que necesitas durante el tiempo que los usas. Analogía: es como la factura de la luz. No construyes una central eléctrica en tu casa; usas la electricidad que necesitas y pagas por lo que consumes. Si un mes casi no la usas, pagas poco, y si la usas mucho, pagas más.",
+      "title": "¿Qué es la computación en la nube?",
       "source": "https://aws.amazon.com/what-is-cloud-computing/",
-      "questions": [
-        {
-          "q": "¿Cómo define AWS la computación en la nube?",
-          "options": [
-            "La entrega bajo demanda de recursos de TI por Internet con precios de pago por uso",
-            "Un servidor físico que compras e instalas en tu oficina",
-            "Un programa que se instala en tu computadora para guardar archivos"
-          ],
-          "answer": 0,
-          "why": "AWS la describe como la entrega bajo demanda de recursos de TI a través de Internet con precios de pago por uso."
-        },
-        {
-          "q": "¿Qué significa «pago por uso»?",
-          "options": [
-            "Pagas una cuota fija anual por todos los servicios, los uses o no",
-            "Pagas por los servicios que necesitas durante el tiempo que los usas",
-            "Pagas solo cuando el servicio falla"
-          ],
-          "answer": 1,
-          "why": "En el modelo de pago por uso, el costo depende de los servicios individuales que necesitas y de cuánto tiempo los utilizas."
-        },
-        {
-          "q": "Una pequeña tienda online usa muchos recursos solo unos días al año y casi nada el resto. ¿Qué describe mejor su factura con pago por uso?",
-          "options": [
-            "Paga lo mismo todos los meses, porque el precio es fijo",
-            "Paga más cuando consume más recursos y menos cuando consume poco",
-            "No paga nada fuera de esos días, aunque siga usando servicios"
-          ],
-          "answer": 1,
-          "why": "El pago por uso sigue el consumo: lo que usas y el tiempo que lo usas. Si sigues usando un servicio, sigues pagando por él."
-        }
+      "steps": [
+        { "type": "card", "emoji": "☁️", "text": "La computación en la nube es la entrega bajo demanda de recursos de TI a través de Internet.", "analogy": "Como abrir el grifo: el agua llega cuando la pides." },
+        { "type": "choice", "q": "¿Qué describe mejor la computación en la nube?", "options": ["Entrega bajo demanda de recursos de TI por Internet con precios de pago por uso", "Un servidor físico que instalas tú en tu oficina", "Un programa que se instala en tu computadora"], "answer": 0, "why": "AWS la define como la entrega bajo demanda de recursos de TI a través de Internet con precios de pago por uso." },
+        { "type": "card", "emoji": "⏱️", "text": "Bajo demanda: los recursos llegan cuando los pides. Por Internet: los usas a través de la red." },
+        { "type": "truefalse", "statement": "En la nube, los recursos de TI se entregan a través de Internet.", "answer": true, "why": "Es parte de la definición de AWS de computación en la nube." },
+        { "type": "match", "q": "Une cada idea con su significado", "pairs": [
+          { "term": "Bajo demanda", "desc": "Los recursos llegan cuando los pides" },
+          { "term": "Por Internet", "desc": "Los usas a través de la red" },
+          { "term": "Pago por uso", "desc": "El precio sigue lo que consumes" }
+        ], "why": "Las tres ideas aparecen en la definición de AWS: entrega bajo demanda, por Internet y con precios de pago por uso." },
+        { "type": "choice", "q": "¿Cuál NO forma parte de la definición de AWS de la nube?", "options": ["Entrega bajo demanda", "Acceso a través de Internet", "Comprar primero el hardware para poder usarlo"], "answer": 2, "why": "La definición habla de entrega bajo demanda por Internet con pago por uso, no de comprar hardware." }
       ]
     },
     {
-      "title": "IaaS: infraestructura como servicio",
-      "term": "IaaS",
-      "explanation": "IaaS (Infrastructure as a Service) contiene los bloques básicos de TI en la nube: normalmente da acceso a funciones de red, a computadoras (virtuales o en hardware dedicado) y a espacio de almacenamiento de datos. Analogía: es como alquilar un local vacío. El dueño te da paredes, luz y agua, pero tú decides cómo amueblarlo y qué negocio poner. En IaaS tienes el mayor nivel de flexibilidad sobre los recursos de TI, pero también más cosas que configurar tú mismo.",
-      "source": "https://aws.amazon.com/types-of-cloud-computing/",
-      "questions": [
-        {
-          "q": "¿Qué significa la sigla IaaS?",
-          "options": [
-            "Internet as a Service",
-            "Infrastructure as a Service",
-            "Integration as a Service"
-          ],
-          "answer": 1,
-          "why": "IaaS significa Infrastructure as a Service, infraestructura como servicio."
-        },
-        {
-          "q": "¿Qué ofrece típicamente IaaS?",
-          "options": [
-            "Acceso a funciones de red, computadoras (virtuales o dedicadas) y almacenamiento",
-            "Solo aplicaciones terminadas listas para usar",
-            "Solo cursos de capacitación sobre la nube"
-          ],
-          "answer": 0,
-          "why": "AWS describe IaaS como los bloques básicos de TI en la nube: red, computadoras y espacio de almacenamiento."
-        },
-        {
-          "q": "¿Cuál de estas cosas NO es un bloque básico típico de IaaS, sino algo que ya llega como producto terminado?",
-          "options": [
-            "Almacenamiento de datos",
-            "Una computadora virtual",
-            "Una aplicación de correo web lista para usar"
-          ],
-          "answer": 2,
-          "why": "Una aplicación lista para usar, como el correo web, corresponde a SaaS. IaaS entrega los bloques básicos: red, cómputo y almacenamiento."
-        }
+      "title": "Pago por uso",
+      "source": "https://aws.amazon.com/pricing/",
+      "steps": [
+        { "type": "card", "emoji": "💡", "text": "Pago por uso: pagas por los servicios que necesitas, durante el tiempo que los usas.", "analogy": "Como la factura de la luz." },
+        { "type": "truefalse", "statement": "Con pago por uso pagas una cuota fija anual por todos los servicios, los uses o no.", "answer": false, "why": "Pagas por los servicios individuales que necesitas y por el tiempo que los usas." },
+        { "type": "choice", "q": "Una tienda online usa muchos recursos solo unos días al año. ¿Cómo es su factura con pago por uso?", "options": ["Igual todos los meses, porque el precio es fijo", "Mayor cuando consume más y menor cuando consume poco", "Cero siempre, aunque siga usando servicios"], "answer": 1, "why": "El pago por uso sigue el consumo: lo que usas y el tiempo que lo usas." },
+        { "type": "card", "emoji": "🧾", "text": "El precio de cada servicio es propio: pagas por los servicios individuales que usas." },
+        { "type": "choice", "q": "¿De qué depende lo que pagas en el modelo de pago por uso?", "options": ["Del tamaño de tu empresa", "De los servicios que usas y el tiempo que los usas", "Del número de empleados"], "answer": 1, "why": "AWS indica que pagas por los servicios individuales que necesitas, durante el tiempo que los usas." },
+        { "type": "truefalse", "statement": "AWS aplica precios de pago por uso a la gran mayoría de sus servicios en la nube.", "answer": true, "why": "La página de precios de AWS lo indica para la gran mayoría de sus servicios." }
       ]
     },
     {
-      "title": "PaaS y SaaS: menos trabajo para ti",
-      "term": "SaaS",
-      "explanation": "SaaS (Software as a Service) es software que el proveedor ejecuta y administra por ti; tú solo lo usas, por ejemplo un correo web. PaaS (Platform as a Service) quita a las organizaciones la necesidad de administrar la infraestructura subyacente (normalmente el hardware y los sistemas operativos), para que se centren en desplegar y gestionar sus aplicaciones. Analogía: PaaS es una cocina ya equipada donde tú solo cocinas; SaaS es ir a un restaurante, donde solo comes.",
+      "title": "IaaS",
       "source": "https://aws.amazon.com/types-of-cloud-computing/",
-      "questions": [
-        {
-          "q": "En SaaS, ¿quién ejecuta y administra la aplicación?",
-          "options": [
-            "El proveedor del servicio",
-            "Tú, en tus propios servidores",
-            "Un tercero ajeno al proveedor y al cliente"
-          ],
-          "answer": 0,
-          "why": "En SaaS, el proveedor ejecuta y administra la aplicación; el cliente solo la usa."
-        },
-        {
-          "q": "¿Qué te quita de encima PaaS?",
-          "options": [
-            "La necesidad de escribir tu aplicación",
-            "La necesidad de administrar la infraestructura subyacente, como hardware y sistemas operativos",
-            "La necesidad de tener una cuenta con el proveedor"
-          ],
-          "answer": 1,
-          "why": "PaaS elimina la necesidad de administrar la infraestructura subyacente (normalmente hardware y sistemas operativos). Tu aplicación sigue siendo cosa tuya."
-        },
-        {
-          "q": "Un equipo quiere desplegar su propio código sin ocuparse del hardware ni de los sistemas operativos. ¿Qué modelo encaja mejor?",
-          "options": [
-            "SaaS, porque el proveedor les escribe la aplicación",
-            "PaaS, porque el proveedor gestiona la infraestructura subyacente",
-            "Ninguno: siempre hay que administrar el hardware"
-          ],
-          "answer": 1,
-          "why": "Es justo el caso de PaaS. SaaS entrega una aplicación ya hecha, no sirve para desplegar código propio."
-        }
+      "steps": [
+        { "type": "card", "emoji": "🧱", "text": "IaaS (Infrastructure as a Service) contiene los bloques básicos de TI en la nube.", "analogy": "Como alquilar un local vacío: tú lo equipas." },
+        { "type": "choice", "q": "¿Qué significa IaaS?", "options": ["Internet as a Service", "Infrastructure as a Service", "Integration as a Service"], "answer": 1, "why": "IaaS es Infrastructure as a Service: infraestructura como servicio." },
+        { "type": "card", "emoji": "🖥️", "text": "Normalmente da acceso a funciones de red, computadoras (virtuales o en hardware dedicado) y espacio de almacenamiento." },
+        { "type": "truefalse", "statement": "IaaS suele dar acceso a espacio de almacenamiento de datos.", "answer": true, "why": "El almacenamiento es uno de los bloques básicos que AWS asocia a IaaS." },
+        { "type": "choice", "q": "¿Cuál NO es un bloque básico típico de IaaS?", "options": ["Almacenamiento de datos", "Una computadora virtual", "Una aplicación de correo web lista para usar"], "answer": 2, "why": "Una aplicación lista para usar corresponde a SaaS. IaaS entrega bloques básicos: red, cómputo y almacenamiento." },
+        { "type": "truefalse", "statement": "Las computadoras que ofrece IaaS pueden ser virtuales o hardware dedicado.", "answer": true, "why": "AWS menciona computadoras virtuales o en hardware dedicado." }
+      ]
+    },
+    {
+      "title": "PaaS",
+      "source": "https://aws.amazon.com/types-of-cloud-computing/",
+      "steps": [
+        { "type": "card", "emoji": "🛠️", "text": "PaaS (Platform as a Service) te quita la necesidad de administrar la infraestructura subyacente.", "analogy": "Como una cocina ya equipada." },
+        { "type": "choice", "q": "¿Qué deja de administrar quien usa PaaS?", "options": ["La infraestructura subyacente, normalmente hardware y sistemas operativos", "Nada, administra todo igual", "El pago de la factura"], "answer": 0, "why": "PaaS elimina la necesidad de administrar la infraestructura subyacente, normalmente hardware y sistemas operativos." },
+        { "type": "card", "emoji": "⚙️", "text": "La infraestructura subyacente es, normalmente, el hardware y los sistemas operativos." },
+        { "type": "truefalse", "statement": "PaaS elimina la necesidad de administrar el hardware y los sistemas operativos subyacentes.", "answer": true, "why": "Es la descripción de PaaS de AWS." },
+        { "type": "choice", "q": "Un equipo no quiere ocuparse del hardware ni del sistema operativo. ¿Qué modelo encaja?", "options": ["SaaS, porque el proveedor les escribe su aplicación", "PaaS", "Ninguno: siempre hay que administrarlos"], "answer": 1, "why": "PaaS quita esa administración. En SaaS el proveedor ofrece una aplicación ya hecha, no escribe la tuya." },
+        { "type": "truefalse", "statement": "PaaS y SaaS son lo mismo.", "answer": false, "why": "PaaS quita la administración de la infraestructura subyacente; SaaS entrega software que el proveedor ejecuta y administra." }
+      ]
+    },
+    {
+      "title": "SaaS",
+      "source": "https://aws.amazon.com/types-of-cloud-computing/",
+      "steps": [
+        { "type": "card", "emoji": "📧", "text": "SaaS (Software as a Service): aplicaciones que el proveedor ejecuta y administra.", "analogy": "Como ir a un restaurante: tú solo comes." },
+        { "type": "choice", "q": "En SaaS, ¿quién ejecuta y administra la aplicación?", "options": ["El proveedor del servicio", "Tú, en tus propios servidores", "Un tercero ajeno al proveedor y al cliente"], "answer": 0, "why": "En SaaS el proveedor ejecuta y administra la aplicación; tú solo la usas." },
+        { "type": "card", "emoji": "✉️", "text": "Un ejemplo que da AWS: el correo electrónico basado en web." },
+        { "type": "truefalse", "statement": "Con SaaS instalas y administras tú el software en tus servidores.", "answer": false, "why": "En SaaS el proveedor ejecuta y administra el software." },
+        { "type": "choice", "q": "Quieres usar un correo sin instalar ni administrar nada. ¿Qué modelo es?", "options": ["IaaS", "PaaS", "SaaS"], "answer": 2, "why": "Es el ejemplo clásico de SaaS: una aplicación web ejecutada y administrada por el proveedor." },
+        { "type": "truefalse", "statement": "El correo electrónico basado en web es un ejemplo de SaaS.", "answer": true, "why": "AWS lo menciona como ejemplo de SaaS." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://aws.amazon.com/what-is-cloud-computing/",
+        "https://aws.amazon.com/pricing/",
+        "https://aws.amazon.com/types-of-cloud-computing/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: nube, pago por uso, IaaS, PaaS y SaaS. ¡Vamos!" },
+        { "type": "choice", "q": "Pagas solo por los servicios que usas y mientras los usas. ¿Cómo se llama este modelo?", "options": ["Cuota fija", "Pago por uso", "Licencia perpetua"], "answer": 1, "why": "Es el pago por uso." },
+        { "type": "match", "q": "Une cada modelo con su descripción", "pairs": [
+          { "term": "IaaS", "desc": "Bloques básicos: red, cómputo y almacenamiento" },
+          { "term": "PaaS", "desc": "Sin administrar hardware ni sistemas operativos" },
+          { "term": "SaaS", "desc": "Software que el proveedor ejecuta y administra" }
+        ], "why": "IaaS da los bloques básicos; PaaS quita la administración de la infraestructura subyacente; SaaS entrega software administrado por el proveedor." },
+        { "type": "truefalse", "statement": "En SaaS, el usuario ejecuta y administra la aplicación.", "answer": false, "why": "En SaaS lo hace el proveedor." },
+        { "type": "choice", "q": "¿Cómo define AWS la computación en la nube?", "options": ["Entrega bajo demanda de recursos de TI por Internet con pago por uso", "Servidores que compras e instalas tú", "Un antivirus en línea"], "answer": 0, "why": "Entrega bajo demanda de recursos de TI por Internet con precios de pago por uso." },
+        { "type": "choice", "q": "¿Cuál es un bloque básico típico de IaaS?", "options": ["Una aplicación de correo web", "Espacio de almacenamiento de datos", "Un servicio que solo administra hardware por ti"], "answer": 1, "why": "El almacenamiento es uno de los bloques de IaaS. El correo web es SaaS." },
+        { "type": "truefalse", "statement": "PaaS elimina la necesidad de administrar la infraestructura subyacente.", "answer": true, "why": "Es la descripción de PaaS que da AWS." }
       ]
     }
   ]

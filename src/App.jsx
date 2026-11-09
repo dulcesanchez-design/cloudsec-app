@@ -1,12 +1,20 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import course from './data/course.json'
+import { Card, Lab, exerciseComponents } from './Exercises'
 
 const moduleFiles = import.meta.glob('./data/modules/*.json', {
   eager: true,
   import: 'default',
 })
 
-const STORAGE_KEY = 'cloudsec-progress'
+const STORAGE_KEY = 'cloudsec-progress-v2' // lista de "idModulo:indiceLeccion"
+
+const modules = course.modules.map((m) => ({
+  ...m,
+  data: moduleFiles[`./data/modules/${m.file}`],
+}))
+
+const lessonKey = (modId, i) => `${modId}:${i}`
 
 function loadDone() {
   try {
@@ -23,6 +31,11 @@ function saveDone(done) {
     // sin almacenamiento: el progreso solo dura la sesión
   }
 }
+
+const moduleDone = (m, done) =>
+  m.data.lessons.every((_, i) => done.includes(lessonKey(m.id, i)))
+
+const moduleUnlocked = (idx, done) => idx === 0 || moduleDone(modules[idx - 1], done)
 
 function Sources({ source }) {
   if (!source) return null
@@ -48,20 +61,18 @@ function Home({ done, onOpen }) {
       <header>
         <p className="module">Cloud Security</p>
         <h1>Módulos</h1>
-        <p className="progress">
-          {done.length} de {course.modules.length} completados
-        </p>
       </header>
       <div className="options">
-        {course.modules.map((m, i) => {
-          const unlocked = i === 0 || done.includes(course.modules[i - 1].id)
-          const finished = done.includes(m.id)
+        {modules.map((m, i) => {
+          const unlocked = moduleUnlocked(i, done)
+          const finished = moduleDone(m, done)
+          const count = m.data.lessons.filter((_, j) => done.includes(lessonKey(m.id, j))).length
           return (
             <button
               key={m.id}
               className={`btn module-btn${unlocked ? '' : ' locked'}${finished ? ' finished' : ''}`}
               disabled={!unlocked}
-              onClick={() => onOpen(m)}
+              onClick={() => onOpen(m.id)}
             >
               <span className="module-title">
                 {!unlocked && '🔒 '}
@@ -69,7 +80,9 @@ function Home({ done, onOpen }) {
                 {m.title}
               </span>
               <span className="module-desc">
-                {unlocked ? m.description : 'Termina el módulo anterior para desbloquear'}
+                {unlocked
+                  ? `${m.description} · ${count}/${m.data.lessons.length} lecciones`
+                  : 'Termina el módulo anterior para desbloquear'}
               </span>
             </button>
           )
@@ -79,163 +92,189 @@ function Home({ done, onOpen }) {
   )
 }
 
-function Lesson({ mod, onExit, onFinish }) {
-  const [lessonIdx, setLessonIdx] = useState(0)
-  const [step, setStep] = useState(-1) // -1 = explicación, 0..n-1 = preguntas, n = resultado
-  const [picked, setPicked] = useState(null)
-  const [score, setScore] = useState(0)
-
-  const lesson = mod.lessons[lessonIdx]
-  const total = lesson.questions.length
-  const isLast = lessonIdx === mod.lessons.length - 1
-
-  const resetLesson = (idx) => {
-    setLessonIdx(idx)
-    setStep(-1)
-    setPicked(null)
-    setScore(0)
-  }
-
-  const choose = (i) => {
-    if (picked !== null) return
-    setPicked(i)
-    if (i === lesson.questions[step].answer) setScore((s) => s + 1)
-  }
-
-  const next = () => {
-    setPicked(null)
-    if (step + 1 === total && isLast) onFinish()
-    setStep((s) => s + 1)
-  }
-
+function LessonList({ mod, done, onOpen, onBack }) {
   return (
     <main className="app">
       <header>
-        <button className="back" onClick={onExit}>
+        <button className="back" onClick={onBack}>
           ← Módulos
         </button>
-        <p className="module">{mod.title}</p>
-        <h1>{lesson.title}</h1>
-        <p className="progress">
-          Lección {lessonIdx + 1} de {mod.lessons.length}
-        </p>
+        <h1>{mod.title}</h1>
       </header>
-
-      {step === -1 && (
-        <section className="card">
-          {lesson.term && (
-            <p className="term">
-              Término nuevo: <strong>{lesson.term}</strong>
-            </p>
-          )}
-          <p className="explanation">{lesson.explanation}</p>
-          <Sources source={lesson.source} />
-          <button className="btn primary" onClick={() => setStep(0)}>
-            Empezar preguntas
-          </button>
-        </section>
-      )}
-
-      {step >= 0 && step < total && (
-        <section className="card">
-          <p className="progress">
-            Pregunta {step + 1} de {total}
-          </p>
-          <h2>{lesson.questions[step].q}</h2>
-          <div className="options">
-            {lesson.questions[step].options.map((opt, i) => {
-              const { answer } = lesson.questions[step]
-              let cls = 'btn option'
-              if (picked !== null) {
-                if (i === answer) cls += ' correct'
-                else if (i === picked) cls += ' wrong'
-              }
-              return (
-                <button
-                  key={i}
-                  className={cls}
-                  onClick={() => choose(i)}
-                  disabled={picked !== null}
-                >
-                  {opt}
-                </button>
-              )
-            })}
-          </div>
-          {picked !== null && (
-            <>
-              <p className="why">{lesson.questions[step].why}</p>
-              <button className="btn primary" onClick={next}>
-                {step + 1 === total ? 'Ver resultado' : 'Continuar'}
-              </button>
-            </>
-          )}
-        </section>
-      )}
-
-      {step === total && (
-        <section className="card result">
-          <h2>Resultado</h2>
-          <p className="score">
-            {score} / {total}
-          </p>
-          <p>
-            {score === total
-              ? '¡Perfecto!'
-              : score >= total / 2
-                ? 'Bien, pero puedes repasar.'
-                : 'Repite la lección para afianzar los conceptos.'}
-          </p>
-          {!isLast && (
+      <div className="options">
+        {mod.data.lessons.map((l, i) => {
+          const finished = done.includes(lessonKey(mod.id, i))
+          const unlocked = i === 0 || done.includes(lessonKey(mod.id, i - 1))
+          return (
             <button
-              className="btn primary"
-              onClick={() => resetLesson(lessonIdx + 1)}
+              key={i}
+              className={`btn module-btn${unlocked ? '' : ' locked'}${finished ? ' finished' : ''}`}
+              disabled={!unlocked}
+              onClick={() => onOpen(i)}
             >
+              <span className="module-title">
+                {!unlocked && '🔒 '}
+                {finished && '✓ '}
+                {i + 1}. {l.title}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+    </main>
+  )
+}
+
+function Player({ lesson, hasNext, onExit, onFinish, onNext, onRepeat }) {
+  const [queue, setQueue] = useState(() => lesson.steps.map((s) => ({ s, retry: false })))
+  const [idx, setIdx] = useState(0)
+  const [answer, setAnswer] = useState(null) // null | { ok }
+  const [correct, setCorrect] = useState(0)
+  const [finished, setFinished] = useState(false)
+
+  const totalExercises = useMemo(
+    () => lesson.steps.filter((s) => !['card', 'lab'].includes(s.type)).length,
+    [lesson],
+  )
+
+  const item = queue[idx]
+
+  const handleDone = (ok) => {
+    setAnswer({ ok })
+    if (!item.retry) {
+      if (ok) setCorrect((c) => c + 1)
+      else setQueue((q) => [...q, { s: item.s, retry: true }])
+    }
+  }
+
+  const advance = () => {
+    setAnswer(null)
+    if (idx + 1 >= queue.length) {
+      setFinished(true)
+      onFinish()
+    } else {
+      setIdx(idx + 1)
+    }
+  }
+
+  const pct = finished ? 100 : Math.round((idx / queue.length) * 100)
+
+  if (finished) {
+    return (
+      <main className="app">
+        <section className="card result">
+          <h2>¡Lección completada!</h2>
+          <p className="score">
+            {correct} / {totalExercises}
+          </p>
+          <p>aciertos a la primera</p>
+          {hasNext && (
+            <button className="btn primary" onClick={onNext}>
               Siguiente lección
             </button>
           )}
-          <button className="btn" onClick={() => resetLesson(lessonIdx)}>
+          <button className="btn" onClick={onRepeat}>
             Repetir lección
           </button>
           <button className="btn" onClick={onExit}>
-            {isLast ? 'Módulo completado: volver al inicio' : 'Volver a los módulos'}
+            Volver
           </button>
+          <Sources source={lesson.source} />
         </section>
-      )}
+      </main>
+    )
+  }
+
+  const { s } = item
+  const Exercise = exerciseComponents[s.type]
+
+  return (
+    <main className="app">
+      <div className="topbar">
+        <button className="close" onClick={onExit} aria-label="Salir">
+          ✕
+        </button>
+        <div className="bar">
+          <div className="bar-fill" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      <p className="lesson-title">
+        {lesson.title}
+        {item.retry && ' · repaso de un fallo'}
+      </p>
+
+      <section className="card">
+        {s.type === 'card' ? (
+          <Card step={s} />
+        ) : s.type === 'lab' ? (
+          <Lab key={`${idx}`} step={s} onComplete={advance} />
+        ) : (
+          <Exercise key={`${idx}`} step={s} onDone={handleDone} />
+        )}
+
+        {s.type === 'card' && (
+          <button className="btn primary" onClick={advance}>
+            Continuar
+          </button>
+        )}
+
+        {answer && (
+          <>
+            <div className={`feedback ${answer.ok ? 'ok' : 'bad'}`}>
+              <strong>{answer.ok ? '¡Correcto!' : 'Casi. Lo repetiremos al final.'}</strong>
+              <p>{s.why}</p>
+            </div>
+            <button className="btn primary" onClick={advance}>
+              Continuar
+            </button>
+          </>
+        )}
+      </section>
     </main>
   )
 }
 
 function App() {
   const [done, setDone] = useState(loadDone)
-  const [current, setCurrent] = useState(null)
+  const [view, setView] = useState({ name: 'home' }) // home | module | lesson
 
-  const markDone = (id) => {
+  const markDone = (key) =>
     setDone((d) => {
-      if (d.includes(id)) return d
-      const nd = [...d, id]
+      if (d.includes(key)) return d
+      const nd = [...d, key]
       saveDone(nd)
       return nd
     })
+
+  if (view.name === 'home') {
+    return <Home done={done} onOpen={(modId) => setView({ name: 'module', modId })} />
   }
 
-  if (!current) {
+  const mod = modules.find((m) => m.id === view.modId)
+
+  if (view.name === 'module') {
     return (
-      <Home
+      <LessonList
+        mod={mod}
         done={done}
-        onOpen={(m) =>
-          setCurrent({ id: m.id, data: moduleFiles[`./data/modules/${m.file}`] })
-        }
+        onBack={() => setView({ name: 'home' })}
+        onOpen={(i) => setView({ name: 'lesson', modId: mod.id, i, nonce: 0 })}
       />
     )
   }
 
+  const lesson = mod.data.lessons[view.i]
+  const hasNext = view.i + 1 < mod.data.lessons.length
+
   return (
-    <Lesson
-      key={current.id}
-      mod={current.data}
-      onExit={() => setCurrent(null)}
-      onFinish={() => markDone(current.id)}
+    <Player
+      key={`${mod.id}-${view.i}-${view.nonce}`}
+      lesson={lesson}
+      hasNext={hasNext}
+      onExit={() => setView({ name: 'module', modId: mod.id })}
+      onFinish={() => markDone(lessonKey(mod.id, view.i))}
+      onNext={() => setView({ name: 'lesson', modId: mod.id, i: view.i + 1, nonce: 0 })}
+      onRepeat={() => setView({ ...view, nonce: view.nonce + 1 })}
     />
   )
 }

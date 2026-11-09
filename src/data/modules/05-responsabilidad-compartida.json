@@ -1,0 +1,99 @@
+{
+  "title": "05 Responsabilidad compartida",
+  "lessons": [
+    {
+      "title": "La idea general",
+      "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "steps": [
+        { "type": "card", "emoji": "🤝", "text": "Modelo de responsabilidad compartida: la seguridad en la nube se reparte entre AWS y el cliente.", "analogy": "El dueño cuida el edificio; tú, tu apartamento." },
+        { "type": "choice", "q": "¿Qué describe el modelo de responsabilidad compartida?", "options": ["La seguridad se reparte entre AWS y el cliente", "AWS se encarga de toda la seguridad", "El cliente se encarga de toda la seguridad"], "answer": 0, "why": "AWS protege la infraestructura y el cliente asume responsabilidades según los servicios que elige." },
+        { "type": "card", "emoji": "🏗️", "text": "AWS es responsable de proteger la infraestructura que ejecuta todos los servicios de la nube de AWS." },
+        { "type": "truefalse", "statement": "AWS es responsable de proteger la infraestructura que ejecuta sus servicios.", "answer": true, "why": "Es la responsabilidad de AWS según su documentación." },
+        { "type": "card", "emoji": "🧑‍💻", "text": "La responsabilidad del cliente depende de los servicios de AWS que elija." },
+        { "type": "choice", "q": "¿De qué depende la responsabilidad del cliente?", "options": ["Del tamaño de su factura", "De los servicios de AWS que elige", "Es idéntica para todos los servicios"], "answer": 1, "why": "AWS indica que la responsabilidad del cliente se determina por los servicios que selecciona." }
+      ]
+    },
+    {
+      "title": "Lo que protege AWS",
+      "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "steps": [
+        { "type": "card", "emoji": "🏢", "text": "La infraestructura de AWS se compone del hardware, el software, las redes y las instalaciones que ejecutan los servicios." },
+        { "type": "choice", "q": "¿Qué forma parte de la infraestructura que AWS protege?", "options": ["Hardware, software, redes e instalaciones que ejecutan los servicios", "Los datos que cada cliente decide guardar", "El contenido de las aplicaciones del cliente"], "answer": 0, "why": "AWS describe su infraestructura como hardware, software, redes e instalaciones que ejecutan los servicios de la nube." },
+        { "type": "card", "emoji": "🛰️", "text": "Controles heredados: el cliente los hereda por completo de AWS. Ejemplo: controles físicos y ambientales." },
+        { "type": "truefalse", "statement": "Los controles físicos y ambientales son un ejemplo de controles que el cliente hereda de AWS.", "answer": true, "why": "AWS pone los controles físicos y ambientales como ejemplo de controles heredados." },
+        { "type": "choice", "q": "¿Qué son los controles heredados?", "options": ["Los que el cliente hereda por completo de AWS", "Los que solo el cliente gestiona", "Los que se reparten a partes iguales"], "answer": 0, "why": "Son controles que un cliente hereda por completo de AWS." },
+        { "type": "truefalse", "statement": "El cliente debe encargarse de la seguridad física de los centros de datos de AWS.", "answer": false, "why": "Los controles físicos y ambientales los hereda el cliente de AWS." }
+      ]
+    },
+    {
+      "title": "Lo que protege el cliente",
+      "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "steps": [
+        { "type": "card", "emoji": "🧑", "text": "Los servicios que elige el cliente determinan cuánta configuración de seguridad debe realizar." },
+        { "type": "choice", "q": "¿Qué determina cuánta configuración de seguridad debe hacer el cliente?", "options": ["Los servicios de AWS que elige", "La región donde vive", "El día de la semana"], "answer": 0, "why": "AWS indica que los servicios elegidos fijan la cantidad de trabajo de configuración del cliente." },
+        { "type": "card", "emoji": "📦", "text": "Controles específicos del cliente: son solo responsabilidad del cliente, según la aplicación que despliega." },
+        { "type": "truefalse", "statement": "Los controles específicos del cliente dependen de la aplicación que el cliente despliega.", "answer": true, "why": "AWS los define como controles que son solo responsabilidad del cliente, según su aplicación." },
+        { "type": "card", "emoji": "🗂️", "text": "En servicios abstraídos como S3 o DynamoDB, el cliente gestiona sus datos (incluido el cifrado) y los permisos de IAM." },
+        { "type": "choice", "q": "En un servicio abstraído como S3, ¿qué gestiona el cliente?", "options": ["Sus datos, incluidas las opciones de cifrado, y los permisos de IAM", "El sistema operativo del servicio", "La infraestructura física"], "answer": 0, "why": "En esos servicios AWS opera la infraestructura, el sistema operativo y las plataformas; el cliente gestiona sus datos y los permisos de IAM." }
+      ]
+    },
+    {
+      "title": "Controles compartidos",
+      "source": [
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/shared-responsibility.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔀", "text": "Controles compartidos: aplican tanto a la infraestructura de AWS como al lado del cliente, en contextos distintos." },
+        { "type": "choice", "q": "¿Qué son los controles compartidos?", "options": ["Controles que aplican a la infraestructura de AWS y al lado del cliente", "Controles que solo gestiona AWS", "Controles que solo gestiona el cliente"], "answer": 0, "why": "AWS los define como controles que aplican tanto a la capa de infraestructura como a la del cliente." },
+        { "type": "card", "emoji": "🩹", "text": "Parches: AWS arregla los fallos de la infraestructura; el cliente parchea su sistema operativo invitado y sus aplicaciones." },
+        { "type": "truefalse", "statement": "En la gestión de parches, AWS se ocupa de la infraestructura y el cliente de su sistema operativo invitado y sus aplicaciones.", "answer": true, "why": "Es el ejemplo de gestión de parches que da AWS." },
+        { "type": "match", "q": "Une cada control compartido con su reparto", "pairs": [
+          { "term": "Gestión de parches", "desc": "AWS parchea la infraestructura; tú tu SO y apps" },
+          { "term": "Gestión de configuración", "desc": "AWS configura su infraestructura; tú tus SO, bases de datos y apps" },
+          { "term": "Concienciación y formación", "desc": "AWS forma a su personal; tú al tuyo" }
+        ], "why": "Son los tres ejemplos de controles compartidos que da AWS." },
+        { "type": "choice", "q": "¿Quién forma a los empleados del cliente?", "options": ["AWS", "El propio cliente", "Nadie"], "answer": 1, "why": "AWS forma a sus empleados, pero el cliente debe formar a los suyos." }
+      ]
+    },
+    {
+      "title": "Ejemplo: EC2 frente a S3",
+      "source": [
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/shared-responsibility.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🖥️", "text": "Amazon EC2 es un servicio de infraestructura (IaaS): exige al cliente todas las tareas de configuración y gestión de seguridad." },
+        { "type": "choice", "q": "En EC2, ¿qué gestiona el cliente?", "options": ["Nada: AWS gestiona todo", "El sistema operativo invitado, con sus actualizaciones y parches, y el firewall del security group", "Solo los datos"], "answer": 1, "why": "Según AWS, el cliente gestiona el sistema operativo invitado (con actualizaciones y parches de seguridad) y el firewall del security group." },
+        { "type": "card", "emoji": "🪣", "text": "En servicios abstraídos como S3 y DynamoDB, AWS opera la infraestructura, el sistema operativo y las plataformas." },
+        { "type": "truefalse", "statement": "En S3, el cliente debe parchear el sistema operativo del servicio.", "answer": false, "why": "En servicios abstraídos como S3, AWS opera la infraestructura, el sistema operativo y las plataformas." },
+        { "type": "match", "q": "Une cada servicio con lo que implica", "pairs": [
+          { "term": "EC2", "desc": "El cliente gestiona el SO invitado y sus parches" },
+          { "term": "S3", "desc": "AWS opera infraestructura, SO y plataformas" },
+          { "term": "Security group", "desc": "Firewall que gestiona el cliente en EC2" }
+        ], "why": "En EC2 el cliente gestiona el SO invitado y el security group; en S3, AWS opera la infraestructura, el SO y las plataformas." },
+        { "type": "truefalse", "statement": "La responsabilidad del cliente es la misma en EC2 que en S3.", "answer": false, "why": "AWS advierte que las responsabilidades varían según los servicios usados." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/shared-responsibility.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: AWS protege la infraestructura; el cliente, según los servicios que elige." },
+        { "type": "match", "q": "Une cada tipo de control con su definición", "pairs": [
+          { "term": "Heredados", "desc": "El cliente los hereda por completo de AWS" },
+          { "term": "Compartidos", "desc": "Aplican a la infraestructura y al cliente" },
+          { "term": "Específicos del cliente", "desc": "Solo del cliente, según su aplicación" }
+        ], "why": "Son las tres categorías de controles que describe AWS." },
+        { "type": "choice", "q": "¿Quién protege el hardware y las instalaciones que ejecutan los servicios de AWS?", "options": ["El cliente", "AWS", "Ambos a partes iguales"], "answer": 1, "why": "AWS es responsable de proteger la infraestructura que ejecuta los servicios." },
+        { "type": "truefalse", "statement": "La responsabilidad del cliente depende de los servicios que elige.", "answer": true, "why": "AWS lo indica así." },
+        { "type": "choice", "q": "En S3, ¿qué gestiona el cliente?", "options": ["El sistema operativo del servicio", "Sus datos y los permisos de IAM", "Las instalaciones físicas"], "answer": 1, "why": "En servicios abstraídos el cliente gestiona sus datos (incluido el cifrado) y los permisos de IAM." },
+        { "type": "truefalse", "statement": "En EC2, el cliente gestiona el sistema operativo invitado, incluidos sus parches de seguridad.", "answer": true, "why": "EC2 exige al cliente las tareas de configuración y gestión de seguridad, incluido el sistema operativo invitado." },
+        { "type": "choice", "q": "¿Quién forma a los empleados del cliente en seguridad?", "options": ["AWS", "El propio cliente", "El proveedor de Internet"], "answer": 1, "why": "AWS forma a sus empleados; el cliente debe formar a los suyos." }
+      ]
+    }
+  ]
+}

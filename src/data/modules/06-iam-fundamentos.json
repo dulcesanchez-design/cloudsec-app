@@ -3,74 +3,89 @@
   "lessons": [
     {
       "title": "Usuario root y MFA",
-      "explanation": "Al crear una cuenta de AWS empiezas con el usuario root: tiene acceso completo e irrestricto a todo y no se le pueden limitar permisos con políticas IAM. Por eso se protege con una contraseña robusta y MFA (autenticación multifactor), y se usa solo para las pocas tareas que exigen root (por ejemplo, cambiar el plan de soporte o cerrar la cuenta). Para el trabajo diario se usan usuarios o roles IAM. Recuerda el modelo de responsabilidad compartida: AWS protege la infraestructura de la nube; tú eres responsable de cómo configuras tu cuenta, incluidos IAM y MFA.",
-      "questions": [
-        {
-          "q": "¿Cuál es la práctica recomendada para el usuario root de una cuenta de AWS?",
-          "options": [
-            "Usarlo a diario para administrar recursos, ya que tiene todos los permisos",
-            "Protegerlo con MFA y usarlo solo para las tareas que requieren root",
-            "Crear access keys para root y usarlas en scripts de automatización"
-          ],
-          "answer": 1,
-          "why": "AWS recomienda proteger root con MFA, no crearle access keys y usarlo solo para tareas que lo exigen. El trabajo cotidiano se hace con identidades IAM."
-        },
-        {
-          "q": "¿Qué aporta activar MFA en un usuario?",
-          "options": [
-            "Cifra automáticamente todos los datos que el usuario guarda en S3",
-            "Sustituye la necesidad de definir políticas de permisos",
-            "Exige un segundo factor además de la contraseña, así que una contraseña robada no basta para entrar"
-          ],
-          "answer": 2,
-          "why": "MFA añade algo que tienes (app o llave de seguridad) a algo que sabes (contraseña). No cifra datos ni reemplaza los permisos."
-        },
-        {
-          "q": "Según el modelo de responsabilidad compartida, ¿quién es responsable de configurar bien los usuarios, permisos y MFA de IAM en tu cuenta?",
-          "options": [
-            "AWS, porque IAM es un servicio de AWS",
-            "El cliente: AWS protege la seguridad DE la nube y el cliente la seguridad EN la nube",
-            "Se reparte al 50 % entre AWS y el cliente en cada configuración"
-          ],
-          "answer": 1,
-          "why": "AWS se encarga de la infraestructura subyacente; la configuración de identidades, permisos y datos dentro de tu cuenta es responsabilidad del cliente."
-        }
+      "source": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔑", "text": "El usuario root es la identidad inicial de la cuenta, con acceso completo a todos los servicios y recursos." },
+        { "type": "choice", "q": "¿Qué recomienda AWS sobre el usuario root?", "options": ["Usarlo para las tareas cotidianas", "No usarlo para las tareas cotidianas", "Compartir su contraseña con el equipo"], "answer": 1, "why": "AWS recomienda encarecidamente no usar el usuario root para las tareas cotidianas." },
+        { "type": "card", "emoji": "🧰", "text": "Algunas tareas sí requieren credenciales de root, por ejemplo cerrar una cuenta independiente que no está en AWS Organizations." },
+        { "type": "truefalse", "statement": "Cerrar una cuenta de AWS independiente (fuera de AWS Organizations) requiere credenciales del usuario root.", "answer": true, "why": "La documentación lista «cerrar tu cuenta de AWS» como tarea de root y lo exige para cuentas independientes." },
+        { "type": "card", "emoji": "📲", "text": "MFA exige una autenticación adicional a tus credenciales de inicio de sesión." },
+        { "type": "choice", "q": "¿Qué tipos de MFA admite AWS?", "options": ["Solo códigos por SMS", "Passkeys y llaves de seguridad, apps autenticadoras virtuales y tokens TOTP de hardware", "Solo preguntas secretas"], "answer": 1, "why": "AWS admite passkeys y llaves de seguridad, aplicaciones autenticadoras virtuales y tokens de hardware. Dejó de admitir MFA por SMS." },
+        { "type": "card", "emoji": "🛡️", "text": "AWS recomienda MFA resistente al phishing, como passkeys y llaves de seguridad." },
+        { "type": "truefalse", "statement": "AWS exige MFA a los usuarios root por defecto, pero el cliente debe añadirlo al crear la cuenta o cuando se le pida al iniciar sesión.", "answer": true, "why": "La documentación indica que MFA se exige por defecto a root y que requiere una acción del cliente al crear la cuenta o al iniciar sesión." },
+        { "type": "truefalse", "statement": "AWS sigue permitiendo activar MFA por SMS.", "answer": false, "why": "AWS terminó el soporte para activar MFA por SMS." }
       ]
     },
     {
-      "title": "Mínimo privilegio y roles",
-      "explanation": "El principio de mínimo privilegio consiste en conceder solo los permisos necesarios para una tarea, y nada más. En IAM, una política con un Deny explícito siempre gana sobre cualquier Allow; sin Allow ni Deny, el acceso se niega por defecto (denegación implícita). Para aplicaciones y servicios, es mejor usar roles IAM: entregan credenciales temporales vía AWS STS que expiran solas, en lugar de claves de acceso permanentes que pueden filtrarse y quedarse válidas indefinidamente.",
-      "questions": [
-        {
-          "q": "¿Qué significa aplicar el principio de mínimo privilegio?",
-          "options": [
-            "Dar a cada usuario solo los permisos necesarios para su tarea",
-            "Dar permisos amplios al principio y quitarlos solo si hay un incidente",
-            "Asignar la política AdministratorAccess a todo el equipo para evitar bloqueos"
-          ],
-          "answer": 0,
-          "why": "Limitar los permisos al mínimo necesario reduce el impacto si unas credenciales se ven comprometidas o se cometen errores."
-        },
-        {
-          "q": "Una aplicación en EC2 necesita leer de S3. ¿Qué opción es más segura?",
-          "options": [
-            "Guardar en el código unas access keys de un usuario IAM",
-            "Asociar a la instancia un rol IAM, que entrega credenciales temporales",
-            "Usar las access keys del usuario root para que nunca falle"
-          ],
-          "answer": 1,
-          "why": "Los roles proporcionan credenciales temporales que se rotan automáticamente. Las claves permanentes en el código pueden filtrarse y siguen siendo válidas hasta que alguien las revoque."
-        },
-        {
-          "q": "Un usuario tiene una política con Allow para s3:GetObject en un bucket y otra con Deny para s3:GetObject en ese mismo bucket. ¿Qué ocurre?",
-          "options": [
-            "Se permite, porque el Allow se evaluó primero",
-            "Se permite, porque el Allow es más específico",
-            "Se deniega, porque un Deny explícito siempre prevalece sobre un Allow"
-          ],
-          "answer": 2,
-          "why": "En la lógica de evaluación de políticas de AWS, un Deny explícito anula cualquier Allow, sin importar el orden ni dónde esté definida cada política."
-        }
+      "title": "Mínimo privilegio y Deny explícito",
+      "source": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_action.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔒", "text": "Mínimo privilegio: conceder solo los permisos necesarios para realizar una tarea." },
+        { "type": "choice", "q": "¿Qué significa aplicar el principio de mínimo privilegio?", "options": ["Dar a cada usuario solo los permisos necesarios para su tarea", "Dar permisos amplios y quitarlos solo si hay un incidente", "Asignar AdministratorAccess a todo el equipo"], "answer": 0, "why": "AWS recomienda conceder solo los permisos necesarios para realizar una tarea." },
+        { "type": "card", "emoji": "🚫", "text": "Por defecto, toda solicitud se deniega implícitamente (salvo la del usuario root). Una política debe permitirla explícitamente." },
+        { "type": "fillblank", "q": "Quieres que este statement bloquee la acción aunque otra política la permita. Completa el hueco.", "code": "\"Effect\": \"___\",\n\"Action\": \"s3:GetObject\",\n\"Resource\": \"arn:aws:s3:::mi-bucket/*\"", "options": ["Allow", "Deny", "Block"], "answer": 1, "why": "Un Deny explícito anula un Allow explícito. «Block» no es un valor válido de Effect." },
+        { "type": "card", "emoji": "⛔", "text": "Un Deny explícito anula un Allow explícito." },
+        { "type": "choice", "q": "Un usuario tiene una política con Allow para s3:GetObject y otra con Deny para s3:GetObject. ¿Qué ocurre?", "options": ["Se permite, porque el Allow se evaluó primero", "Se permite, porque el Allow es más específico", "Se deniega, porque un Deny explícito anula un Allow explícito"], "answer": 2, "why": "La documentación de evaluación de políticas indica que un Deny explícito anula un Allow explícito." },
+        { "type": "match", "q": "Une cada concepto con su significado", "pairs": [
+          { "term": "Mínimo privilegio", "desc": "Solo los permisos necesarios para la tarea" },
+          { "term": "Denegación implícita", "desc": "Lo no permitido explícitamente se deniega" },
+          { "term": "Deny explícito", "desc": "Anula un Allow explícito" }
+        ], "why": "Mínimo privilegio limita los permisos; sin Allow explícito se deniega por defecto; un Deny explícito anula un Allow explícito." },
+        { "type": "findbug", "q": "Esta política va contra el mínimo privilegio. ¿Qué línea es la insegura?", "lines": ["{", "  \"Effect\": \"Allow\",", "  \"Action\": \"*\",", "  \"Resource\": \"arn:aws:s3:::mi-bucket/*\"", "}"], "answer": 2, "why": "El comodín * en Action da acceso a todas las acciones. AWS recomienda conceder solo los permisos necesarios, por ejemplo una acción concreta como s3:GetObject." }
+      ]
+    },
+    {
+      "title": "Roles y credenciales temporales",
+      "source": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🎭", "text": "Un rol IAM no tiene credenciales de largo plazo. Al asumirlo recibes credenciales de seguridad temporales para la sesión.", "analogy": "Como un pase de visitante." },
+        { "type": "choice", "q": "¿Qué recibes al asumir un rol IAM?", "options": ["Una contraseña permanente", "Credenciales de seguridad temporales para tu sesión del rol", "Unas access keys que nunca expiran"], "answer": 1, "why": "Un rol no tiene contraseña ni access keys de largo plazo; al asumirlo recibes credenciales de seguridad temporales." },
+        { "type": "card", "emoji": "⏳", "text": "Las credenciales temporales duran de unos minutos a varias horas. Al expirar, AWS ya no las reconoce." },
+        { "type": "truefalse", "statement": "Cuando las credenciales temporales expiran, AWS deja de reconocerlas.", "answer": true, "why": "Así lo indica la documentación de credenciales temporales." },
+        { "type": "card", "emoji": "🔐", "text": "Siempre que sea posible, AWS recomienda usar credenciales temporales en lugar de crear credenciales de largo plazo, como las access keys." },
+        { "type": "scenario", "situation": "Vas a desplegar una aplicación en una instancia EC2 que debe acceder a servicios de AWS. Un compañero propone copiar unas access keys en el código.", "q": "¿Qué haces primero?", "options": ["Aceptar y subir las claves al repositorio para no perderlas", "Proponer entregar credenciales temporales a la instancia, sin guardar credenciales de largo plazo en ella", "Usar las access keys del usuario root"], "answer": 1, "why": "La documentación indica que puedes dar credenciales temporales a tus instancias al lanzarlas, sin guardar credenciales de largo plazo en ellas. Y no se deben poner access keys en los archivos de la aplicación." },
+        { "type": "findbug", "q": "Este código guarda credenciales de largo plazo. ¿Qué líneas son inseguras? Toca una.", "lines": ["import boto3", "s3 = boto3.client(", "    \"s3\",", "    aws_access_key_id=\"<CLAVE-DE-EJEMPLO>\",", "    aws_secret_access_key=\"<SECRETO-DE-EJEMPLO>\")"], "answer": [3, 4], "why": "AWS indica: no pongas access keys ni información de credenciales en los archivos de tu aplicación, y usa credenciales temporales (como roles IAM) en lugar de credenciales de largo plazo." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Rol IAM", "desc": "Da credenciales temporales de sesión" },
+          { "term": "AWS STS", "desc": "Crea credenciales temporales" },
+          { "term": "Access key de largo plazo", "desc": "AWS recomienda evitarla si es posible" }
+        ], "why": "Los roles dan credenciales temporales, AWS STS crea credenciales temporales, y AWS recomienda preferir las temporales a las de largo plazo cuando sea posible." }
+      ]
+    },
+    {
+      "title": "Práctica: protege tu usuario root",
+      "source": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/enable-mfa-for-root.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/enable-virt-mfa-for-root.html",
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/budget-templates.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🧪", "text": "Práctica real: añadirás MFA al usuario root de tu cuenta de AWS." },
+        { "type": "scenario", "situation": "Acabas de crear tu cuenta de AWS y has entrado con el usuario root.", "q": "¿Qué haces primero para protegerla?", "options": ["Crear access keys del root para tus scripts", "Añadir MFA al usuario root", "Usar el root para todo el trabajo diario"], "answer": 1, "why": "AWS exige MFA a root por defecto, pero requiere que el cliente lo añada. Y recomienda no usar root para tareas cotidianas." },
+        { "type": "card", "emoji": "🛡️", "text": "AWS recomienda una passkey o llave de seguridad como dispositivo MFA. También puedes usar una app autenticadora." },
+        { "type": "choice", "q": "¿Qué dispositivo MFA recomienda AWS para el usuario root?", "options": ["Un código por SMS", "Una passkey o llave de seguridad", "Una pregunta secreta"], "answer": 1, "why": "La documentación recomienda passkey o llave de seguridad. AWS dejó de admitir MFA por SMS." },
+        { "type": "lab", "title": "Activar MFA en el usuario root", "objective": "Asignar un dispositivo MFA (app autenticadora) al usuario root de tu cuenta de AWS.", "steps": [
+          "Abre la consola de AWS e inicia sesión con las credenciales del usuario root.",
+          "En la barra de navegación, a la derecha, elige el nombre de tu cuenta y luego Security credentials.",
+          "En la sección Multi-factor authentication (MFA), elige Assign MFA device.",
+          "En el asistente, escribe un Device name, elige Authenticator app y pulsa Next.",
+          "Abre tu app autenticadora y escanea el código QR (o usa Show secret key).",
+          "Escribe un primer código en MFA code 1 y espera al siguiente para escribirlo en MFA code 2. Hazlo enseguida: los códigos expiran.",
+          "Pulsa Add MFA."
+        ], "cleanup": "Este lab no crea recursos que haya que eliminar. Deja el MFA activado y no uses el usuario root para tareas cotidianas." },
+        { "type": "truefalse", "statement": "Al terminar el lab, debes quitar el MFA del usuario root.", "answer": false, "why": "El MFA es una protección: se deja activado. Lo que se evita es usar root para las tareas cotidianas." }
       ]
     }
   ]

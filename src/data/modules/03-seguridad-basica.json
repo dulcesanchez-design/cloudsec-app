@@ -1,0 +1,123 @@
+{
+  "title": "03 Seguridad básica",
+  "lessons": [
+    {
+      "title": "Confidencialidad",
+      "source": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "steps": [
+        { "type": "card", "emoji": "🤫", "text": "Confidencialidad: preservar las restricciones autorizadas sobre el acceso a la información y su divulgación.", "analogy": "Como un sobre cerrado." },
+        { "type": "choice", "q": "¿Qué protege la confidencialidad?", "options": ["Que la información esté siempre disponible", "Que solo quien está autorizado acceda a la información", "Que nadie pueda borrar la información"], "answer": 1, "why": "NIST la define como preservar las restricciones autorizadas sobre el acceso y la divulgación de la información." },
+        { "type": "card", "emoji": "🔐", "text": "Una forma de lograrlo: técnicas como el cifrado, que evitan que los datos queden comprometidos ante entidades no autorizadas." },
+        { "type": "truefalse", "statement": "El cifrado es un ejemplo de técnica para proteger la confidencialidad de los datos.", "answer": true, "why": "NIST cita el cifrado como técnica para evitar que los datos se comprometan ante entidades no autorizadas." },
+        { "type": "choice", "q": "Un empleado sin autorización lee el expediente de un cliente. ¿Qué propiedad se vulnera?", "options": ["Confidencialidad", "Disponibilidad", "Ninguna"], "answer": 0, "why": "Se accede a información sin estar autorizado: se rompe la restricción de acceso." },
+        { "type": "truefalse", "statement": "La confidencialidad trata de que la información sea siempre accesible.", "answer": false, "why": "Eso es la disponibilidad. La confidencialidad trata de restringir el acceso a quien está autorizado." }
+      ]
+    },
+    {
+      "title": "Integridad",
+      "source": "https://csrc.nist.gov/glossary/term/integrity",
+      "steps": [
+        { "type": "card", "emoji": "✅", "text": "Integridad: proteger la información contra su modificación o destrucción indebidas.", "analogy": "Como un sello que no debe romperse." },
+        { "type": "choice", "q": "¿Qué protege la integridad?", "options": ["Que la información no se modifique ni se destruya de forma indebida", "Que la información sea secreta", "Que el servicio responda rápido"], "answer": 0, "why": "NIST la define como proteger contra la modificación o destrucción indebidas de la información." },
+        { "type": "card", "emoji": "🧾", "text": "La definición de NIST añade que incluye asegurar el no repudio y la autenticidad de la información." },
+        { "type": "truefalse", "statement": "La integridad se refiere solo a mantener los datos en secreto.", "answer": false, "why": "Mantener datos en secreto es confidencialidad. La integridad protege contra modificación o destrucción indebidas." },
+        { "type": "choice", "q": "Alguien cambia sin permiso el importe de una factura guardada. ¿Qué propiedad se vulnera?", "options": ["Disponibilidad", "Integridad", "Confidencialidad"], "answer": 1, "why": "Se modifica información de forma indebida: se rompe la integridad." },
+        { "type": "truefalse", "statement": "Destruir información de forma indebida también va contra la integridad.", "answer": true, "why": "La definición habla de modificación o destrucción indebidas." }
+      ]
+    },
+    {
+      "title": "Disponibilidad",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/availability",
+        "https://csrc.nist.gov/glossary/term/cia"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🟢", "text": "Disponibilidad: asegurar un acceso y uso oportunos y fiables a la información.", "analogy": "Como una tienda abierta cuando la necesitas." },
+        { "type": "choice", "q": "¿Qué busca la disponibilidad?", "options": ["Acceso y uso oportunos y fiables a la información", "Que la información esté cifrada", "Que solo una persona la use"], "answer": 0, "why": "NIST la define como asegurar un acceso y uso oportunos y fiables a la información." },
+        { "type": "card", "emoji": "🧭", "text": "El glosario de NIST abrevia estas tres propiedades como CIA: Confidentiality, Integrity, Availability (confidencialidad, integridad y disponibilidad)." },
+        { "type": "truefalse", "statement": "Si un servicio no responde cuando lo necesitas, se afecta la disponibilidad.", "answer": true, "why": "La disponibilidad exige acceso y uso oportunos y fiables." },
+        { "type": "choice", "q": "Una web de tienda deja de responder durante horas. ¿Qué propiedad se afecta?", "options": ["Integridad", "Confidencialidad", "Disponibilidad"], "answer": 2, "why": "Los usuarios no pueden acceder de forma oportuna y fiable." },
+        { "type": "match", "q": "Une cada propiedad con su idea", "pairs": [
+          { "term": "Confidencialidad", "desc": "Restringir el acceso y la divulgación" },
+          { "term": "Integridad", "desc": "Evitar modificación o destrucción indebidas" },
+          { "term": "Disponibilidad", "desc": "Acceso y uso oportunos y fiables" }
+        ], "why": "Son las tres definiciones del glosario de NIST." }
+      ]
+    },
+    {
+      "title": "Autenticación vs. autorización",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/authentication",
+        "https://csrc.nist.gov/glossary/term/authorization",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🪪", "text": "Autenticación: verificar la identidad de un usuario, proceso o dispositivo.", "analogy": "Mostrar tu documento en la entrada." },
+        { "type": "choice", "q": "¿Qué hace la autenticación?", "options": ["Verifica la identidad de un usuario, proceso o dispositivo", "Cifra los datos", "Decide qué recursos puede usar alguien"], "answer": 0, "why": "NIST la define como verificar la identidad de un usuario, proceso o dispositivo, a menudo como paso previo a permitir el acceso." },
+        { "type": "card", "emoji": "🎟️", "text": "Autorización: los privilegios de acceso concedidos a un usuario, programa o proceso, o el acto de concederlos.", "analogy": "La lista de salas a las que puedes pasar." },
+        { "type": "choice", "q": "¿Cuál describe la autorización?", "options": ["Comprobar la identidad de alguien", "Decidir si se permite o se deniega el acceso a un recurso", "Detectar correos sospechosos"], "answer": 1, "why": "NIST la describe como la decisión de permitir o denegar a un sujeto el acceso a objetos del sistema." },
+        { "type": "card", "emoji": "☁️", "text": "En AWS IAM, la gestión de acceso suele llamarse autorización. Lo que una política no permite explícitamente se deniega por defecto." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Autenticación", "desc": "Verificar la identidad" },
+          { "term": "Autorización", "desc": "Conceder o denegar acceso" },
+          { "term": "Política IAM", "desc": "Define qué puede hacer una entidad" }
+        ], "why": "La autenticación verifica la identidad; la autorización concede o deniega acceso; en IAM, las políticas definen lo que una entidad puede hacer en la cuenta." },
+        { "type": "truefalse", "statement": "Verificar quién eres y decidir qué puedes hacer son exactamente lo mismo.", "answer": false, "why": "Son conceptos distintos: autenticación verifica la identidad; autorización concede o deniega acceso." }
+      ]
+    },
+    {
+      "title": "Phishing",
+      "source": "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing",
+      "steps": [
+        { "type": "card", "emoji": "🎣", "text": "Phishing: criminales intentan que abras enlaces, correos o archivos adjuntos dañinos." },
+        { "type": "choice", "q": "¿Qué es el phishing?", "options": ["Un intento de que abras enlaces, correos o adjuntos dañinos", "Un tipo de cifrado", "Una copia de seguridad"], "answer": 0, "why": "CISA lo describe como criminales que intentan que abramos enlaces, correos o archivos adjuntos dañinos." },
+        { "type": "card", "emoji": "🚩", "text": "Señales: lenguaje urgente o emotivo, peticiones de datos personales o financieros, enlaces acortados no confiables y direcciones incorrectas." },
+        { "type": "choice", "q": "¿Cuál combina señales típicas de phishing?", "options": ["Un mensaje conocido que no te pide nada", "Un mensaje urgente con un enlace acortado no confiable que pide tus datos financieros", "Un aviso de tu propio calendario"], "answer": 1, "why": "Lenguaje urgente, enlaces acortados no confiables y petición de datos financieros figuran entre las señales que lista CISA." },
+        { "type": "card", "emoji": "🛑", "text": "Ante la duda, no hagas clic en enlaces ni llames a números del mensaje. Repórtalo y bórralo." },
+        { "type": "truefalse", "statement": "Si un mensaje sospechoso pide datos con urgencia, lo mejor es responder rápido.", "answer": false, "why": "CISA recomienda resistir la tentación de hacer clic en enlaces o adjuntos, reportar y borrar el mensaje." },
+        { "type": "choice", "q": "¿Qué haces con un mensaje que parece phishing?", "options": ["Hacer clic para comprobar si es real", "No hacer clic; reportarlo y borrarlo", "Reenviarlo a todos tus contactos"], "answer": 1, "why": "CISA recomienda no hacer clic, reportar el phishing y borrar el mensaje." }
+      ]
+    },
+    {
+      "title": "Contraseñas débiles y MFA",
+      "source": [
+        "https://www.cisa.gov/secure-our-world/use-strong-passwords",
+        "https://www.cisa.gov/turn-mfa"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔑", "text": "CISA recomienda contraseñas largas, aleatorias y únicas, de al menos 16 caracteres." },
+        { "type": "choice", "q": "Según CISA, ¿qué contraseña es más fuerte?", "options": ["Tu fecha de nacimiento", "Una cadena larga y aleatoria de letras mayúsculas y minúsculas, números y símbolos", "Una palabra corta con un número"], "answer": 1, "why": "CISA recomienda una cadena aleatoria de letras en mayúsculas y minúsculas, números y símbolos, de al menos 16 caracteres." },
+        { "type": "card", "emoji": "📝", "text": "Alternativa: una frase de 4 a 7 palabras sin relación entre sí (passphrase)." },
+        { "type": "truefalse", "statement": "Conviene reutilizar la misma contraseña fuerte en todas tus cuentas.", "answer": false, "why": "CISA recomienda una contraseña fuerte distinta para cada cuenta." },
+        { "type": "card", "emoji": "🗄️", "text": "En vez de apuntarlas, usa un gestor de contraseñas: las genera, guarda y rellena por ti." },
+        { "type": "choice", "q": "¿Para qué sirve un gestor de contraseñas?", "options": ["Genera, guarda y rellena tus contraseñas", "Cifra tu disco duro", "Bloquea todos los correos"], "answer": 0, "why": "CISA indica que genera, guarda e incluso rellena tus contraseñas, y solo necesitas recordar una fuerte." },
+        { "type": "card", "emoji": "📲", "text": "MFA añade seguridad confirmando tu identidad al iniciar sesión. Aunque roben tu contraseña, no podrán cumplir el segundo paso." },
+        { "type": "truefalse", "statement": "Con MFA activado, una contraseña robada por sí sola no basta para entrar.", "answer": true, "why": "CISA indica que, aunque alguien robe tu contraseña, no podrá cumplir el segundo paso." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/confidentiality",
+        "https://csrc.nist.gov/glossary/term/integrity",
+        "https://csrc.nist.gov/glossary/term/availability",
+        "https://csrc.nist.gov/glossary/term/authentication",
+        "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing",
+        "https://www.cisa.gov/secure-our-world/use-strong-passwords"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: confidencialidad, integridad, disponibilidad, autenticación, autorización, phishing y contraseñas." },
+        { "type": "match", "q": "Une cada propiedad con su idea", "pairs": [
+          { "term": "Confidencialidad", "desc": "Restringir el acceso y la divulgación" },
+          { "term": "Integridad", "desc": "Evitar modificación o destrucción indebidas" },
+          { "term": "Disponibilidad", "desc": "Acceso y uso oportunos y fiables" }
+        ], "why": "Son las definiciones del glosario de NIST." },
+        { "type": "choice", "q": "Verificar la identidad de un usuario es…", "options": ["Autorización", "Autenticación", "Integridad"], "answer": 1, "why": "Autenticación es verificar la identidad de un usuario, proceso o dispositivo." },
+        { "type": "truefalse", "statement": "Un mensaje urgente que pide datos financieros es una señal típica de phishing.", "answer": true, "why": "CISA lista el lenguaje urgente y las peticiones de datos personales o financieros como señales." },
+        { "type": "choice", "q": "¿Qué contraseña recomienda CISA?", "options": ["Larga, aleatoria y distinta para cada cuenta", "Corta y fácil de recordar", "La misma para todas las cuentas"], "answer": 0, "why": "CISA recomienda contraseñas largas, aleatorias y únicas por cuenta." },
+        { "type": "choice", "q": "Un servicio deja de responder durante horas. ¿Qué propiedad se afecta?", "options": ["Disponibilidad", "Integridad", "Confidencialidad"], "answer": 0, "why": "La disponibilidad exige acceso y uso oportunos y fiables." },
+        { "type": "truefalse", "statement": "Con MFA, una contraseña robada es suficiente para entrar.", "answer": false, "why": "MFA añade un segundo paso que el atacante no podrá cumplir solo con la contraseña." }
+      ]
+    }
+  ]
+}

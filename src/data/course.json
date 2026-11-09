@@ -13,6 +13,24 @@
       "file": "02-aws-desde-cero.json"
     },
     {
+      "id": "03-seguridad-basica",
+      "title": "03 Seguridad básica",
+      "description": "Confidencialidad, integridad, disponibilidad, autenticación y amenazas comunes.",
+      "file": "03-seguridad-basica.json"
+    },
+    {
+      "id": "04-redes-basicas",
+      "title": "04 Redes básicas",
+      "description": "IP, DNS, HTTP/HTTPS, puertos y firewalls.",
+      "file": "04-redes-basicas.json"
+    },
+    {
+      "id": "05-responsabilidad-compartida",
+      "title": "05 Responsabilidad compartida",
+      "description": "Qué protege AWS y qué proteges tú.",
+      "file": "05-responsabilidad-compartida.json"
+    },
+    {
       "id": "06-iam",
       "title": "06 IAM: fundamentos (AWS)",
       "description": "Usuario root, MFA, mínimo privilegio y roles.",

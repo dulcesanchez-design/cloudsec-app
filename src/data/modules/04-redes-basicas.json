@@ -1,0 +1,122 @@
+{
+  "title": "04 Redes básicas",
+  "lessons": [
+    {
+      "title": "Dirección IP",
+      "source": "https://developer.mozilla.org/en-US/docs/Glossary/IP_Address",
+      "steps": [
+        { "type": "card", "emoji": "🏠", "text": "Una dirección IP es un número que identifica de forma única a cada dispositivo en una red IP.", "analogy": "Como la dirección de una casa." },
+        { "type": "choice", "q": "¿Para qué sirve una dirección IP?", "options": ["Para identificar de forma única a un dispositivo en una red IP", "Para cifrar contraseñas", "Para guardar páginas web"], "answer": 0, "why": "MDN la define como un número usado para direccionar cada dispositivo de una red IP de forma única." },
+        { "type": "card", "emoji": "🔢", "text": "Ejemplo de dirección: 192.0.2.172. Normalmente «dirección IP» se refiere a las IPv4, de 32 bits." },
+        { "type": "truefalse", "statement": "Cada dispositivo de una red IP se identifica con una dirección única.", "answer": true, "why": "Es la definición de dirección IP." },
+        { "type": "choice", "q": "¿Cuántos bits tiene normalmente una dirección IPv4?", "options": ["16", "32", "64"], "answer": 1, "why": "MDN indica que «dirección IP» normalmente se refiere a direcciones IPv4 de 32 bits." },
+        { "type": "truefalse", "statement": "Una dirección IP es un nombre fácil de leer, como mozilla.org.", "answer": false, "why": "Una dirección IP es un número. mozilla.org es un nombre de dominio." }
+      ]
+    },
+    {
+      "title": "DNS",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Glossary/DNS",
+        "https://aws.amazon.com/route53/what-is-dns/"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📖", "text": "DNS (Domain Name System) traduce nombres de dominio legibles a direcciones IP numéricas.", "analogy": "Como una agenda de contactos." },
+        { "type": "choice", "q": "¿Qué hace DNS?", "options": ["Traduce nombres de dominio a direcciones IP", "Cifra el tráfico web", "Bloquea el tráfico no deseado"], "answer": 0, "why": "Su función más destacada es traducir nombres de dominio legibles a direcciones IP numéricas." },
+        { "type": "card", "emoji": "🔎", "text": "Ejemplo: mozilla.org corresponde a 192.0.2.172. Ese proceso se llama búsqueda DNS (DNS lookup)." },
+        { "type": "truefalse", "statement": "Una función destacada de DNS es traducir nombres de dominio a direcciones IP.", "answer": true, "why": "MDN y AWS la describen así." },
+        { "type": "match", "q": "Une cada elemento con su descripción", "pairs": [
+          { "term": "mozilla.org", "desc": "Nombre de dominio" },
+          { "term": "192.0.2.172", "desc": "Dirección IP numérica" },
+          { "term": "DNS", "desc": "Traduce nombres a direcciones IP" }
+        ], "why": "mozilla.org es un nombre de dominio, 192.0.2.172 una dirección IP, y DNS traduce entre ambos." },
+        { "type": "choice", "q": "Escribes un dominio en el navegador. ¿Qué sistema lo convierte en una dirección IP?", "options": ["HTTPS", "DNS", "Un firewall"], "answer": 1, "why": "DNS traduce el nombre de dominio a la dirección IP." }
+      ]
+    },
+    {
+      "title": "HTTP",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+      "steps": [
+        { "type": "card", "emoji": "🌐", "text": "HTTP es un protocolo para obtener recursos, como documentos HTML." },
+        { "type": "choice", "q": "¿Qué es HTTP?", "options": ["Un protocolo para obtener recursos, como documentos HTML", "Un sistema de nombres de dominio", "Un tipo de dirección IP"], "answer": 0, "why": "MDN lo define como un protocolo para obtener recursos como documentos HTML." },
+        { "type": "card", "emoji": "🔁", "text": "Es un protocolo cliente-servidor: el cliente, normalmente el navegador, envía peticiones y el servidor responde." },
+        { "type": "truefalse", "statement": "En HTTP, los mensajes del cliente se llaman peticiones y los del servidor, respuestas.", "answer": true, "why": "Así lo describe MDN." },
+        { "type": "match", "q": "Une cada término con su descripción", "pairs": [
+          { "term": "Petición", "desc": "Mensaje que envía el cliente" },
+          { "term": "Respuesta", "desc": "Mensaje que devuelve el servidor" },
+          { "term": "Cliente", "desc": "Normalmente, el navegador" }
+        ], "why": "El cliente (normalmente el navegador) envía peticiones y el servidor devuelve respuestas." },
+        { "type": "choice", "q": "En una comunicación HTTP, ¿quién envía las peticiones?", "options": ["El cliente, normalmente el navegador", "Siempre el servidor", "El firewall"], "answer": 0, "why": "HTTP es cliente-servidor: las peticiones las inicia el cliente, normalmente el navegador." }
+      ]
+    },
+    {
+      "title": "HTTPS",
+      "source": "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS",
+      "steps": [
+        { "type": "card", "emoji": "🔒", "text": "HTTPS es la versión cifrada del protocolo HTTP." },
+        { "type": "choice", "q": "¿Qué añade HTTPS respecto a HTTP?", "options": ["Cifra la comunicación entre cliente y servidor", "Traduce dominios a IP", "Aumenta la velocidad de Internet"], "answer": 0, "why": "HTTPS usa TLS para cifrar toda la comunicación entre cliente y servidor." },
+        { "type": "card", "emoji": "🧩", "text": "Usa TLS para cifrar toda la comunicación entre el cliente y el servidor." },
+        { "type": "truefalse", "statement": "En HTTPS, la comunicación entre cliente y servidor va cifrada.", "answer": true, "why": "HTTPS es la versión cifrada de HTTP." },
+        { "type": "choice", "q": "¿Qué usa HTTPS para cifrar la comunicación?", "options": ["DNS", "TLS", "Una dirección IP"], "answer": 1, "why": "MDN indica que HTTPS usa TLS." },
+        { "type": "truefalse", "statement": "HTTP y HTTPS cifran la comunicación exactamente igual.", "answer": false, "why": "HTTPS es la versión cifrada de HTTP." }
+      ]
+    },
+    {
+      "title": "Puertos",
+      "source": "https://developer.mozilla.org/en-US/docs/Glossary/Port",
+      "steps": [
+        { "type": "card", "emoji": "🚪", "text": "Un puerto es un punto de comunicación identificado por un número.", "analogy": "Como las puertas numeradas de un edificio." },
+        { "type": "choice", "q": "¿Qué es un puerto?", "options": ["Un punto de comunicación identificado por un número", "Un tipo de contraseña", "Un servidor DNS"], "answer": 0, "why": "MDN define un puerto como un punto de comunicación designado por un número." },
+        { "type": "card", "emoji": "🔢", "text": "Por debajo de 1024, cada puerto se asocia por defecto con un protocolo específico." },
+        { "type": "match", "q": "Une cada elemento con su puerto o descripción", "pairs": [
+          { "term": "HTTP", "desc": "Puerto 80 por defecto" },
+          { "term": "HTTPS", "desc": "Puerto 443 por defecto" },
+          { "term": "Puertos < 1024", "desc": "Asociados por defecto a un protocolo" }
+        ], "why": "Los puertos por defecto son 80 para HTTP y 443 para HTTPS; por debajo de 1024 cada puerto se asocia por defecto a un protocolo." },
+        { "type": "choice", "q": "¿Cuál es el puerto por defecto de HTTPS?", "options": ["80", "443", "1024"], "answer": 1, "why": "El puerto por defecto de HTTPS es 443." },
+        { "type": "truefalse", "statement": "El puerto por defecto del protocolo HTTP es el 80.", "answer": true, "why": "Así lo indica MDN." }
+      ]
+    },
+    {
+      "title": "Firewalls",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Glossary/Firewall",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🧱", "text": "Un firewall filtra el tráfico de red: lo deja pasar o lo bloquea según reglas.", "analogy": "Un guardia con una lista." },
+        { "type": "choice", "q": "¿Qué hace un firewall?", "options": ["Filtra el tráfico de red según reglas", "Traduce dominios a IP", "Cifra páginas web"], "answer": 0, "why": "MDN lo define como un sistema que filtra el tráfico de red, dejándolo pasar o bloqueándolo según reglas." },
+        { "type": "card", "emoji": "☁️", "text": "En AWS, un security group actúa como firewall virtual. A la instancia solo llega el tráfico que permiten sus reglas." },
+        { "type": "truefalse", "statement": "En AWS, un security group actúa como un firewall virtual.", "answer": true, "why": "Así lo describe la documentación de Amazon VPC." },
+        { "type": "card", "emoji": "🔄", "text": "Los security groups son stateful: si la instancia envía una petición, la respuesta puede volver sin importar las reglas de entrada." },
+        { "type": "choice", "q": "¿Qué significa que un security group sea stateful?", "options": ["La respuesta a una petición enviada desde la instancia puede volver sin importar las reglas de entrada", "Guarda una copia de todo el tráfico", "Bloquea siempre las respuestas"], "answer": 0, "why": "La documentación lo explica así: la respuesta a una petición enviada desde la instancia puede llegar sin importar las reglas de entrada." },
+        { "type": "truefalse", "statement": "A la instancia solo llega el tráfico permitido por las reglas del security group.", "answer": true, "why": "Es lo que indica la documentación." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://developer.mozilla.org/en-US/docs/Glossary/IP_Address",
+        "https://developer.mozilla.org/en-US/docs/Glossary/DNS",
+        "https://developer.mozilla.org/en-US/docs/Glossary/Port",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: IP, DNS, HTTP, HTTPS, puertos y firewalls." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Dirección IP", "desc": "Identifica un dispositivo en la red" },
+          { "term": "DNS", "desc": "Traduce nombres de dominio a IP" },
+          { "term": "Puerto", "desc": "Punto de comunicación numerado" }
+        ], "why": "La IP identifica dispositivos, DNS traduce nombres a IP y un puerto es un punto de comunicación identificado por un número." },
+        { "type": "choice", "q": "¿Cuál es el puerto por defecto de HTTPS?", "options": ["80", "443", "22"], "answer": 1, "why": "El puerto por defecto de HTTPS es 443." },
+        { "type": "truefalse", "statement": "HTTPS es la versión cifrada de HTTP.", "answer": true, "why": "Usa TLS para cifrar toda la comunicación entre cliente y servidor." },
+        { "type": "choice", "q": "¿Qué sistema traduce mozilla.org a una dirección IP?", "options": ["DNS", "Un puerto", "Un firewall"], "answer": 0, "why": "DNS traduce nombres de dominio a direcciones IP." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "HTTP", "desc": "Protocolo para obtener recursos" },
+          { "term": "HTTPS", "desc": "Versión cifrada de HTTP" },
+          { "term": "Firewall", "desc": "Filtra tráfico según reglas" }
+        ], "why": "HTTP obtiene recursos, HTTPS es su versión cifrada y un firewall filtra el tráfico según reglas." },
+        { "type": "truefalse", "statement": "En AWS, un security group actúa como un firewall virtual.", "answer": true, "why": "Así lo describe la documentación de Amazon VPC." }
+      ]
+    }
+  ]
+}
