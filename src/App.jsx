@@ -13,6 +13,7 @@ const XP_LESSON_BONUS = 5
 const MIN_APROBACION = 0.7 // fracción mínima de aciertos a la primera para aprobar un módulo
 const REVIEW_INTERVALS = [1, 3, 7, 14] // días hasta el próximo repaso, por caja (Leitner)
 const REVIEW_XP_PER_HIT = 5 // XP por acierto en una sesión de repaso
+const REVIEW_SESSION_SIZE = 20 // máximo de ejercicios por sesión de repaso
 
 const courses = course.courses.map((c) => ({
   ...c,
@@ -136,11 +137,13 @@ function registerStudyDay(p) {
 }
 
 // ---------- Cola de repaso: reglas ----------
-// Ejercicios pendientes hoy (fecha local): vencidos y que todavía existen.
+// Ejercicios pendientes hoy (fecha local): vencidos y que todavía existen,
+// ordenados del más atrasado (fecha de repaso más antigua) al menos atrasado.
 const pendingIds = (p) => {
   const t = today()
   return Object.entries(p.review)
     .filter(([id, e]) => e.due <= t && resolveStep(id))
+    .sort(([ida, a], [idb, b]) => (a.due < b.due ? -1 : a.due > b.due ? 1 : ida < idb ? -1 : 1))
     .map(([id]) => id)
 }
 
@@ -234,7 +237,7 @@ function Home({ progress, onOpen, onReset, onReview }) {
         <Stats progress={progress} />
       </header>
       <button className="btn primary" disabled={pending === 0} onClick={onReview}>
-        Repaso del día ({pending})
+        Repaso del día ({pending > REVIEW_SESSION_SIZE ? `${REVIEW_SESSION_SIZE} de ${pending}` : pending})
       </button>
       <div className="options">
         {courses.map((c) => {
@@ -638,7 +641,8 @@ function App() {
     update((p) => registerStudyDay({ ...p, xp: p.xp + hits * REVIEW_XP_PER_HIT }))
 
   const startReview = () => {
-    const items = pendingIds(progress).map((id) => {
+    // Los más atrasados primero; el resto sigue pendiente para la siguiente sesión.
+    const items = pendingIds(progress).slice(0, REVIEW_SESSION_SIZE).map((id) => {
       const { mod: m, step } = resolveStep(id)
       return { id, step, modTitle: m.title }
     })
