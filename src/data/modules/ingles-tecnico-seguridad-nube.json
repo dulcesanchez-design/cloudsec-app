@@ -1,0 +1,51 @@
+{
+  "title": "Inglés técnico: seguridad y nube",
+  "source": ["https://www.spanishdict.com/"],
+  "sessions": [
+    {
+      "title": "Sesión 1: cuentas y sistemas",
+      "words": [
+        { "en": "access", "es": "acceso", "emoji": "🔓", "exampleEn": "Only admins have access to this folder.", "exampleEs": "Solo los administradores tienen acceso a esta carpeta." },
+        { "en": "permission", "es": "permiso", "emoji": "✅", "exampleEn": "You need permission to open this file.", "exampleEs": "Necesitas permiso para abrir este archivo." },
+        { "en": "password", "es": "contraseña", "emoji": "🔐", "exampleEn": "Choose a long password.", "exampleEs": "Elige una contraseña larga." },
+        { "en": "user", "es": "usuario", "emoji": "👤", "exampleEn": "Each user has an account.", "exampleEs": "Cada usuario tiene una cuenta." },
+        { "en": "account", "es": "cuenta", "emoji": "🧾", "exampleEn": "I created an account yesterday.", "exampleEs": "Creé una cuenta ayer." },
+        { "en": "file", "es": "archivo", "emoji": "📄", "exampleEn": "Please send me the file.", "exampleEs": "Por favor, envíame el archivo." },
+        { "en": "data", "es": "datos", "emoji": "📊", "exampleEn": "The data is stored safely.", "exampleEs": "Los datos se guardan de forma segura." },
+        { "en": "network", "es": "red", "emoji": "🌐", "exampleEn": "Our network is very fast.", "exampleEs": "Nuestra red es muy rápida." },
+        { "en": "server", "es": "servidor", "emoji": "🖥️", "exampleEn": "The server is down today.", "exampleEs": "El servidor está caído hoy." },
+        { "en": "system", "es": "sistema", "emoji": "⚙️", "exampleEn": "The system needs an update.", "exampleEs": "El sistema necesita una actualización." }
+      ]
+    },
+    {
+      "title": "Sesión 2: amenazas y protección",
+      "words": [
+        { "en": "threat", "es": "amenaza", "emoji": "⚠️", "exampleEn": "This email is a threat to the company.", "exampleEs": "Este correo es una amenaza para la empresa." },
+        { "en": "breach", "es": "brecha", "emoji": "🚨", "exampleEn": "The company reported a security breach.", "exampleEs": "La empresa informó de una brecha de seguridad." },
+        { "en": "policy", "es": "política", "emoji": "📜", "exampleEn": "Read the security policy first.", "exampleEs": "Lee primero la política de seguridad." },
+        { "en": "risk", "es": "riesgo", "emoji": "🎲", "exampleEn": "Weak passwords are a risk.", "exampleEs": "Las contraseñas débiles son un riesgo." },
+        { "en": "attack", "es": "ataque", "emoji": "💥", "exampleEn": "The attack lasted two hours.", "exampleEs": "El ataque duró dos horas." },
+        { "en": "secure", "es": "seguro", "emoji": "🛡️", "exampleEn": "Keep your account secure.", "exampleEs": "Mantén tu cuenta segura." },
+        { "en": "protect", "es": "proteger", "emoji": "🔒", "exampleEn": "We protect user data.", "exampleEs": "Protegemos los datos de los usuarios." },
+        { "en": "backup", "es": "copia de seguridad", "emoji": "💾", "exampleEn": "Make a backup every day.", "exampleEs": "Haz una copia de seguridad cada día." },
+        { "en": "update", "es": "actualizar", "emoji": "🔄", "exampleEn": "Please update the system today.", "exampleEs": "Por favor, actualiza el sistema hoy." },
+        { "en": "error", "es": "error", "emoji": "❌", "exampleEn": "The page shows an error.", "exampleEs": "La página muestra un error." }
+      ]
+    },
+    {
+      "title": "Sesión 3: la nube",
+      "words": [
+        { "en": "cloud", "es": "nube", "emoji": "☁️", "exampleEn": "Our files are in the cloud.", "exampleEs": "Nuestros archivos están en la nube." },
+        { "en": "storage", "es": "almacenamiento", "emoji": "🗄️", "exampleEn": "We need more storage.", "exampleEs": "Necesitamos más almacenamiento." },
+        { "en": "database", "es": "base de datos", "emoji": "🗃️", "exampleEn": "The database has all the names.", "exampleEs": "La base de datos tiene todos los nombres." },
+        { "en": "key", "es": "clave", "emoji": "🗝️", "exampleEn": "Never share your secret key.", "exampleEs": "Nunca compartas tu clave secreta." },
+        { "en": "service", "es": "servicio", "emoji": "🛎️", "exampleEn": "The service is free.", "exampleEs": "El servicio es gratuito." },
+        { "en": "request", "es": "petición", "emoji": "📨", "exampleEn": "I sent a request to the team.", "exampleEs": "Envié una petición al equipo." },
+        { "en": "delete", "es": "borrar", "emoji": "🗑️", "exampleEn": "Do not delete this file.", "exampleEs": "No borres este archivo." },
+        { "en": "link", "es": "enlace", "emoji": "🔗", "exampleEn": "Click the link to log in.", "exampleEs": "Haz clic en el enlace para entrar." },
+        { "en": "report", "es": "informe", "emoji": "📝", "exampleEn": "I wrote a report about the error.", "exampleEs": "Escribí un informe sobre el error." },
+        { "en": "alert", "es": "alerta", "emoji": "🔔", "exampleEn": "You will get an alert by email.", "exampleEs": "Recibirás una alerta por correo." }
+      ]
+    }
+  ]
+}

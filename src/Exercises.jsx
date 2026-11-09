@@ -1,4 +1,51 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+// ---------- Voz del navegador (speechSynthesis, inglés) ----------
+const englishVoices = () => {
+  try {
+    return (window.speechSynthesis?.getVoices() || []).filter((v) => /^en([-_]|$)/i.test(v.lang))
+  } catch {
+    return []
+  }
+}
+
+export const hasEnglishVoice = () => englishVoices().length > 0
+
+// Algunos navegadores cargan la lista de voces de forma asíncrona: se pide pronto.
+try {
+  window.speechSynthesis?.getVoices()
+} catch {
+  // sin síntesis de voz
+}
+
+export function useEnglishVoice() {
+  const [ok, setOk] = useState(hasEnglishVoice)
+  useEffect(() => {
+    const ss = window.speechSynthesis
+    if (!ss) return undefined
+    const update = () => setOk(hasEnglishVoice())
+    update()
+    ss.addEventListener?.('voiceschanged', update)
+    return () => ss.removeEventListener?.('voiceschanged', update)
+  }, [])
+  return ok
+}
+
+export function speak(text) {
+  try {
+    const ss = window.speechSynthesis
+    if (!ss) return
+    ss.cancel()
+    const u = new SpeechSynthesisUtterance(text)
+    u.lang = 'en-US'
+    const voices = englishVoices()
+    const voice = voices.find((v) => /^en[-_]US$/i.test(v.lang)) || voices[0]
+    if (voice) u.voice = voice
+    ss.speak(u)
+  } catch {
+    // sin audio
+  }
+}
 
 export function shuffle(arr) {
   const r = [...arr]
@@ -29,10 +76,18 @@ export function Card({ step }) {
 
 // Mezcla las opciones una sola vez al montar el ejercicio (useState inicial)
 // y marca la correcta por contenido, no por posición.
+// Si el ejercicio trae "accept" (traducciones válidas: la principal y sus variantes), una opción
+// es correcta si su texto coincide con cualquiera de ellas; si no, solo la del índice "answer".
 function useShuffledOptions(step) {
-  const [opts] = useState(() =>
-    shuffle(step.options.map((text, i) => ({ text, correct: i === step.answer }))),
-  )
+  const [opts] = useState(() => {
+    const accepted = step.accept?.map((a) => a.trim().toLowerCase())
+    return shuffle(
+      step.options.map((text, i) => ({
+        text,
+        correct: accepted ? accepted.includes(text.trim().toLowerCase()) : i === step.answer,
+      })),
+    )
+  })
   return opts
 }
 
@@ -161,7 +216,7 @@ export function Match({ step, onDone }) {
   const [sel, setSel] = useState(null)
   const [matched, setMatched] = useState([])
   const [flash, setFlash] = useState(null)
-  const failed = useRef(false)
+  const mistakes = useRef(0) // toques equivocados; se informan para dar puntaje parcial en el examen
 
   const tapTerm = (i) => {
     if (matched.includes(i)) return
@@ -173,9 +228,9 @@ export function Match({ step, onDone }) {
       const nm = [...matched, sel]
       setMatched(nm)
       setSel(null)
-      if (nm.length === step.pairs.length) onDone(!failed.current)
+      if (nm.length === step.pairs.length) onDone(mistakes.current === 0, { mistakes: mistakes.current })
     } else {
-      failed.current = true
+      mistakes.current += 1
       setFlash(d)
       setSel(null)
       setTimeout(() => setFlash(null), 600)
@@ -389,6 +444,105 @@ export function Lab({ step, onComplete }) {
   )
 }
 
+// Tarjeta de vocabulario: inglés, traducción, emoji y ejemplo.
+export function WordCard({ step }) {
+  const voice = useEnglishVoice()
+  return (
+    <div className="card-step">
+      <div className="emoji">{step.emoji}</div>
+      <p className="word-en">
+        {step.en}
+        {voice && (
+          <button className="speak" onClick={() => speak(step.en)} aria-label={`Escuchar ${step.en}`}>
+            🔊
+          </button>
+        )}
+      </p>
+      <p className="word-es">
+        {step.es}
+        {step.alt?.length > 0 && <span className="word-alt"> ({step.alt.join(', ')})</span>}
+      </p>
+      <p className="example-en">{step.exampleEn}</p>
+      <p className="example-es">{step.exampleEs}</p>
+    </div>
+  )
+}
+
+// Se reproduce la palabra y se elige cuál es (solo si hay voz en inglés).
+export function Listen({ step, onDone }) {
+  const opts = useShuffledOptions(step)
+  const [picked, setPicked] = useState(null)
+  useEffect(() => {
+    speak(step.word)
+  }, [step.word])
+  const choose = (i) => {
+    if (picked !== null) return
+    setPicked(i)
+    onDone(opts[i].correct)
+  }
+  return (
+    <>
+      <h2>Escucha y elige la palabra</h2>
+      <button className="btn" onClick={() => speak(step.word)}>
+        🔊 Escuchar otra vez
+      </button>
+      <div className="options">
+        {opts.map((opt, i) => {
+          let cls = 'btn option'
+          if (picked !== null) {
+            if (opt.correct) cls += ' correct'
+            else if (i === picked) cls += ' wrong'
+          }
+          return (
+            <button key={opt.text} className={cls} disabled={picked !== null} onClick={() => choose(i)}>
+              {opt.text}
+            </button>
+          )
+        })}
+      </div>
+    </>
+  )
+}
+
+// Escribir la palabra en inglés viendo la traducción.
+// Acepta mayúsculas/minúsculas y espacios de más; no ignora acentos ni letras distintas.
+const normalizeTyped = (s) => s.trim().replace(/\s+/g, ' ').toLowerCase()
+
+export function TypeAnswer({ step, onDone }) {
+  const [value, setValue] = useState('')
+  const [done, setDone] = useState(false)
+  const submit = () => {
+    if (done || !value.trim()) return
+    setDone(true)
+    onDone(normalizeTyped(value) === normalizeTyped(step.answer))
+  }
+  return (
+    <>
+      <h2>Escribe la palabra en inglés</h2>
+      <div className="type-prompt">
+        <span className="emoji-sm">{step.emoji}</span> {step.es}
+      </div>
+      <input
+        className="type-input"
+        value={value}
+        disabled={done}
+        autoFocus
+        autoCapitalize="none"
+        autoCorrect="off"
+        spellCheck={false}
+        placeholder="English word"
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && submit()}
+      />
+      {!done && (
+        <button className="btn primary" disabled={!value.trim()} onClick={submit}>
+          Comprobar
+        </button>
+      )}
+    </>
+  )
+}
+
 export const exerciseComponents = {
   choice: Choice,
   truefalse: TrueFalse,
@@ -397,4 +551,6 @@ export const exerciseComponents = {
   scenario: Scenario,
   findbug: FindBug,
   fillblank: FillBlank,
+  listen: Listen,
+  type: TypeAnswer,
 }

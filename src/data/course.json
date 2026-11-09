@@ -93,6 +93,35 @@
           "file": "06-iam-fundamentos.json"
         }
       ]
+    },
+    {
+      "id": "ingles-vocabulario",
+      "title": "Inglés: vocabulario",
+      "description": "Vocabulario básico en inglés para hispanohablantes: rutina diaria e inglés técnico.",
+      "recommended": false,
+      "kind": "vocab",
+      "levels": [
+        {
+          "id": "a1-a2",
+          "title": "A1–A2",
+          "modules": [
+            {
+              "id": "ingles-rutina",
+              "title": "01 Rutina diaria",
+              "description": "30 palabras de la vida diaria en 3 sesiones.",
+              "file": "ingles-rutina.json"
+            },
+            {
+              "id": "ingles-tecnico-seguridad-nube",
+              "title": "02 Inglés técnico: seguridad y nube",
+              "description": "30 palabras básicas de seguridad y nube en 3 sesiones.",
+              "file": "ingles-tecnico-seguridad-nube.json"
+            }
+          ]
+        },
+        { "id": "b1", "title": "B1", "modules": [] },
+        { "id": "b2", "title": "B2", "modules": [] }
+      ]
     }
   ]
 }

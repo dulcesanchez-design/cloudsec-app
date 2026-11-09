@@ -546,3 +546,107 @@ header .progress {
   background: var(--accent);
   border-radius: 999px;
 }
+
+/* --- Vocabulario --- */
+.word-en {
+  margin: 8px 0 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.speak {
+  margin-left: 10px;
+  padding: 4px 10px;
+  font-size: 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.word-es {
+  margin: 4px 0 0;
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.example-en {
+  margin: 14px 0 0;
+  font-style: italic;
+}
+
+.example-es {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.type-prompt {
+  padding: 12px 14px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: rgba(79, 140, 255, 0.1);
+  border-radius: 12px;
+}
+
+.emoji-sm {
+  font-size: 1.6rem;
+}
+
+.type-input {
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--text);
+  background: #0b0d12;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+}
+
+.type-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* --- Niveles y examen --- */
+.level {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.level-locked {
+  opacity: 0.6;
+}
+
+.level-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.level-head h2 {
+  margin: 0;
+}
+
+.level-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.level-note {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.word-alt {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
