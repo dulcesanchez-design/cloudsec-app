@@ -1,0 +1,77 @@
+{
+  "title": "IAM: fundamentos (AWS)",
+  "lessons": [
+    {
+      "title": "Usuario root y MFA",
+      "explanation": "Al crear una cuenta de AWS empiezas con el usuario root: tiene acceso completo e irrestricto a todo y no se le pueden limitar permisos con políticas IAM. Por eso se protege con una contraseña robusta y MFA (autenticación multifactor), y se usa solo para las pocas tareas que exigen root (por ejemplo, cambiar el plan de soporte o cerrar la cuenta). Para el trabajo diario se usan usuarios o roles IAM. Recuerda el modelo de responsabilidad compartida: AWS protege la infraestructura de la nube; tú eres responsable de cómo configuras tu cuenta, incluidos IAM y MFA.",
+      "questions": [
+        {
+          "q": "¿Cuál es la práctica recomendada para el usuario root de una cuenta de AWS?",
+          "options": [
+            "Usarlo a diario para administrar recursos, ya que tiene todos los permisos",
+            "Protegerlo con MFA y usarlo solo para las tareas que requieren root",
+            "Crear access keys para root y usarlas en scripts de automatización"
+          ],
+          "answer": 1,
+          "why": "AWS recomienda proteger root con MFA, no crearle access keys y usarlo solo para tareas que lo exigen. El trabajo cotidiano se hace con identidades IAM."
+        },
+        {
+          "q": "¿Qué aporta activar MFA en un usuario?",
+          "options": [
+            "Cifra automáticamente todos los datos que el usuario guarda en S3",
+            "Sustituye la necesidad de definir políticas de permisos",
+            "Exige un segundo factor además de la contraseña, así que una contraseña robada no basta para entrar"
+          ],
+          "answer": 2,
+          "why": "MFA añade algo que tienes (app o llave de seguridad) a algo que sabes (contraseña). No cifra datos ni reemplaza los permisos."
+        },
+        {
+          "q": "Según el modelo de responsabilidad compartida, ¿quién es responsable de configurar bien los usuarios, permisos y MFA de IAM en tu cuenta?",
+          "options": [
+            "AWS, porque IAM es un servicio de AWS",
+            "El cliente: AWS protege la seguridad DE la nube y el cliente la seguridad EN la nube",
+            "Se reparte al 50 % entre AWS y el cliente en cada configuración"
+          ],
+          "answer": 1,
+          "why": "AWS se encarga de la infraestructura subyacente; la configuración de identidades, permisos y datos dentro de tu cuenta es responsabilidad del cliente."
+        }
+      ]
+    },
+    {
+      "title": "Mínimo privilegio y roles",
+      "explanation": "El principio de mínimo privilegio consiste en conceder solo los permisos necesarios para una tarea, y nada más. En IAM, una política con un Deny explícito siempre gana sobre cualquier Allow; sin Allow ni Deny, el acceso se niega por defecto (denegación implícita). Para aplicaciones y servicios, es mejor usar roles IAM: entregan credenciales temporales vía AWS STS que expiran solas, en lugar de claves de acceso permanentes que pueden filtrarse y quedarse válidas indefinidamente.",
+      "questions": [
+        {
+          "q": "¿Qué significa aplicar el principio de mínimo privilegio?",
+          "options": [
+            "Dar a cada usuario solo los permisos necesarios para su tarea",
+            "Dar permisos amplios al principio y quitarlos solo si hay un incidente",
+            "Asignar la política AdministratorAccess a todo el equipo para evitar bloqueos"
+          ],
+          "answer": 0,
+          "why": "Limitar los permisos al mínimo necesario reduce el impacto si unas credenciales se ven comprometidas o se cometen errores."
+        },
+        {
+          "q": "Una aplicación en EC2 necesita leer de S3. ¿Qué opción es más segura?",
+          "options": [
+            "Guardar en el código unas access keys de un usuario IAM",
+            "Asociar a la instancia un rol IAM, que entrega credenciales temporales",
+            "Usar las access keys del usuario root para que nunca falle"
+          ],
+          "answer": 1,
+          "why": "Los roles proporcionan credenciales temporales que se rotan automáticamente. Las claves permanentes en el código pueden filtrarse y siguen siendo válidas hasta que alguien las revoque."
+        },
+        {
+          "q": "Un usuario tiene una política con Allow para s3:GetObject en un bucket y otra con Deny para s3:GetObject en ese mismo bucket. ¿Qué ocurre?",
+          "options": [
+            "Se permite, porque el Allow se evaluó primero",
+            "Se permite, porque el Allow es más específico",
+            "Se deniega, porque un Deny explícito siempre prevalece sobre un Allow"
+          ],
+          "answer": 2,
+          "why": "En la lógica de evaluación de políticas de AWS, un Deny explícito anula cualquier Allow, sin importar el orden ni dónde esté definida cada política."
+        }
+      ]
+    }
+  ]
+}

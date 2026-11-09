@@ -1,0 +1,128 @@
+{
+  "title": "02 AWS desde cero",
+  "lessons": [
+    {
+      "title": "Tu cuenta de AWS y el usuario raíz",
+      "term": "Usuario raíz (root)",
+      "explanation": "Para crear una cuenta de AWS necesitas el correo del usuario raíz, un nombre de cuenta, una verificación de identidad por teléfono y un método de pago válido. Al empezar tienes una única identidad de inicio de sesión con acceso completo a todos los servicios y recursos de la cuenta: el usuario raíz. Analogía: es la llave maestra de un edificio. Abre todas las puertas, así que se guarda bien protegida y no se usa para entrar cada día. AWS recomienda no usar el usuario raíz para las tareas cotidianas.",
+      "source": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html",
+        "https://docs.aws.amazon.com/accounts/latest/reference/welcome-first-time-user.html"
+      ],
+      "questions": [
+        {
+          "q": "¿Qué es el usuario raíz de una cuenta de AWS?",
+          "options": [
+            "La identidad inicial de la cuenta, con acceso completo a todos los servicios y recursos",
+            "Un usuario con permisos solo de lectura",
+            "Un servicio que crea copias de seguridad"
+          ],
+          "answer": 0,
+          "why": "Al crear la cuenta empiezas con una identidad de inicio de sesión con acceso completo a todo. Es el usuario raíz."
+        },
+        {
+          "q": "¿Cuál de estas cosas se te pide al registrarte en AWS?",
+          "options": [
+            "Un método de pago válido y verificación de identidad por teléfono",
+            "Un certificado profesional de seguridad",
+            "El código fuente de tus aplicaciones"
+          ],
+          "answer": 0,
+          "why": "El registro pide correo, nombre de cuenta, un método de pago válido y confirmación de identidad por teléfono."
+        },
+        {
+          "q": "¿Qué recomienda AWS sobre el uso diario del usuario raíz?",
+          "options": [
+            "Usarlo siempre, porque tiene todos los permisos",
+            "No usarlo para las tareas cotidianas",
+            "Compartir su contraseña con todo el equipo"
+          ],
+          "answer": 1,
+          "why": "AWS recomienda encarecidamente no usar el usuario raíz para las tareas del día a día, por su acceso completo."
+        }
+      ]
+    },
+    {
+      "title": "La consola de administración",
+      "term": "AWS Management Console",
+      "explanation": "La AWS Management Console es una aplicación web que da acceso centralizado a las consolas de todos los servicios individuales de AWS. Analogía: es el panel de recepción de un centro comercial. Desde ahí llegas a cada tienda (servicio) sin buscar cada local por separado. Un detalle importante: algunos recursos, como las instancias de Amazon EC2, son específicos de la Región donde se crearon. Si creaste algo y no lo ves en la consola, puede que esté mostrando otra Región.",
+      "source": [
+        "https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/getting-started.html",
+        "https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/select-region.html"
+      ],
+      "questions": [
+        {
+          "q": "¿Qué es la AWS Management Console?",
+          "options": [
+            "Una aplicación web con acceso centralizado a las consolas de los servicios de AWS",
+            "Un lenguaje de programación",
+            "Un tipo de cuenta de facturación"
+          ],
+          "answer": 0,
+          "why": "AWS la define como una aplicación web que da acceso centralizado a todas las consolas de servicios individuales."
+        },
+        {
+          "q": "Creaste un recurso en AWS pero no lo ves en la consola. ¿Cuál es una causa posible?",
+          "options": [
+            "La consola está mostrando recursos de otra Región",
+            "AWS borra los recursos cada noche",
+            "Solo el usuario raíz puede ver los recursos"
+          ],
+          "answer": 0,
+          "why": "Algunos recursos, como las instancias de EC2, son específicos de la Región donde se crearon. La consola puede estar mostrando otra Región."
+        },
+        {
+          "q": "¿Qué afirmación es correcta sobre las Regiones y la consola?",
+          "options": [
+            "Todos los recursos de AWS se ven siempre en cualquier Región",
+            "Para algunos servicios, como IAM, no necesitas elegir una Región",
+            "Debes elegir siempre una Región incluso para entrar a la consola"
+          ],
+          "answer": 1,
+          "why": "La documentación indica que no necesitas elegir una Región para la propia consola ni para algunos servicios, como IAM."
+        }
+      ]
+    },
+    {
+      "title": "Regiones y zonas de disponibilidad",
+      "term": "Región y zona de disponibilidad",
+      "explanation": "Una Región de AWS es una ubicación física en el mundo donde se agrupan centros de datos. Cada Región se compone de un mínimo de tres zonas de disponibilidad (AZ) aisladas y físicamente separadas. Una AZ es uno o más centros de datos independientes, con energía, red y conectividad redundantes. Analogía: la Región es una ciudad y las AZ son barrios con su propia red eléctrica; si un barrio se queda sin luz, los otros siguen funcionando. Las AZ de una Región están conectadas con redes de alto ancho de banda y baja latencia.",
+      "source": [
+        "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+        "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+      ],
+      "questions": [
+        {
+          "q": "¿Qué es una Región de AWS?",
+          "options": [
+            "Un tipo de licencia de software",
+            "Una ubicación física en el mundo donde AWS agrupa centros de datos",
+            "Un nombre para cada usuario de la cuenta"
+          ],
+          "answer": 1,
+          "why": "AWS define una Región como una ubicación física en el mundo donde se agrupan centros de datos."
+        },
+        {
+          "q": "¿Cuántas zonas de disponibilidad tiene como mínimo cada Región de AWS?",
+          "options": [
+            "Una",
+            "Dos",
+            "Tres"
+          ],
+          "answer": 2,
+          "why": "Cada Región de AWS consta de un mínimo de tres zonas de disponibilidad aisladas y físicamente separadas."
+        },
+        {
+          "q": "¿Qué afirmación sobre las Regiones es correcta?",
+          "options": [
+            "us-east-1 es un código de Región; las Regiones más recientes (posteriores a marzo de 2019) hay que habilitarlas antes de usarlas",
+            "Todas las Regiones vienen habilitadas siempre y no tienen código",
+            "Una Región es lo mismo que una zona de disponibilidad"
+          ],
+          "answer": 0,
+          "why": "Las Regiones tienen códigos como us-east-1. Las introducidas después del 20 de marzo de 2019 deben habilitarse antes de acceder; las anteriores están habilitadas por defecto."
+        }
+      ]
+    }
+  ]
+}
