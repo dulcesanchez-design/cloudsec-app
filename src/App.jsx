@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import course from './data/course.json'
-import { Card, Lab, exerciseComponents } from './Exercises'
+import { Card, Lab, exerciseComponents, shuffle } from './Exercises'
 
 const moduleFiles = import.meta.glob('./data/modules/*.json', {
   eager: true,
@@ -11,6 +11,8 @@ const STORAGE_KEY = 'cloudsec-progress-v2'
 const XP_PER_EXERCISE = 10
 const XP_LESSON_BONUS = 5
 const MIN_APROBACION = 0.7 // fracción mínima de aciertos a la primera para aprobar un módulo
+const REVIEW_INTERVALS = [1, 3, 7, 14] // días hasta el próximo repaso, por caja (Leitner)
+const REVIEW_XP_PER_HIT = 5 // XP por acierto en una sesión de repaso
 
 const courses = course.courses.map((c) => ({
   ...c,
@@ -26,6 +28,30 @@ const lessonKey = (modId, i) => `${modId}:${i}`
 const pctText = (f) => `${Math.round(f * 100)}%`
 const isObj = (x) => x && typeof x === 'object' && !Array.isArray(x)
 
+// ---------- Repaso espaciado ----------
+// Id estable de un ejercicio: módulo + lección + posición del paso ("idModulo:leccion:paso").
+const stepId = (modId, lessonIdx, stepIdx) => `${modId}:${lessonIdx}:${stepIdx}`
+
+// Devuelve el ejercicio de un id, o null si ya no existe (o no es un ejercicio).
+function resolveStep(id) {
+  const [modId, li, si] = String(id).split(':')
+  const mod = allModules.find((m) => m.id === modId)
+  const step = mod?.data.lessons[Number(li)]?.steps[Number(si)]
+  return step && exerciseComponents[step.type] ? { mod, step } : null
+}
+
+// Limpia la cola: descarta entradas mal formadas o cuyo id ya no existe.
+function normalizeReview(raw) {
+  const out = {}
+  if (!isObj(raw)) return out
+  for (const [id, e] of Object.entries(raw)) {
+    if (!isObj(e) || !Number.isInteger(e.box) || e.box < 0 || e.box >= REVIEW_INTERVALS.length) continue
+    if (typeof e.due !== 'string' || !resolveStep(id)) continue
+    out[id] = { box: e.box, due: e.due }
+  }
+  return out
+}
+
 // ---------- Progreso (una sola clave de localStorage) ----------
 // {
 //   done:   ["idModulo:indice", ...]            lecciones terminadas
@@ -34,7 +60,8 @@ const isObj = (x) => x && typeof x === 'object' && !Array.isArray(x)
 //   mods:   { idModulo: {best, passed} }         mejor fracción de aciertos y si está aprobado
 // }
 
-const emptyProgress = () => ({ done: [], xp: 0, streak: 0, lastDay: null, scores: {}, mods: {} })
+//   review: { "idModulo:leccion:paso": {box, due} }   cola de repaso: caja Leitner (0-3) y fecha del próximo repaso
+const emptyProgress = () => ({ done: [], xp: 0, streak: 0, lastDay: null, scores: {}, mods: {}, review: {} })
 
 // Progreso anterior a la aprobación por módulo: los módulos completos quedan aprobados
 // (sin porcentaje); las lecciones sueltas de módulos incompletos se descartan porque
@@ -62,6 +89,7 @@ function loadProgress() {
         lastDay: typeof raw.lastDay === 'string' ? raw.lastDay : null,
         scores: isObj(raw.scores) ? raw.scores : {},
         mods: isObj(raw.mods) ? raw.mods : {},
+        review: normalizeReview(raw.review),
       }
       return isObj(raw.mods) ? p : migrateLegacy(p)
     }
@@ -89,6 +117,12 @@ const yesterday = () => {
   return dayString(d)
 }
 
+// Suma n días a una fecha local "YYYY-MM-DD".
+const addDays = (day, n) => {
+  const [y, m, d] = day.split('-').map(Number)
+  return dayString(new Date(y, m - 1, d + n))
+}
+
 // Racha que se muestra: si pasó más de un día sin estudiar, vale 0.
 function shownStreak(p) {
   return p.lastDay === today() || p.lastDay === yesterday() ? p.streak : 0
@@ -99,6 +133,36 @@ function registerStudyDay(p) {
   const t = today()
   if (p.lastDay === t) return p
   return { ...p, streak: p.lastDay === yesterday() ? p.streak + 1 : 1, lastDay: t }
+}
+
+// ---------- Cola de repaso: reglas ----------
+// Ejercicios pendientes hoy (fecha local): vencidos y que todavía existen.
+const pendingIds = (p) => {
+  const t = today()
+  return Object.entries(p.review)
+    .filter(([id, e]) => e.due <= t && resolveStep(id))
+    .map(([id]) => id)
+}
+
+// Fallo a la primera en una lección: entra (o vuelve) a la caja 0 y sale mañana.
+const queueForReview = (p, id) => ({
+  ...p,
+  review: { ...p.review, [id]: { box: 0, due: addDays(today(), 1) } },
+})
+
+// Resultado de un ejercicio en una sesión de repaso.
+function applyReview(p, id, ok) {
+  const e = p.review[id]
+  if (!e) return p
+  const review = { ...p.review }
+  if (!ok) {
+    review[id] = { box: 0, due: addDays(today(), 1) }
+  } else if (e.box >= REVIEW_INTERVALS.length - 1) {
+    delete review[id] // acertó en el último intervalo: sale de la cola
+  } else {
+    review[id] = { box: e.box + 1, due: addDays(today(), REVIEW_INTERVALS[e.box + 1]) }
+  }
+  return { ...p, review }
 }
 
 // ---------- Aprobación por módulo ----------
@@ -160,7 +224,8 @@ function Sources({ source }) {
   )
 }
 
-function Home({ progress, onOpen, onReset }) {
+function Home({ progress, onOpen, onReset, onReview }) {
+  const pending = pendingIds(progress).length
   return (
     <main className="app">
       <header>
@@ -168,6 +233,9 @@ function Home({ progress, onOpen, onReset }) {
         <h1>Cursos</h1>
         <Stats progress={progress} />
       </header>
+      <button className="btn primary" disabled={pending === 0} onClick={onReview}>
+        Repaso del día ({pending})
+      </button>
       <div className="options">
         {courses.map((c) => {
           const approved = approvedCount(c, progress)
@@ -289,8 +357,8 @@ function LessonList({ mod, progress, onOpen, onBack, onRepeatModule }) {
   )
 }
 
-function Player({ lesson, progress, mod, isLast, hasNext, onExit, onFinish, onNext, onRepeat, onRepeatModule }) {
-  const [queue, setQueue] = useState(() => lesson.steps.map((s) => ({ s, retry: false })))
+function Player({ lesson, progress, mod, isLast, hasNext, onExit, onFinish, onNext, onRepeat, onRepeatModule, onFail }) {
+  const [queue, setQueue] = useState(() => lesson.steps.map((s, i) => ({ s, i, retry: false })))
   const [idx, setIdx] = useState(0)
   const [answer, setAnswer] = useState(null) // null | { ok }
   const [correct, setCorrect] = useState(0) // aciertos a la primera
@@ -309,7 +377,10 @@ function Player({ lesson, progress, mod, isLast, hasNext, onExit, onFinish, onNe
     setAnswer({ ok })
     if (!item.retry) {
       if (ok) setCorrect((c) => c + 1)
-      else setQueue((q) => [...q, { s: item.s, retry: true }])
+      else {
+        setQueue((q) => [...q, { s: item.s, i: item.i, retry: true }])
+        onFail(item.i) // fallo a la primera: entra a la cola de repaso
+      }
     }
   }
 
@@ -425,6 +496,90 @@ function Player({ lesson, progress, mod, isLast, hasNext, onExit, onFinish, onNe
   )
 }
 
+function ReviewPlayer({ items, progress, onAnswer, onFinish, onExit }) {
+  const [idx, setIdx] = useState(0)
+  const [answer, setAnswer] = useState(null) // null | { ok }
+  const [hits, setHits] = useState(0)
+  const [finished, setFinished] = useState(false)
+
+  const item = items[idx]
+
+  const handleDone = (ok) => {
+    setAnswer({ ok })
+    if (ok) setHits((h) => h + 1)
+    onAnswer(item.id, ok) // la caja y la fecha se guardan en cada respuesta
+  }
+
+  const advance = () => {
+    setAnswer(null)
+    if (idx + 1 >= items.length) {
+      setFinished(true)
+      onFinish(hits)
+    } else {
+      setIdx(idx + 1)
+    }
+  }
+
+  if (finished) {
+    return (
+      <main className="app">
+        <section className="card result">
+          <Stats progress={progress} />
+          <h2>¡Repaso completado!</h2>
+          <p className="score">
+            {hits} / {items.length}
+          </p>
+          <p>aciertos</p>
+          <p className="xp-earned">
+            +{hits * REVIEW_XP_PER_HIT} XP{' '}
+            <span className="muted">
+              ({hits}×{REVIEW_XP_PER_HIT})
+            </span>
+          </p>
+          <p>
+            Subieron de caja: {hits}. Volverán a la caja inicial: {items.length - hits}.
+          </p>
+          <button className="btn primary" onClick={onExit}>
+            Volver al inicio
+          </button>
+        </section>
+      </main>
+    )
+  }
+
+  const { step: s } = item
+  const Exercise = exerciseComponents[s.type]
+
+  return (
+    <main className="app">
+      <div className="topbar">
+        <button className="close" onClick={onExit} aria-label="Salir">
+          ✕
+        </button>
+        <div className="bar">
+          <div className="bar-fill" style={{ width: `${Math.round((idx / items.length) * 100)}%` }} />
+        </div>
+      </div>
+      <p className="lesson-title">Repaso del día · {item.modTitle}</p>
+
+      <section className="card">
+        <Exercise key={idx} step={s} onDone={handleDone} />
+        {answer && (
+          <>
+            <div className={`feedback ${answer.ok ? 'ok' : 'bad'}`}>
+              <strong>{answer.ok ? '¡Correcto!' : 'Casi. Volverá a salir mañana.'}</strong>
+              <p>{s.why}</p>
+            </div>
+            <button className="btn primary" onClick={advance}>
+              Continuar
+            </button>
+          </>
+        )}
+      </section>
+    </main>
+  )
+}
+
 function App() {
   const [progress, setProgress] = useState(loadProgress)
   const [view, setView] = useState({ name: 'home' }) // home | module | lesson
@@ -476,6 +631,21 @@ function App() {
     setView({ name: 'module', modId: mod.id })
   }
 
+  const failFirstTry = (id) => update((p) => queueForReview(p, id))
+  const answerReview = (id, ok) => update((p) => applyReview(p, id, ok))
+  // Una sesión de repaso completada cuenta para la racha y da XP por acierto.
+  const finishReview = (hits) =>
+    update((p) => registerStudyDay({ ...p, xp: p.xp + hits * REVIEW_XP_PER_HIT }))
+
+  const startReview = () => {
+    const items = pendingIds(progress).map((id) => {
+      const { mod: m, step } = resolveStep(id)
+      return { id, step, modTitle: m.title }
+    })
+    if (items.length === 0) return
+    setView({ name: 'review', items: shuffle(items), nonce: Date.now() })
+  }
+
   const resetProgress = () => {
     if (!window.confirm('¿Reiniciar todo el progreso, el XP y la racha? No se puede deshacer.')) return
     const fresh = emptyProgress()
@@ -489,6 +659,20 @@ function App() {
         progress={progress}
         onOpen={(courseId) => setView({ name: 'course', courseId })}
         onReset={resetProgress}
+        onReview={startReview}
+      />
+    )
+  }
+
+  if (view.name === 'review') {
+    return (
+      <ReviewPlayer
+        key={view.nonce}
+        items={view.items}
+        progress={progress}
+        onAnswer={answerReview}
+        onFinish={finishReview}
+        onExit={() => setView({ name: 'home' })}
       />
     )
   }
@@ -534,6 +718,7 @@ function App() {
       onFinish={(xp, score) => finishLesson(mod, view.i, xp, score)}
       onNext={() => setView({ name: 'lesson', modId: mod.id, i: view.i + 1, nonce: 0 })}
       onRepeat={() => setView({ ...view, nonce: view.nonce + 1 })}
+      onFail={(si) => failFirstTry(stepId(mod.id, view.i, si))}
       onRepeatModule={() => repeatModule(mod)}
     />
   )
