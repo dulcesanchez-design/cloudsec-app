@@ -409,7 +409,7 @@ function Home({ progress, onOpen, onReset, onReview, onWordReview }) {
           const approved = approvedCount(c, progress)
           return (
             <button key={c.id} className="btn module-btn course-btn" onClick={() => onOpen(c.id)}>
-              {c.recommended && <span className="badge">Recomendado primero</span>}
+              {(c.badge || (c.recommended && 'Recomendado primero')) && <span className="badge">{c.badge || 'Recomendado primero'}</span>}
               <span className="module-title">{c.title}</span>
               <span className="module-desc">{c.description}</span>
               <span className="module-status">

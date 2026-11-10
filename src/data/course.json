@@ -63,6 +63,33 @@
       ]
     },
     {
+      "id": "ciberseguridad-esencial",
+      "title": "Ciberseguridad esencial",
+      "description": "Amenazas, malware y ransomware, y seguridad de redes, con enfoque defensivo.",
+      "recommended": false,
+      "badge": "Recomendado después de Fundamentos",
+      "modules": [
+        {
+          "id": "ciber-panorama-amenazas",
+          "title": "01 Panorama de amenazas",
+          "description": "Amenaza, vulnerabilidad y riesgo, actores, vías de entrada y superficie de ataque.",
+          "file": "ciber-panorama-amenazas.json"
+        },
+        {
+          "id": "ciber-malware-ransomware",
+          "title": "02 Malware y ransomware",
+          "description": "Tipos de malware, cómo entra, prevención y recuperación.",
+          "file": "ciber-malware-ransomware.json"
+        },
+        {
+          "id": "ciber-seguridad-redes",
+          "title": "03 Seguridad de redes",
+          "description": "Firewalls, segmentación, IDS/IPS, VPN y zero trust.",
+          "file": "ciber-seguridad-redes.json"
+        }
+      ]
+    },
+    {
       "id": "cloud-security-aws",
       "title": "Cloud Security con AWS",
       "description": "La nube, AWS desde cero, responsabilidad compartida e IAM.",
@@ -119,8 +146,16 @@
             }
           ]
         },
-        { "id": "b1", "title": "B1", "modules": [] },
-        { "id": "b2", "title": "B2", "modules": [] }
+        {
+          "id": "b1",
+          "title": "B1",
+          "modules": []
+        },
+        {
+          "id": "b2",
+          "title": "B2",
+          "modules": []
+        }
       ]
     }
   ]
