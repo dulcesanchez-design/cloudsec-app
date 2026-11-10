@@ -1,0 +1,115 @@
+{
+  "title": "Identidades y accesos",
+  "lessons": [
+    {
+      "title": "Mínimo privilegio, control de acceso y RBAC",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/least_privilege",
+        "https://csrc.nist.gov/glossary/term/access_control",
+        "https://csrc.nist.gov/glossary/term/role_based_access_control"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "↩️", "text": "En «IAM: fundamentos (AWS)» viste el mínimo privilegio aplicado a AWS. Aquí va la definición general de NIST." },
+        { "type": "card", "emoji": "🔒", "text": "Mínimo privilegio: a cada entidad se le dan solo los recursos y autorizaciones mínimos que necesita para su función." },
+        { "type": "choice", "q": "Según NIST, el principio de mínimo privilegio…", "options": ["Da a cada entidad solo lo mínimo que necesita para su función", "Da permisos amplios por comodidad", "Elimina todas las cuentas"], "answer": 0, "why": "Es la definición del glosario de NIST (SP 800-53 Rev. 5)." },
+        { "type": "card", "emoji": "🚪", "text": "Control de acceso: limitar el acceso a los recursos de un sistema solo a programas, procesos u otros sistemas autorizados." },
+        { "type": "truefalse", "statement": "El control de acceso limita el acceso a los recursos solo a quienes están autorizados.", "answer": true, "why": "Es la definición de NISTIR 4734 en el glosario." },
+        { "type": "card", "emoji": "🎭", "text": "RBAC: un modelo de control de acceso donde las acciones permitidas sobre los recursos se identifican con roles." },
+        { "type": "choice", "q": "¿Qué es RBAC?", "options": ["Un modelo donde las acciones permitidas se identifican con roles", "Un tipo de cifrado", "Un protocolo de red"], "answer": 0, "why": "Es la definición del glosario de NIST." },
+        { "type": "scenario", "situation": "Un proceso de respaldo solo necesita leer una carpeta, pero tiene permisos de administración total.", "q": "¿Qué principio incumple?", "options": ["Mínimo privilegio", "Inspección con estado", "Doble factor"], "answer": 0, "why": "Tiene más autorizaciones de las mínimas que necesita para su función." }
+      ]
+    },
+    {
+      "title": "Separación de funciones",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/separation_of_duty",
+        "https://www.ncsc.gov.uk/collection/10-steps/identity-and-access-management"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "⚖️", "text": "Separación de funciones: ningún usuario debería tener privilegios suficientes para hacer mal uso del sistema por sí solo." },
+        { "type": "choice", "q": "¿Qué establece la separación de funciones?", "options": ["Que ningún usuario tenga privilegios suficientes para abusar del sistema por sí solo", "Que todos tengan acceso a todo", "Que nadie use contraseñas"], "answer": 0, "why": "Es la definición del glosario de NIST (SP 800-192)." },
+        { "type": "card", "emoji": "💵", "text": "Ejemplo de NIST: quien autoriza el pago de una nómina no debería ser también quien puede prepararla." },
+        { "type": "scenario", "situation": "En una empresa, la misma persona crea los pagos y también los aprueba.", "q": "¿Qué principio se incumple?", "options": ["Separación de funciones", "Mínimo privilegio solamente", "Segmentación de red"], "answer": 0, "why": "Una sola persona reúne privilegios suficientes para abusar del proceso." },
+        { "type": "card", "emoji": "👥", "text": "NCSC (Reino Unido) añade que ciertas acciones críticas deberían requerir a más de una persona para realizarlas o autorizarlas." },
+        { "type": "truefalse", "statement": "Algunas acciones críticas deberían requerir a más de una persona para realizarlas o autorizarlas.", "answer": true, "why": "Lo indica la guía de NCSC sobre identidad y acceso." }
+      ]
+    },
+    {
+      "title": "Cuentas privilegiadas",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/privileged_user",
+        "https://csrc.nist.gov/glossary/term/privileged_account",
+        "https://www.ncsc.gov.uk/collection/10-steps/identity-and-access-management"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔑", "text": "Un usuario privilegiado puede realizar funciones de seguridad que los usuarios normales no están autorizados a realizar." },
+        { "type": "card", "emoji": "🧾", "text": "Una cuenta privilegiada es una cuenta del sistema con las autorizaciones de un usuario privilegiado." },
+        { "type": "choice", "q": "Según NIST, ¿qué es una cuenta privilegiada?", "options": ["Una cuenta del sistema con las autorizaciones de un usuario privilegiado", "Una cuenta sin contraseña", "Una cuenta de invitado"], "answer": 0, "why": "Es la definición del glosario de NIST." },
+        { "type": "card", "emoji": "🛡️", "text": "NCSC recomienda MFA y otras mitigaciones para cuentas privilegiadas, y cuentas separadas para el trabajo diario de los administradores." },
+        { "type": "truefalse", "statement": "Los administradores deberían tener cuentas separadas para el trabajo diario.", "answer": true, "why": "Lo recomienda NCSC. El MFA se explica en «Seguridad básica» y en «IAM: fundamentos (AWS)»." },
+        { "type": "findbug", "q": "¿Qué práctica contradice las recomendaciones de NCSC?", "hint": "Toca la práctica que no debería estar", "lines": ["Cuentas de administrador separadas de la cuenta de uso diario", "MFA en las cuentas privilegiadas", "Revisar con regularidad los privilegios innecesarios", "Usar la cuenta de administrador para el correo de todos los días"], "answer": 3, "why": "NCSC pide que los administradores tengan cuentas separadas para el trabajo diario." },
+        { "type": "scenario", "situation": "Un administrador usa su cuenta con privilegios completos para las tareas cotidianas.", "q": "¿Qué recomienda NCSC?", "options": ["Usar una cuenta separada para el trabajo diario", "Compartir la cuenta con el equipo", "Quitar el MFA"], "answer": 0, "why": "Las cuentas con privilegios completos deben reservarse para lo que las necesita." }
+      ]
+    },
+    {
+      "title": "Contraseñas según NIST SP 800-63B",
+      "source": [
+        "https://pages.nist.gov/800-63-4/sp800-63b.html",
+        "https://csrc.nist.gov/pubs/sp/800/63/b/4/final"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📚", "text": "NIST SP 800-63B-4 (final, julio de 2025) es la guía de NIST sobre autenticación y gestión de autenticadores." },
+        { "type": "card", "emoji": "↩️", "text": "«Seguridad básica» recoge consejos de CISA para usuarios. Esta lección trata lo que NIST exige a quien verifica contraseñas." },
+        { "type": "truefalse", "statement": "NIST SP 800-63B-4 sustituye a la versión anterior, SP 800-63B (2020).", "answer": true, "why": "La página de NIST lo indica: esta publicación sustituye a SP 800-63B." },
+        { "type": "card", "emoji": "📏", "text": "Longitud mínima: 15 caracteres si la contraseña es el único factor; 8 si solo se usa como parte de autenticación multifactor." },
+        { "type": "choice", "q": "Según SP 800-63B-4, ¿qué longitud mínima exigir si la contraseña es el único factor?", "options": ["15 caracteres", "6 caracteres", "3 caracteres"], "answer": 0, "why": "NIST: contraseñas usadas como único factor, mínimo de 15 caracteres; 8 si solo forman parte de MFA." },
+        { "type": "card", "emoji": "🚫", "text": "NIST prohíbe imponer otras reglas de composición y exigir cambios periódicos. Además, se compara la contraseña con una lista de bloqueo." },
+        { "type": "findbug", "q": "¿Qué reglas de una política de contraseñas contradicen a NIST?", "hint": "Toca una regla que NIST no permite", "lines": ["Mínimo de 15 caracteres si la contraseña es el único factor", "Exigir al menos un símbolo y un número", "Comparar la contraseña con una lista de bloqueo", "Exigir cambiarla cada 90 días sin indicios de compromiso"], "answer": [1, 3], "why": "NIST: no deben imponerse otras reglas de composición y no debe exigirse cambiar contraseñas periódicamente." },
+        { "type": "match", "q": "Une cada elemento con su significado", "pairs": [
+          { "term": "15 caracteres", "desc": "Mínimo si la contraseña es el único factor" },
+          { "term": "8 caracteres", "desc": "Mínimo si forma parte de autenticación multifactor" },
+          { "term": "Lista de bloqueo", "desc": "Se compara con la contraseña candidata" }
+        ], "why": "Son requisitos de la sección de verificadores de contraseñas de SP 800-63B-4." }
+      ]
+    },
+    {
+      "title": "Niveles de aseguramiento de autenticación",
+      "source": [
+        "https://pages.nist.gov/800-63-4/sp800-63b.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🎚️", "text": "SP 800-63B define tres niveles de aseguramiento de autenticación: AAL1, AAL2 y AAL3." },
+        { "type": "card", "emoji": "1️⃣", "text": "AAL1 da confianza básica de que quien reclama controla el autenticador. Permite factor único o múltiple." },
+        { "type": "match", "q": "Une cada nivel con su descripción", "pairs": [
+          { "term": "AAL1", "desc": "Confianza básica; factor único o múltiple" },
+          { "term": "AAL2", "desc": "Prueba de dos factores de autenticación distintos" },
+          { "term": "AAL3", "desc": "Prueba de posesión de una clave (clave pública)" }
+        ], "why": "Son las descripciones de la introducción de SP 800-63B-4." },
+        { "type": "choice", "q": "¿Qué exige AAL2?", "options": ["Prueba de posesión y control de dos factores distintos", "Un solo factor", "Ningún factor"], "answer": 0, "why": "Lo indica SP 800-63B-4." },
+        { "type": "card", "emoji": "🔑", "text": "AAL3 se basa en demostrar la posesión de una clave mediante un protocolo criptográfico de clave pública." },
+        { "type": "scenario", "situation": "Un sistema exige probar la posesión y el control de dos factores de autenticación distintos.", "q": "¿Qué nivel de aseguramiento es?", "options": ["AAL2", "AAL1", "Ninguno"], "answer": 0, "why": "AAL2 requiere prueba de dos factores de autenticación distintos." },
+        { "type": "truefalse", "statement": "AAL1 exige siempre autenticación multifactor.", "answer": false, "why": "AAL1 requiere un factor único o múltiple. El MFA se explica en «Seguridad básica»." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/least_privilege",
+        "https://csrc.nist.gov/glossary/term/separation_of_duty",
+        "https://pages.nist.gov/800-63-4/sp800-63b.html"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: mínimo privilegio, separación de funciones, cuentas privilegiadas, contraseñas y AAL." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Mínimo privilegio", "desc": "Solo los recursos y autorizaciones necesarios" },
+          { "term": "Separación de funciones", "desc": "Nadie puede abusar del sistema por sí solo" },
+          { "term": "RBAC", "desc": "Acciones permitidas identificadas con roles" }
+        ], "why": "Son definiciones del glosario de NIST." },
+        { "type": "choice", "q": "¿Qué dice NIST sobre cambiar contraseñas periódicamente?", "options": ["No debe exigirse sin indicios de compromiso", "Debe exigirse siempre", "Debe prohibirse tener contraseña"], "answer": 0, "why": "SP 800-63B-4: los verificadores no deben exigir cambios periódicos." },
+        { "type": "truefalse", "statement": "Para NIST, exigir símbolos y números obligatorios es una regla de composición que no debe imponerse.", "answer": true, "why": "SP 800-63B-4: no deben imponerse otras reglas de composición." },
+        { "type": "scenario", "situation": "Un empleado aprueba y también registra los pagos de su departamento.", "q": "¿Qué principio conviene aplicar?", "options": ["Separación de funciones", "Inspección con estado", "Zero trust"], "answer": 0, "why": "Evita que una sola persona tenga privilegios suficientes para abusar del proceso." },
+        { "type": "choice", "q": "¿Qué recomienda NCSC para administradores?", "options": ["Cuentas separadas para el trabajo diario", "Una sola cuenta para todo", "Compartir la cuenta"], "answer": 0, "why": "Está en su guía sobre identidad y acceso." }
+      ]
+    }
+  ]
+}

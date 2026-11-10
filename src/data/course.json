@@ -86,6 +86,24 @@
           "title": "03 Seguridad de redes",
           "description": "Firewalls, segmentación, IDS/IPS, VPN y zero trust.",
           "file": "ciber-seguridad-redes.json"
+        },
+        {
+          "id": "ciber-owasp-top10",
+          "title": "04 Seguridad web: OWASP Top 10",
+          "description": "Las diez categorías del OWASP Top 10:2025, con código inseguro para reconocerlo y su corrección.",
+          "file": "ciber-owasp-top10.json"
+        },
+        {
+          "id": "ciber-vulnerabilidades-parches",
+          "title": "05 Vulnerabilidades y parches",
+          "description": "CVE, NVD, CVSS, priorización y gestión de parches.",
+          "file": "ciber-vulnerabilidades-parches.json"
+        },
+        {
+          "id": "ciber-identidades-accesos",
+          "title": "06 Identidades y accesos",
+          "description": "Mínimo privilegio, separación de funciones, cuentas privilegiadas y contraseñas según NIST.",
+          "file": "ciber-identidades-accesos.json"
         }
       ]
     },

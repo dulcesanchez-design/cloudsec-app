@@ -9,18 +9,82 @@
         "https://csrc.nist.gov/glossary/term/risk"
       ],
       "steps": [
-        { "type": "card", "emoji": "⛈️", "text": "Amenaza: cualquier circunstancia o evento con potencial de afectar negativamente las operaciones de una organización.", "analogy": "Una tormenta." },
-        { "type": "choice", "q": "Según NIST, ¿qué es una amenaza?", "options": ["Cualquier circunstancia o evento con potencial de afectar negativamente las operaciones", "Una debilidad en un sistema", "Una copia de seguridad"], "answer": 0, "why": "El glosario de NIST define la amenaza como cualquier circunstancia o evento con el potencial de afectar adversamente las operaciones de la organización." },
-        { "type": "card", "emoji": "🕳️", "text": "Vulnerabilidad: una debilidad en un sistema, en sus procedimientos de seguridad, en sus controles internos o en su implementación.", "analogy": "Un techo con goteras." },
-        { "type": "truefalse", "statement": "Una vulnerabilidad es una condición que permite que ocurra un evento de amenaza.", "answer": true, "why": "NIST SP 800-221 la define así; además la describe como una debilidad en el sistema, los procedimientos, los controles o la implementación." },
-        { "type": "card", "emoji": "📏", "text": "Riesgo: medida de hasta qué punto una entidad está amenazada por un evento potencial. Suele depender del impacto adverso y de su probabilidad." },
-        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
-          { "term": "Amenaza", "desc": "Evento o circunstancia con potencial de causar daño" },
-          { "term": "Vulnerabilidad", "desc": "Debilidad que puede permitir que ocurra" },
-          { "term": "Riesgo", "desc": "Medida según el impacto y la probabilidad" }
-        ], "why": "Son las definiciones del glosario de NIST." },
-        { "type": "scenario", "situation": "Tu empresa tiene un servidor con una debilidad conocida, y circulan ataques que podrían aprovecharla.", "q": "¿Cómo se llama la debilidad del servidor?", "options": ["Vulnerabilidad", "Amenaza", "Riesgo"], "answer": 0, "why": "La debilidad es la vulnerabilidad. Los ataques posibles son la amenaza, y el riesgo mide el impacto y la probabilidad." },
-        { "type": "choice", "q": "¿De qué suele ser función el riesgo, según NIST?", "options": ["Del impacto adverso y de la probabilidad de que ocurra", "Solo del precio de los equipos", "Solo del número de empleados"], "answer": 0, "why": "El glosario indica que el riesgo suele ser función del impacto adverso y de la probabilidad de ocurrencia." }
+        {
+          "type": "card",
+          "emoji": "⛈️",
+          "text": "Amenaza: cualquier circunstancia o evento con potencial de afectar negativamente las operaciones de una organización.",
+          "analogy": "Una tormenta."
+        },
+        {
+          "type": "choice",
+          "q": "Según NIST, ¿qué es una amenaza?",
+          "options": [
+            "Cualquier circunstancia o evento con potencial de afectar negativamente las operaciones",
+            "Una debilidad en un sistema",
+            "Una copia de seguridad"
+          ],
+          "answer": 0,
+          "why": "El glosario de NIST define la amenaza como cualquier circunstancia o evento con el potencial de afectar adversamente las operaciones de la organización."
+        },
+        {
+          "type": "card",
+          "emoji": "🕳️",
+          "text": "Vulnerabilidad: una debilidad en un sistema, en sus procedimientos de seguridad, en sus controles internos o en su implementación.",
+          "analogy": "Un techo con goteras."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Una vulnerabilidad es una condición que permite que ocurra un evento de amenaza.",
+          "answer": true,
+          "why": "NIST SP 800-221 la define así; además la describe como una debilidad en el sistema, los procedimientos, los controles o la implementación."
+        },
+        {
+          "type": "card",
+          "emoji": "📏",
+          "text": "Riesgo: medida de hasta qué punto una entidad está amenazada por un evento potencial. Suele depender del impacto adverso y de su probabilidad."
+        },
+        {
+          "type": "match",
+          "q": "Une cada concepto con su descripción",
+          "pairs": [
+            {
+              "term": "Amenaza",
+              "desc": "Evento o circunstancia con potencial de causar daño"
+            },
+            {
+              "term": "Vulnerabilidad",
+              "desc": "Debilidad que puede permitir que ocurra"
+            },
+            {
+              "term": "Riesgo",
+              "desc": "Medida según el impacto y la probabilidad"
+            }
+          ],
+          "why": "Son las definiciones del glosario de NIST."
+        },
+        {
+          "type": "scenario",
+          "situation": "Tu empresa tiene un servidor con una debilidad conocida, y circulan ataques que podrían aprovecharla.",
+          "q": "¿Cómo se llama la debilidad del servidor?",
+          "options": [
+            "Vulnerabilidad",
+            "Amenaza",
+            "Riesgo"
+          ],
+          "answer": 0,
+          "why": "La debilidad es la vulnerabilidad. Los ataques posibles son la amenaza, y el riesgo mide el impacto y la probabilidad."
+        },
+        {
+          "type": "choice",
+          "q": "¿De qué suele ser función el riesgo, según NIST?",
+          "options": [
+            "Del impacto adverso y de la probabilidad de que ocurra",
+            "Solo del precio de los equipos",
+            "Solo del número de empleados"
+          ],
+          "answer": 0,
+          "why": "El glosario indica que el riesgo suele ser función del impacto adverso y de la probabilidad de ocurrencia."
+        }
       ]
     },
     {
@@ -28,16 +92,81 @@
       "source": [
         "https://csrc.nist.gov/glossary/term/threat_actor",
         "https://csrc.nist.gov/glossary/term/insider_threat",
-        "https://www.cisa.gov/topics/physical-security/insider-threat-mitigation"
+        "https://www.cisa.gov/topics/physical-security/insider-threat-mitigation",
+        "https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends"
       ],
       "steps": [
-        { "type": "card", "emoji": "🧑‍💻", "text": "Un actor de amenaza es un individuo o un grupo que representa una amenaza." },
-        { "type": "choice", "q": "Según NIST, ¿qué es un actor de amenaza?", "options": ["Un individuo o un grupo que representa una amenaza", "Un programa antivirus", "Un tipo de red"], "answer": 0, "why": "NIST SP 800-150 lo define como un individuo o un grupo que representa una amenaza." },
-        { "type": "card", "emoji": "🎯", "text": "Otras definiciones de NIST: la fuente de riesgo que puede causar un impacto dañino, o quien instiga riesgos con capacidad de hacer daño." },
-        { "type": "truefalse", "statement": "Un actor de amenaza puede ser un grupo, no solo una persona.", "answer": true, "why": "La definición de NIST habla de un individuo o un grupo." },
-        { "type": "card", "emoji": "🏢", "text": "Amenaza interna: alguien con acceso autorizado o conocimiento de la organización lo usa para hacer daño, a sabiendas o sin saberlo." },
-        { "type": "choice", "q": "Según CISA, ¿quién es un «insider»?", "options": ["Cualquier persona que tiene o tuvo acceso autorizado o conocimiento de los recursos de la organización", "Solo un atacante externo", "Solo el equipo de seguridad"], "answer": 0, "why": "CISA define al insider como cualquier persona que tiene o tuvo acceso autorizado o conocimiento de los recursos de la organización." },
-        { "type": "scenario", "situation": "Un empleado comparte por error datos sensibles con personas no autorizadas.", "q": "Según NIST y CISA, ¿puede ser una amenaza interna?", "options": ["Sí: puede ser un acto no intencional", "No: solo cuenta si lo hace a propósito", "No: los empleados nunca son una amenaza"], "answer": 0, "why": "NIST habla de uso del acceso «a sabiendas o sin saberlo», y CISA indica que pueden ser actos intencionales o no intencionales." }
+        {
+          "type": "card",
+          "emoji": "🧑‍💻",
+          "text": "Un actor de amenaza es un individuo o un grupo que representa una amenaza."
+        },
+        {
+          "type": "choice",
+          "q": "Según NIST, ¿qué es un actor de amenaza?",
+          "options": [
+            "Un individuo o un grupo que representa una amenaza",
+            "Un programa antivirus",
+            "Un tipo de red"
+          ],
+          "answer": 0,
+          "why": "NIST SP 800-150 lo define como un individuo o un grupo que representa una amenaza."
+        },
+        {
+          "type": "card",
+          "emoji": "🎯",
+          "text": "Otras definiciones de NIST: la fuente de riesgo que puede causar un impacto dañino, o quien instiga riesgos con capacidad de hacer daño."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Un actor de amenaza puede ser un grupo, no solo una persona.",
+          "answer": true,
+          "why": "La definición de NIST habla de un individuo o un grupo."
+        },
+        {
+          "type": "card",
+          "emoji": "🇪🇺",
+          "text": "ENISA señala que las organizaciones de la UE seguirán enfrentando una combinación de ciberdelincuencia, ciberespionaje y actividad hacktivista."
+        },
+        {
+          "type": "choice",
+          "q": "Según el panorama de amenazas de ENISA, ¿qué combinación enfrentan las organizaciones de la UE?",
+          "options": [
+            "Ciberdelincuencia, ciberespionaje y actividad hacktivista",
+            "Solo fallos de hardware",
+            "Solo correo basura"
+          ],
+          "answer": 0,
+          "why": "Es la formulación de la página de ENISA sobre amenazas y tendencias (Threat Landscape 2026)."
+        },
+        {
+          "type": "card",
+          "emoji": "🏢",
+          "text": "Amenaza interna: alguien con acceso autorizado o conocimiento de la organización lo usa para hacer daño, a sabiendas o sin saberlo."
+        },
+        {
+          "type": "choice",
+          "q": "Según CISA, ¿quién es un «insider»?",
+          "options": [
+            "Cualquier persona que tiene o tuvo acceso autorizado o conocimiento de los recursos de la organización",
+            "Solo un atacante externo",
+            "Solo el equipo de seguridad"
+          ],
+          "answer": 0,
+          "why": "CISA define al insider como cualquier persona que tiene o tuvo acceso autorizado o conocimiento de los recursos de la organización."
+        },
+        {
+          "type": "scenario",
+          "situation": "Un empleado comparte por error datos sensibles con personas no autorizadas.",
+          "q": "Según NIST y CISA, ¿puede ser una amenaza interna?",
+          "options": [
+            "Sí: puede ser un acto no intencional",
+            "No: solo cuenta si lo hace a propósito",
+            "No: los empleados nunca son una amenaza"
+          ],
+          "answer": 0,
+          "why": "NIST habla de uso del acceso «a sabiendas o sin saberlo», y CISA indica que pueden ser actos intencionales o no intencionales."
+        }
       ]
     },
     {
@@ -46,17 +175,69 @@
         "https://www.cisa.gov/stopransomware/ransomware-guide"
       ],
       "steps": [
-        { "type": "card", "emoji": "🚪", "text": "CISA organiza la prevención del ransomware según la vía de acceso inicial: la forma en que un atacante entra por primera vez." },
-        { "type": "card", "emoji": "🌐", "text": "Algunas vías: vulnerabilidades y errores de configuración en servicios expuestos a Internet, credenciales comprometidas y phishing." },
-        { "type": "match", "q": "Une cada vía de entrada con su descripción", "pairs": [
-          { "term": "Servicios expuestos a Internet", "desc": "Fallos o mala configuración" },
-          { "term": "Credenciales comprometidas", "desc": "Acceso con cuentas que el atacante obtuvo" },
-          { "term": "Phishing", "desc": "Engaño para abrir enlaces o adjuntos dañinos" }
-        ], "why": "Son tres de las vías de acceso inicial que agrupa la guía #StopRansomware de CISA. El phishing se explica en el módulo «Seguridad básica»." },
-        { "type": "card", "emoji": "🧩", "text": "También figuran: infección previa por malware, ingeniería social avanzada y terceros o proveedores de servicios gestionados." },
-        { "type": "choice", "q": "¿Cuál es una vía de acceso inicial que menciona CISA?", "options": ["Vulnerabilidades en servicios expuestos a Internet", "Cambiar el fondo de pantalla", "Actualizar el software"], "answer": 0, "why": "La guía de CISA incluye las vulnerabilidades y configuraciones erróneas de servicios expuestos a Internet." },
-        { "type": "scenario", "situation": "Una organización descubre que un servicio de acceso remoto quedó expuesto a Internet con poca protección.", "q": "¿Qué vía de entrada representa?", "options": ["Servicios remotos expuestos y mal protegidos", "Phishing", "Un tercero o proveedor"], "answer": 0, "why": "CISA indica que los actores suelen obtener acceso inicial por servicios remotos expuestos y mal protegidos." },
-        { "type": "truefalse", "statement": "El phishing es una de las vías de acceso inicial que lista CISA.", "answer": true, "why": "Figura entre las vías de la guía. Cómo reconocerlo se explica en «Seguridad básica»." }
+        {
+          "type": "card",
+          "emoji": "🚪",
+          "text": "CISA organiza la prevención del ransomware según la vía de acceso inicial: la forma en que un atacante entra por primera vez."
+        },
+        {
+          "type": "card",
+          "emoji": "🌐",
+          "text": "Algunas vías: vulnerabilidades y errores de configuración en servicios expuestos a Internet, credenciales comprometidas y phishing."
+        },
+        {
+          "type": "match",
+          "q": "Une cada vía de entrada con su descripción",
+          "pairs": [
+            {
+              "term": "Servicios expuestos a Internet",
+              "desc": "Fallos o mala configuración"
+            },
+            {
+              "term": "Credenciales comprometidas",
+              "desc": "Acceso con cuentas que el atacante obtuvo"
+            },
+            {
+              "term": "Phishing",
+              "desc": "Engaño para abrir enlaces o adjuntos dañinos"
+            }
+          ],
+          "why": "Son tres de las vías de acceso inicial que agrupa la guía #StopRansomware de CISA. El phishing se explica en el módulo «Seguridad básica»."
+        },
+        {
+          "type": "card",
+          "emoji": "🧩",
+          "text": "También figuran: infección previa por malware, ingeniería social avanzada y terceros o proveedores de servicios gestionados."
+        },
+        {
+          "type": "choice",
+          "q": "¿Cuál es una vía de acceso inicial que menciona CISA?",
+          "options": [
+            "Vulnerabilidades en servicios expuestos a Internet",
+            "Cambiar el fondo de pantalla",
+            "Actualizar el software"
+          ],
+          "answer": 0,
+          "why": "La guía de CISA incluye las vulnerabilidades y configuraciones erróneas de servicios expuestos a Internet."
+        },
+        {
+          "type": "scenario",
+          "situation": "Una organización descubre que un servicio de acceso remoto quedó expuesto a Internet con poca protección.",
+          "q": "¿Qué vía de entrada representa?",
+          "options": [
+            "Servicios remotos expuestos y mal protegidos",
+            "Phishing",
+            "Un tercero o proveedor"
+          ],
+          "answer": 0,
+          "why": "CISA indica que los actores suelen obtener acceso inicial por servicios remotos expuestos y mal protegidos."
+        },
+        {
+          "type": "truefalse",
+          "statement": "El phishing es una de las vías de acceso inicial que lista CISA.",
+          "answer": true,
+          "why": "Figura entre las vías de la guía. Cómo reconocerlo se explica en «Seguridad básica»."
+        }
       ]
     },
     {
@@ -66,13 +247,66 @@
         "https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html"
       ],
       "steps": [
-        { "type": "card", "emoji": "🧱", "text": "Superficie de ataque: los puntos del límite de un sistema donde un atacante puede intentar entrar, causar un efecto o extraer datos." },
-        { "type": "choice", "q": "¿Qué es la superficie de ataque?", "options": ["Los puntos donde un atacante podría intentar entrar en un sistema", "El tamaño de la pantalla del servidor", "Una copia de seguridad"], "answer": 0, "why": "NIST SP 800-53 la define como el conjunto de puntos del límite de un sistema donde un atacante puede intentar entrar, causar un efecto o extraer datos." },
-        { "type": "card", "emoji": "✂️", "text": "Para reducirla: simplificar el modelo, desactivar funciones e interfaces que no se usan y no guardar datos confidenciales innecesarios." },
-        { "type": "findbug", "q": "¿Qué líneas amplían la superficie de ataque sin necesidad?", "hint": "Toca una línea que debería eliminarse", "lines": ["Servicio web público (necesario)", "Panel de administración activo que nadie usa", "Datos confidenciales guardados solo si son necesarios", "Copias de seguridad antiguas dejadas en el servidor"], "answer": [1, 3], "why": "OWASP recomienda desactivar funciones e interfaces sin uso, y advierte que dejar copias de seguridad antiguas y código sin uso aumenta la superficie de ataque." },
-        { "type": "card", "emoji": "🛡️", "text": "También ayudan controles operativos, como un firewall de aplicaciones web (WAF). El código sin uso y las copias antiguas amplían la superficie." },
-        { "type": "truefalse", "statement": "Dejar código sin usar y copias antiguas aumenta la superficie de ataque.", "answer": true, "why": "Así lo indica la guía de OWASP." },
-        { "type": "scenario", "situation": "Tu equipo mantiene una función antigua que ya nadie usa, pero sigue activa en producción.", "q": "¿Qué haces para reducir la superficie de ataque?", "options": ["Desactivar la función que no se usa", "Dejarla activa por si acaso", "Exponerla también en otros sitios"], "answer": 0, "why": "OWASP recomienda reducir la superficie desactivando funciones e interfaces que no se usan." }
+        {
+          "type": "card",
+          "emoji": "🧱",
+          "text": "Superficie de ataque: los puntos del límite de un sistema donde un atacante puede intentar entrar, causar un efecto o extraer datos."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué es la superficie de ataque?",
+          "options": [
+            "Los puntos donde un atacante podría intentar entrar en un sistema",
+            "El tamaño de la pantalla del servidor",
+            "Una copia de seguridad"
+          ],
+          "answer": 0,
+          "why": "NIST SP 800-53 la define como el conjunto de puntos del límite de un sistema donde un atacante puede intentar entrar, causar un efecto o extraer datos."
+        },
+        {
+          "type": "card",
+          "emoji": "✂️",
+          "text": "Para reducirla: simplificar el modelo, desactivar funciones e interfaces que no se usan y no guardar datos confidenciales innecesarios."
+        },
+        {
+          "type": "findbug",
+          "q": "¿Qué líneas amplían la superficie de ataque sin necesidad?",
+          "hint": "Toca una línea que debería eliminarse",
+          "lines": [
+            "Servicio web público (necesario)",
+            "Panel de administración activo que nadie usa",
+            "Datos confidenciales guardados solo si son necesarios",
+            "Copias de seguridad antiguas dejadas en el servidor"
+          ],
+          "answer": [
+            1,
+            3
+          ],
+          "why": "OWASP recomienda desactivar funciones e interfaces sin uso, y advierte que dejar copias de seguridad antiguas y código sin uso aumenta la superficie de ataque."
+        },
+        {
+          "type": "card",
+          "emoji": "🛡️",
+          "text": "También ayudan controles operativos, como un firewall de aplicaciones web (WAF). El código sin uso y las copias antiguas amplían la superficie."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Dejar código sin usar y copias antiguas aumenta la superficie de ataque.",
+          "answer": true,
+          "why": "Así lo indica la guía de OWASP."
+        },
+        {
+          "type": "scenario",
+          "situation": "Tu equipo mantiene una función antigua que ya nadie usa, pero sigue activa en producción.",
+          "q": "¿Qué haces para reducir la superficie de ataque?",
+          "options": [
+            "Desactivar la función que no se usa",
+            "Dejarla activa por si acaso",
+            "Exponerla también en otros sitios"
+          ],
+          "answer": 0,
+          "why": "OWASP recomienda reducir la superficie desactivando funciones e interfaces que no se usan."
+        }
       ]
     },
     {
@@ -82,16 +316,64 @@
         "https://attack.mitre.org/resources/faq/"
       ],
       "steps": [
-        { "type": "card", "emoji": "🗺️", "text": "MITRE ATT&CK es una base de conocimiento, accesible globalmente, de tácticas y técnicas de adversarios basada en observaciones reales." },
-        { "type": "choice", "q": "¿Qué es MITRE ATT&CK?", "options": ["Una base de conocimiento de tácticas y técnicas de adversarios", "Un antivirus comercial", "Un tipo de firewall"], "answer": 0, "why": "Así la describe su página oficial: una base de conocimiento globalmente accesible de tácticas y técnicas de adversarios basada en observaciones del mundo real." },
-        { "type": "card", "emoji": "❓", "text": "Una táctica es el «porqué» de una técnica. Una técnica es el «cómo» logra un adversario un objetivo táctico mediante una acción." },
-        { "type": "match", "q": "Une cada concepto con su significado", "pairs": [
-          { "term": "Táctica", "desc": "El porqué" },
-          { "term": "Técnica", "desc": "El cómo" },
-          { "term": "ATT&CK", "desc": "Base de conocimiento del comportamiento de adversarios" }
-        ], "why": "Según las preguntas frecuentes de ATT&CK, las tácticas representan el «porqué» y las técnicas el «cómo»." },
-        { "type": "scenario", "situation": "Un informe describe cómo un adversario realiza una acción concreta para alcanzar su objetivo.", "q": "¿Qué describe el informe en términos de ATT&CK?", "options": ["Una técnica", "Una táctica", "Una vulnerabilidad"], "answer": 0, "why": "Las técnicas representan cómo logra un adversario un objetivo táctico mediante una acción." },
-        { "type": "truefalse", "statement": "En ATT&CK, las tácticas responden a la pregunta «por qué».", "answer": true, "why": "Las tácticas representan el «porqué» de una técnica." }
+        {
+          "type": "card",
+          "emoji": "🗺️",
+          "text": "MITRE ATT&CK es una base de conocimiento, accesible globalmente, de tácticas y técnicas de adversarios basada en observaciones reales."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué es MITRE ATT&CK?",
+          "options": [
+            "Una base de conocimiento de tácticas y técnicas de adversarios",
+            "Un antivirus comercial",
+            "Un tipo de firewall"
+          ],
+          "answer": 0,
+          "why": "Así la describe su página oficial: una base de conocimiento globalmente accesible de tácticas y técnicas de adversarios basada en observaciones del mundo real."
+        },
+        {
+          "type": "card",
+          "emoji": "❓",
+          "text": "Una táctica es el «porqué» de una técnica. Una técnica es el «cómo» logra un adversario un objetivo táctico mediante una acción."
+        },
+        {
+          "type": "match",
+          "q": "Une cada concepto con su significado",
+          "pairs": [
+            {
+              "term": "Táctica",
+              "desc": "El porqué"
+            },
+            {
+              "term": "Técnica",
+              "desc": "El cómo"
+            },
+            {
+              "term": "ATT&CK",
+              "desc": "Base de conocimiento del comportamiento de adversarios"
+            }
+          ],
+          "why": "Según las preguntas frecuentes de ATT&CK, las tácticas representan el «porqué» y las técnicas el «cómo»."
+        },
+        {
+          "type": "scenario",
+          "situation": "Un informe describe cómo un adversario realiza una acción concreta para alcanzar su objetivo.",
+          "q": "¿Qué describe el informe en términos de ATT&CK?",
+          "options": [
+            "Una técnica",
+            "Una táctica",
+            "Una vulnerabilidad"
+          ],
+          "answer": 0,
+          "why": "Las técnicas representan cómo logra un adversario un objetivo táctico mediante una acción."
+        },
+        {
+          "type": "truefalse",
+          "statement": "En ATT&CK, las tácticas responden a la pregunta «por qué».",
+          "answer": true,
+          "why": "Las tácticas representan el «porqué» de una técnica."
+        }
       ]
     },
     {
@@ -103,16 +385,70 @@
         "https://csrc.nist.gov/glossary/term/insider_threat"
       ],
       "steps": [
-        { "type": "card", "emoji": "📝", "text": "Repaso: amenaza, vulnerabilidad, riesgo, actores, vías de entrada, superficie de ataque y ATT&CK." },
-        { "type": "match", "q": "Une cada término con su descripción", "pairs": [
-          { "term": "Actor de amenaza", "desc": "Individuo o grupo que representa una amenaza" },
-          { "term": "Superficie de ataque", "desc": "Puntos donde un atacante podría intentar entrar" },
-          { "term": "Vulnerabilidad", "desc": "Debilidad que puede permitir un evento de amenaza" }
-        ], "why": "Son definiciones del glosario de NIST." },
-        { "type": "choice", "q": "¿Qué contribuye a reducir la superficie de ataque?", "options": ["Desactivar funciones e interfaces que no se usan", "Añadir más servicios expuestos", "Guardar más datos confidenciales"], "answer": 0, "why": "OWASP recomienda desactivar lo que no se usa y no guardar datos confidenciales innecesarios." },
-        { "type": "truefalse", "statement": "Una amenaza interna puede ser un acto no intencional.", "answer": true, "why": "NIST habla de uso del acceso a sabiendas o sin saberlo; CISA, de actos intencionales o no." },
-        { "type": "scenario", "situation": "Una organización con un riesgo alto decide reducir primero el impacto y la probabilidad de un evento dañino.", "q": "¿De qué depende el riesgo, según NIST?", "options": ["Del impacto adverso y de la probabilidad de ocurrencia", "Solo del nombre del atacante", "Solo del color de la red"], "answer": 0, "why": "El riesgo suele ser función del impacto adverso y de la probabilidad de ocurrencia." },
-        { "type": "choice", "q": "En ATT&CK, ¿qué representa una técnica?", "options": ["El cómo logra un adversario un objetivo táctico", "El porqué de una táctica", "Un tipo de usuario"], "answer": 0, "why": "Las técnicas representan el «cómo»; las tácticas, el «porqué»." }
+        {
+          "type": "card",
+          "emoji": "📝",
+          "text": "Repaso: amenaza, vulnerabilidad, riesgo, actores, vías de entrada, superficie de ataque y ATT&CK."
+        },
+        {
+          "type": "match",
+          "q": "Une cada término con su descripción",
+          "pairs": [
+            {
+              "term": "Actor de amenaza",
+              "desc": "Individuo o grupo que representa una amenaza"
+            },
+            {
+              "term": "Superficie de ataque",
+              "desc": "Puntos donde un atacante podría intentar entrar"
+            },
+            {
+              "term": "Vulnerabilidad",
+              "desc": "Debilidad que puede permitir un evento de amenaza"
+            }
+          ],
+          "why": "Son definiciones del glosario de NIST."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué contribuye a reducir la superficie de ataque?",
+          "options": [
+            "Desactivar funciones e interfaces que no se usan",
+            "Añadir más servicios expuestos",
+            "Guardar más datos confidenciales"
+          ],
+          "answer": 0,
+          "why": "OWASP recomienda desactivar lo que no se usa y no guardar datos confidenciales innecesarios."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Una amenaza interna puede ser un acto no intencional.",
+          "answer": true,
+          "why": "NIST habla de uso del acceso a sabiendas o sin saberlo; CISA, de actos intencionales o no."
+        },
+        {
+          "type": "scenario",
+          "situation": "Una organización con un riesgo alto decide reducir primero el impacto y la probabilidad de un evento dañino.",
+          "q": "¿De qué depende el riesgo, según NIST?",
+          "options": [
+            "Del impacto adverso y de la probabilidad de ocurrencia",
+            "Solo del nombre del atacante",
+            "Solo del color de la red"
+          ],
+          "answer": 0,
+          "why": "El riesgo suele ser función del impacto adverso y de la probabilidad de ocurrencia."
+        },
+        {
+          "type": "choice",
+          "q": "En ATT&CK, ¿qué representa una técnica?",
+          "options": [
+            "El cómo logra un adversario un objetivo táctico",
+            "El porqué de una táctica",
+            "Un tipo de usuario"
+          ],
+          "answer": 0,
+          "why": "Las técnicas representan el «cómo»; las tácticas, el «porqué»."
+        }
       ]
     }
   ]

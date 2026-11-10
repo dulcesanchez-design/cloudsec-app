@@ -1,0 +1,528 @@
+{
+  "title": "Seguridad web: OWASP Top 10",
+  "lessons": [
+    {
+      "title": "Introducción y A01: control de acceso roto",
+      "source": [
+        "https://top10.owasp.org/2025/",
+        "https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "🔟",
+          "text": "OWASP Top 10:2025 es la edición más reciente de la lista de OWASP, actualizada con los datos y tendencias de seguridad más recientes."
+        },
+        {
+          "type": "choice",
+          "q": "¿Cuál es la edición más reciente del OWASP Top 10?",
+          "options": [
+            "2025",
+            "2017",
+            "2010"
+          ],
+          "answer": 0,
+          "why": "El sitio oficial de OWASP presenta la versión 2025 como la actual."
+        },
+        {
+          "type": "card",
+          "emoji": "🔓",
+          "text": "A01 Control de acceso roto: el control de acceso impone una política para que los usuarios no puedan actuar fuera de sus permisos previstos."
+        },
+        {
+          "type": "fillblank",
+          "q": "Completa la regla de prevención de OWASP.",
+          "code": "Salvo los recursos públicos: ___ por defecto.",
+          "options": [
+            "denegar",
+            "permitir",
+            "ignorar"
+          ],
+          "answer": 0,
+          "why": "OWASP: «Except for public resources, deny by default»."
+        },
+        {
+          "type": "scenario",
+          "situation": "Una aplicación muestra la cuenta de otra persona a un usuario autenticado que la pidió con un identificador distinto.",
+          "q": "¿Qué categoría del Top 10 ilustra?",
+          "options": [
+            "Control de acceso roto",
+            "Inyección",
+            "Fallos criptográficos"
+          ],
+          "answer": 0,
+          "why": "El usuario actuó fuera de sus permisos previstos, que es lo que el control de acceso debe impedir."
+        },
+        {
+          "type": "card",
+          "emoji": "📝",
+          "text": "OWASP también recomienda registrar los fallos de control de acceso y alertar a los administradores cuando corresponda."
+        },
+        {
+          "type": "truefalse",
+          "statement": "El control de acceso busca que los usuarios no actúen fuera de sus permisos previstos.",
+          "answer": true,
+          "why": "Es la descripción de OWASP para A01."
+        }
+      ]
+    },
+    {
+      "title": "A02 y A03: configuración y cadena de suministro",
+      "source": [
+        "https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/",
+        "https://top10.owasp.org/2025/A03_2025-Software_Supply_Chain_Failures/"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "⚙️",
+          "text": "A02 Configuración de seguridad incorrecta: un sistema, aplicación o servicio en la nube que se configura de forma incorrecta."
+        },
+        {
+          "type": "choice",
+          "q": "¿Cuál es un ejemplo de configuración incorrecta que menciona OWASP?",
+          "options": [
+            "Dejar contraseñas por defecto",
+            "Usar HTTPS en todas las páginas",
+            "Instalar actualizaciones"
+          ],
+          "answer": 0,
+          "why": "Los escenarios de OWASP incluyen contraseñas por defecto, listado de directorios, errores detallados y almacenamiento en la nube abierto."
+        },
+        {
+          "type": "card",
+          "emoji": "🧹",
+          "text": "Prevención: una plataforma mínima, sin funciones, componentes, documentación ni ejemplos innecesarios, y enviar directivas de seguridad a los clientes (cabeceras)."
+        },
+        {
+          "type": "findbug",
+          "q": "¿Qué línea de esta lista es un problema de configuración?",
+          "hint": "Toca la línea insegura",
+          "lines": [
+            "Contraseñas por defecto cambiadas antes de producción",
+            "Listado de directorios activado en el servidor web",
+            "Errores detallados solo en los registros internos",
+            "Almacenamiento en la nube con acceso restringido"
+          ],
+          "answer": 1,
+          "why": "El listado de directorios es uno de los ejemplos de configuración incorrecta de OWASP. Las otras líneas son buenas prácticas."
+        },
+        {
+          "type": "card",
+          "emoji": "🔗",
+          "text": "A03 Fallos en la cadena de suministro de software: interrupciones u otros compromisos en el proceso de construcción del software."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué recomienda OWASP sobre los componentes de software?",
+          "options": [
+            "Obtenerlos solo de fuentes oficiales y de confianza, por enlaces seguros",
+            "Descargarlos de cualquier sitio",
+            "No llevar registro de ellos"
+          ],
+          "answer": 0,
+          "why": "OWASP: solo obtener componentes de fuentes oficiales (de confianza) por enlaces seguros."
+        },
+        {
+          "type": "match",
+          "q": "Une cada elemento con su descripción",
+          "pairs": [
+            {
+              "term": "A02",
+              "desc": "Configuración de seguridad incorrecta"
+            },
+            {
+              "term": "A03",
+              "desc": "Fallos en la cadena de suministro de software"
+            },
+            {
+              "term": "SBOM",
+              "desc": "Lista de materiales de software"
+            }
+          ],
+          "why": "OWASP recomienda generar y gestionar de forma central el SBOM (Software Bill of Materials) de todo el software."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Una plataforma mínima, sin funciones innecesarias, ayuda a prevenir la configuración incorrecta.",
+          "answer": true,
+          "why": "Es una de las medidas de prevención de A02."
+        }
+      ]
+    },
+    {
+      "title": "A04 y A05: criptografía e inyección",
+      "source": [
+        "https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/",
+        "https://top10.owasp.org/2025/A05_2025-Injection/",
+        "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "🔐",
+          "text": "A04 Fallos criptográficos. Por regla general, todos los datos en tránsito deben cifrarse en la capa de transporte."
+        },
+        {
+          "type": "choice",
+          "q": "Según OWASP, ¿cómo deben protegerse los datos en tránsito?",
+          "options": [
+            "Cifrados en la capa de transporte",
+            "Sin cifrar",
+            "Solo con contraseña"
+          ],
+          "answer": 0,
+          "why": "Es la regla general que da la página de A04."
+        },
+        {
+          "type": "card",
+          "emoji": "🧂",
+          "text": "Para contraseñas: hashes fuertes, adaptativos y con sal, con factor de trabajo, como Argon2. Y cifrado autenticado, no solo cifrado."
+        },
+        {
+          "type": "truefalse",
+          "statement": "OWASP recomienda guardar contraseñas con funciones de hash fuertes, adaptativas y con sal.",
+          "answer": true,
+          "why": "Es una de las medidas de prevención de A04."
+        },
+        {
+          "type": "card",
+          "emoji": "💉",
+          "text": "A05 Inyección: un fallo que permite enviar entrada no confiable de un usuario a un intérprete."
+        },
+        {
+          "type": "findbug",
+          "q": "Este código construye una consulta de forma insegura. ¿Qué línea?",
+          "hint": "Toca la línea vulnerable",
+          "lines": [
+            "String id = request.getParameter(\"id\");",
+            "String sql = \"SELECT * FROM cuentas WHERE id = '\" + id + \"'\";",
+            "Statement st = con.createStatement();",
+            "ResultSet rs = st.executeQuery(sql);"
+          ],
+          "answer": 1,
+          "why": "La entrada del usuario se pega dentro del texto SQL. OWASP indica mantener los datos separados de los comandos y consultas."
+        },
+        {
+          "type": "fillblank",
+          "q": "Corrige la consulta con un marcador de parámetro.",
+          "code": "String sql = \"SELECT * FROM cuentas WHERE id = ___\";\nPreparedStatement ps = con.prepareStatement(sql);\nps.setString(1, id);",
+          "options": [
+            "?",
+            "' + id + '",
+            "id"
+          ],
+          "answer": 0,
+          "why": "Una consulta parametrizada define la estructura SQL por separado y enlaza los valores mediante la API de la base de datos."
+        },
+        {
+          "type": "card",
+          "emoji": "✅",
+          "text": "La mejor prevención es mantener los datos separados de los comandos y consultas. La opción preferida es una API segura que evite el intérprete."
+        },
+        {
+          "type": "truefalse",
+          "statement": "La prevención de la inyección consiste en mantener separados los datos y los comandos o consultas.",
+          "answer": true,
+          "why": "Es lo que indica OWASP en A05."
+        }
+      ]
+    },
+    {
+      "title": "A06 y A07: diseño y autenticación",
+      "source": [
+        "https://top10.owasp.org/2025/A06_2025-Insecure_Design/",
+        "https://top10.owasp.org/2025/A07_2025-Authentication_Failures/"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "📐",
+          "text": "A06 Diseño inseguro: una categoría amplia de debilidades, expresadas como «diseño de control ausente o ineficaz»."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué recomienda OWASP para partes críticas como autenticación, control de acceso y lógica de negocio?",
+          "options": [
+            "Usar modelado de amenazas",
+            "Evitar el diseño",
+            "Dejarlo para el final"
+          ],
+          "answer": 0,
+          "why": "OWASP: usar modelado de amenazas en las partes críticas de la aplicación."
+        },
+        {
+          "type": "card",
+          "emoji": "🧰",
+          "text": "También: tener una biblioteca de patrones de diseño seguro o componentes de «camino pavimentado»."
+        },
+        {
+          "type": "scenario",
+          "situation": "Antes de construir el módulo de autenticación, tu equipo analiza qué podría salir mal.",
+          "q": "¿Qué práctica de A06 es?",
+          "options": [
+            "Modelado de amenazas",
+            "Una auditoría de contraseñas",
+            "Un parche"
+          ],
+          "answer": 0,
+          "why": "Analizar las amenazas durante el diseño es modelado de amenazas."
+        },
+        {
+          "type": "card",
+          "emoji": "🪪",
+          "text": "A07 Fallos de autenticación: ocurre cuando un atacante logra que el sistema reconozca como legítimo a un usuario inválido."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué práctica previene fallos de autenticación, según OWASP?",
+          "options": [
+            "Implementar y exigir MFA",
+            "Compartir las credenciales de administrador",
+            "Apagar los registros"
+          ],
+          "answer": 0,
+          "why": "OWASP recomienda MFA para prevenir, por ejemplo, el relleno automático de credenciales. El MFA se explica en «Seguridad básica»."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Es aceptable desplegar con credenciales por defecto en las cuentas de administrador.",
+          "answer": false,
+          "why": "OWASP: no desplegar con credenciales por defecto, en particular para usuarios administradores."
+        }
+      ]
+    },
+    {
+      "title": "A08 y A09: integridad y registro",
+      "source": [
+        "https://top10.owasp.org/2025/A08_2025-Software_or_Data_Integrity_Failures/",
+        "https://top10.owasp.org/2025/A09_2025-Security_Logging_and_Alerting_Failures/"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "✍️",
+          "text": "A08 Fallos de integridad de software o datos: código e infraestructura que no protegen contra código no válido o no confiable."
+        },
+        {
+          "type": "choice",
+          "q": "¿Cómo verifica OWASP que el software o los datos vienen de la fuente esperada?",
+          "options": [
+            "Con firmas digitales o mecanismos similares",
+            "Confiando en el nombre del archivo",
+            "No se verifica"
+          ],
+          "answer": 0,
+          "why": "OWASP recomienda firmas digitales o mecanismos similares."
+        },
+        {
+          "type": "card",
+          "emoji": "📦",
+          "text": "También: que las bibliotecas y dependencias, como npm o Maven, usen solo repositorios de confianza."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Las dependencias deben obtenerse solo de repositorios de confianza.",
+          "answer": true,
+          "why": "Es una medida de prevención de A08."
+        },
+        {
+          "type": "card",
+          "emoji": "📋",
+          "text": "A09 Fallos de registro y alertas: sin registro y monitoreo no se detectan ataques ni brechas; sin alertas es difícil responder rápido."
+        },
+        {
+          "type": "findbug",
+          "q": "¿Qué práctica contradice las recomendaciones de OWASP?",
+          "hint": "Toca la práctica que no debería estar",
+          "lines": [
+            "Registrar cada control de seguridad, tenga éxito o falle",
+            "Codificar bien los datos del registro",
+            "No registrar los fallos de inicio de sesión",
+            "Alertar ante fallos repetidos de control de acceso"
+          ],
+          "answer": 2,
+          "why": "OWASP pide registrar todo control de seguridad, ya sea que tenga éxito o falle."
+        },
+        {
+          "type": "scenario",
+          "situation": "Una organización sufre una brecha y no la detecta porque nadie registraba ni monitoreaba los eventos.",
+          "q": "¿Qué categoría ilustra?",
+          "options": [
+            "Fallos de registro y alertas",
+            "Configuración incorrecta",
+            "Inyección"
+          ],
+          "answer": 0,
+          "why": "Sin registro y monitoreo no se pueden detectar ataques ni brechas."
+        },
+        {
+          "type": "match",
+          "q": "Une cada elemento con su descripción",
+          "pairs": [
+            {
+              "term": "A08",
+              "desc": "Fallos de integridad de software o datos"
+            },
+            {
+              "term": "A09",
+              "desc": "Fallos de registro y alertas"
+            },
+            {
+              "term": "Firma digital",
+              "desc": "Verifica el origen del software o los datos"
+            }
+          ],
+          "why": "Son categorías del OWASP Top 10:2025 y una de las medidas de A08."
+        }
+      ]
+    },
+    {
+      "title": "A10: condiciones excepcionales",
+      "source": [
+        "https://top10.owasp.org/2025/A10_2025-Mishandling_of_Exceptional_Conditions/"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "⚡",
+          "text": "A10 Manejo inadecuado de condiciones excepcionales: los programas no previenen, detectan ni responden a situaciones inusuales e impredecibles."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué describe A10?",
+          "options": [
+            "Programas que no manejan bien situaciones inusuales o impredecibles",
+            "Contraseñas por defecto",
+            "Datos sin cifrar"
+          ],
+          "answer": 0,
+          "why": "Es la descripción de OWASP para esta categoría, nueva en 2025."
+        },
+        {
+          "type": "card",
+          "emoji": "🛟",
+          "text": "OWASP aconseja un manejador global de excepciones, y revertir toda la transacción y empezar de nuevo cuando falla."
+        },
+        {
+          "type": "findbug",
+          "q": "Este manejo de errores expone información interna. ¿Qué línea?",
+          "hint": "Toca la línea insegura",
+          "lines": [
+            "try {",
+            "  guardarPedido(pedido);",
+            "} catch (Exception e) {",
+            "  return \"Error: \" + e.getMessage() + \" (consulta: \" + sql + \")\";",
+            "}"
+          ],
+          "answer": 3,
+          "why": "Devolver al usuario el mensaje y la consulta filtra detalles internos; uno de los escenarios de OWASP es el de mensajes de error que revelan información de la base de datos."
+        },
+        {
+          "type": "scenario",
+          "situation": "Una transacción de varios pasos falla a la mitad y deja el estado de los datos a medias.",
+          "q": "¿Qué aconseja OWASP?",
+          "options": [
+            "Revertir toda la transacción y empezar de nuevo",
+            "Dejar el estado a medias",
+            "Ocultar el error sin hacer nada"
+          ],
+          "answer": 0,
+          "why": "OWASP: es extremadamente importante revertir cada parte de la transacción y empezar de nuevo."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Los mensajes de error detallados pueden filtrar información sobre la base de datos.",
+          "answer": true,
+          "why": "Es uno de los escenarios de A10."
+        }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://top10.owasp.org/2025/",
+        "https://top10.owasp.org/2025/A05_2025-Injection/",
+        "https://top10.owasp.org/2025/A07_2025-Authentication_Failures/"
+      ],
+      "steps": [
+        {
+          "type": "card",
+          "emoji": "📝",
+          "text": "Repaso del OWASP Top 10:2025: control de acceso, configuración, cadena de suministro, criptografía, inyección y más."
+        },
+        {
+          "type": "match",
+          "q": "Une cada categoría con su nombre",
+          "pairs": [
+            {
+              "term": "A02",
+              "desc": "Configuración de seguridad incorrecta"
+            },
+            {
+              "term": "A03",
+              "desc": "Fallos en la cadena de suministro"
+            },
+            {
+              "term": "A07",
+              "desc": "Fallos de autenticación"
+            }
+          ],
+          "why": "Son los nombres oficiales de las categorías en OWASP Top 10:2025."
+        },
+        {
+          "type": "choice",
+          "q": "¿Cuál es la mejor prevención de la inyección?",
+          "options": [
+            "Mantener separados los datos de los comandos y consultas",
+            "Concatenar la entrada en la consulta",
+            "Ocultar los errores"
+          ],
+          "answer": 0,
+          "why": "Lo indica OWASP en A05."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Salvo los recursos públicos, el acceso debe denegarse por defecto.",
+          "answer": true,
+          "why": "Es una medida de prevención de A01."
+        },
+        {
+          "type": "fillblank",
+          "q": "Completa la consulta parametrizada.",
+          "code": "SELECT * FROM cuentas WHERE id = ___",
+          "options": [
+            "?",
+            "' + id",
+            "id"
+          ],
+          "answer": 0,
+          "why": "El marcador de parámetro mantiene los datos separados de la consulta."
+        },
+        {
+          "type": "scenario",
+          "situation": "Tu equipo detecta que una cuenta de administrador sigue con la contraseña por defecto.",
+          "q": "¿Qué categoría es la más directa?",
+          "options": [
+            "Fallos de autenticación",
+            "Fallos criptográficos",
+            "Condiciones excepcionales"
+          ],
+          "answer": 0,
+          "why": "OWASP pide no desplegar con credenciales por defecto, en particular para administradores (A07)."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué recomienda OWASP para verificar el origen del software o los datos?",
+          "options": [
+            "Firmas digitales o mecanismos similares",
+            "Confiar sin verificar",
+            "Quitar los registros"
+          ],
+          "answer": 0,
+          "why": "Es una medida de A08."
+        }
+      ]
+    }
+  ]
+}

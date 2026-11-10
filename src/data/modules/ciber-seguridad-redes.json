@@ -6,20 +6,90 @@
       "source": [
         "https://csrc.nist.gov/glossary/term/firewall",
         "https://csrc.nist.gov/glossary/term/packet_filter",
-        "https://csrc.nist.gov/glossary/term/stateful_inspection"
+        "https://csrc.nist.gov/glossary/term/stateful_inspection",
+        "https://csrc.nist.gov/glossary/term/deny_by_default"
       ],
       "steps": [
-        { "type": "card", "emoji": "🧱", "text": "Un firewall controla el flujo de tráfico de red entre redes o equipos con distintas posturas de seguridad." },
-        { "type": "choice", "q": "Según NIST, ¿qué hace un firewall?", "options": ["Controla el flujo de tráfico entre redes o equipos con distintas posturas de seguridad", "Cifra los discos duros", "Traduce nombres de dominio"], "answer": 0, "why": "Es la definición de NIST SP 800-41 Rev. 1." },
-        { "type": "card", "emoji": "🚪", "text": "NIST también lo describe como una pasarela que limita el acceso entre redes de acuerdo con la política de seguridad local." },
-        { "type": "truefalse", "statement": "Un firewall puede limitar el acceso entre redes según una política de seguridad.", "answer": true, "why": "Es la definición de NIST SP 800-12 Rev. 1." },
-        { "type": "card", "emoji": "🔄", "text": "Un filtro de paquetes controla el acceso por direcciones de equipos y sesiones. La inspección con estado además sigue el estado de las conexiones." },
-        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
-          { "term": "Firewall", "desc": "Controla el tráfico entre redes o equipos" },
-          { "term": "Filtro de paquetes", "desc": "Control de acceso por direcciones y sesiones" },
-          { "term": "Inspección con estado", "desc": "Sigue el estado de las conexiones y bloquea lo que se desvía" }
-        ], "why": "Son las definiciones de NIST SP 800-41 Rev. 1." },
-        { "type": "scenario", "situation": "Quieres que el firewall bloquee paquetes que no encajan con el estado esperado de una conexión.", "q": "¿Qué técnica usa?", "options": ["Inspección con estado", "Traducción de dominios", "Cifrado de disco"], "answer": 0, "why": "La inspección con estado hace filtrado de paquetes y además sigue el estado de las conexiones, bloqueando los que se desvían del estado esperado." }
+        {
+          "type": "card",
+          "emoji": "🧱",
+          "text": "Un firewall controla el flujo de tráfico de red entre redes o equipos con distintas posturas de seguridad."
+        },
+        {
+          "type": "choice",
+          "q": "Según NIST, ¿qué hace un firewall?",
+          "options": [
+            "Controla el flujo de tráfico entre redes o equipos con distintas posturas de seguridad",
+            "Cifra los discos duros",
+            "Traduce nombres de dominio"
+          ],
+          "answer": 0,
+          "why": "Es la definición de NIST SP 800-41 Rev. 1."
+        },
+        {
+          "type": "card",
+          "emoji": "🚪",
+          "text": "NIST también lo describe como una pasarela que limita el acceso entre redes de acuerdo con la política de seguridad local."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Un firewall puede limitar el acceso entre redes según una política de seguridad.",
+          "answer": true,
+          "why": "Es la definición de NIST SP 800-12 Rev. 1."
+        },
+        {
+          "type": "card",
+          "emoji": "⛔",
+          "text": "Denegar por defecto: bloquear todo el tráfico, entrante y saliente, que la política del firewall no haya permitido expresamente."
+        },
+        {
+          "type": "scenario",
+          "situation": "La política de un firewall solo permite expresamente el tráfico web entrante.",
+          "q": "Con «denegar por defecto», ¿qué pasa con el resto del tráfico?",
+          "options": [
+            "Se bloquea",
+            "Se permite",
+            "Se registra pero pasa"
+          ],
+          "answer": 0,
+          "why": "La definición de NIST (SP 800-41 Rev. 1): bloquear todo el tráfico que no esté expresamente permitido por la política."
+        },
+        {
+          "type": "card",
+          "emoji": "🔄",
+          "text": "Un filtro de paquetes controla el acceso por direcciones de equipos y sesiones. La inspección con estado además sigue el estado de las conexiones."
+        },
+        {
+          "type": "match",
+          "q": "Une cada concepto con su descripción",
+          "pairs": [
+            {
+              "term": "Firewall",
+              "desc": "Controla el tráfico entre redes o equipos"
+            },
+            {
+              "term": "Filtro de paquetes",
+              "desc": "Control de acceso por direcciones y sesiones"
+            },
+            {
+              "term": "Inspección con estado",
+              "desc": "Sigue el estado de las conexiones y bloquea lo que se desvía"
+            }
+          ],
+          "why": "Son las definiciones de NIST SP 800-41 Rev. 1."
+        },
+        {
+          "type": "scenario",
+          "situation": "Quieres que el firewall bloquee paquetes que no encajan con el estado esperado de una conexión.",
+          "q": "¿Qué técnica usa?",
+          "options": [
+            "Inspección con estado",
+            "Traducción de dominios",
+            "Cifrado de disco"
+          ],
+          "answer": 0,
+          "why": "La inspección con estado hace filtrado de paquetes y además sigue el estado de las conexiones, bloqueando los que se desvían del estado esperado."
+        }
       ]
     },
     {
@@ -29,17 +99,69 @@
         "https://csrc.nist.gov/glossary/term/demilitarized_zone"
       ],
       "steps": [
-        { "type": "card", "emoji": "🧩", "text": "CISA incluye la segmentación de red, lógica o física, entre sus medidas recomendadas contra el ransomware." },
-        { "type": "choice", "q": "¿Qué recomienda la guía de CISA sobre la red?", "options": ["Usar medios lógicos o físicos de segmentación de red", "Mantener una sola red plana", "Quitar todos los firewalls"], "answer": 0, "why": "La guía #StopRansomware propone aplicar medios lógicos o físicos de segmentación de red." },
-        { "type": "card", "emoji": "🛡️", "text": "Una DMZ es un segmento de red perimetral situado lógicamente entre la red interna y la externa." },
-        { "type": "truefalse", "statement": "Una DMZ es un segmento perimetral entre la red interna y la externa.", "answer": true, "why": "Es la definición de CNSSI 4009-2022 en el glosario de NIST." },
-        { "type": "card", "emoji": "🔥", "text": "Otra definición de NIST: una DMZ es una red creada al conectar dos firewalls." },
-        { "type": "scenario", "situation": "Necesitas un segmento perimetral entre tu red interna y la externa.", "q": "¿Cómo se llama?", "options": ["DMZ", "VPN", "IPS"], "answer": 0, "why": "Una zona desmilitarizada (DMZ) es un segmento de red perimetral entre las redes interna y externa." },
-        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
-          { "term": "DMZ", "desc": "Segmento perimetral entre red interna y externa" },
-          { "term": "Segmentación", "desc": "Medida de red lógica o física que CISA recomienda" },
-          { "term": "Firewall", "desc": "Controla el tráfico entre redes" }
-        ], "why": "La DMZ es del glosario de NIST; la segmentación figura en la guía de CISA; el firewall, en NIST SP 800-41." }
+        {
+          "type": "card",
+          "emoji": "🧩",
+          "text": "CISA incluye la segmentación de red, lógica o física, entre sus medidas recomendadas contra el ransomware."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué recomienda la guía de CISA sobre la red?",
+          "options": [
+            "Usar medios lógicos o físicos de segmentación de red",
+            "Mantener una sola red plana",
+            "Quitar todos los firewalls"
+          ],
+          "answer": 0,
+          "why": "La guía #StopRansomware propone aplicar medios lógicos o físicos de segmentación de red."
+        },
+        {
+          "type": "card",
+          "emoji": "🛡️",
+          "text": "Una DMZ es un segmento de red perimetral situado lógicamente entre la red interna y la externa."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Una DMZ es un segmento perimetral entre la red interna y la externa.",
+          "answer": true,
+          "why": "Es la definición de CNSSI 4009-2022 en el glosario de NIST."
+        },
+        {
+          "type": "card",
+          "emoji": "🔥",
+          "text": "Otra definición de NIST: una DMZ es una red creada al conectar dos firewalls."
+        },
+        {
+          "type": "scenario",
+          "situation": "Necesitas un segmento perimetral entre tu red interna y la externa.",
+          "q": "¿Cómo se llama?",
+          "options": [
+            "DMZ",
+            "VPN",
+            "IPS"
+          ],
+          "answer": 0,
+          "why": "Una zona desmilitarizada (DMZ) es un segmento de red perimetral entre las redes interna y externa."
+        },
+        {
+          "type": "match",
+          "q": "Une cada concepto con su descripción",
+          "pairs": [
+            {
+              "term": "DMZ",
+              "desc": "Segmento perimetral entre red interna y externa"
+            },
+            {
+              "term": "Segmentación",
+              "desc": "Medida de red lógica o física que CISA recomienda"
+            },
+            {
+              "term": "Firewall",
+              "desc": "Controla el tráfico entre redes"
+            }
+          ],
+          "why": "La DMZ es del glosario de NIST; la segmentación figura en la guía de CISA; el firewall, en NIST SP 800-41."
+        }
       ]
     },
     {
@@ -49,17 +171,75 @@
         "https://csrc.nist.gov/glossary/term/intrusion_prevention_system"
       ],
       "steps": [
-        { "type": "card", "emoji": "🔔", "text": "Un IDS (sistema de detección de intrusiones) monitorea eventos de red o sistema para encontrar y avisar de accesos no autorizados." },
-        { "type": "choice", "q": "¿Qué hace un IDS?", "options": ["Monitorea eventos y avisa de intentos de acceso no autorizado", "Cifra el tráfico", "Hace copias de seguridad"], "answer": 0, "why": "NIST lo define como un servicio de seguridad que monitorea y analiza eventos para encontrar y avisar de intentos de acceso no autorizado." },
-        { "type": "card", "emoji": "✋", "text": "Un IPS (sistema de prevención de intrusiones) puede detectar actividad intrusiva e intentar detenerla, idealmente antes de que llegue a su objetivo." },
-        { "type": "truefalse", "statement": "Un IPS, además de detectar, puede intentar detener la actividad intrusiva.", "answer": true, "why": "Es la definición de NIST." },
-        { "type": "match", "q": "Une cada sistema con su descripción", "pairs": [
-          { "term": "IDS", "desc": "Busca actividad sospechosa y avisa" },
-          { "term": "IPS", "desc": "Detecta e intenta detener la actividad" },
-          { "term": "Firewall", "desc": "Controla el tráfico entre redes" }
-        ], "why": "Son definiciones de NIST." },
-        { "type": "scenario", "situation": "Quieres un sistema que busque actividad sospechosa y avise a los administradores.", "q": "¿Cuál encaja?", "options": ["Un IDS", "Una VPN", "Una DMZ"], "answer": 0, "why": "NISTIR 7711 describe el IDS como software que busca actividad sospechosa y alerta a los administradores." },
-        { "type": "choice", "q": "¿Qué sistema intenta detener la actividad intrusiva?", "options": ["IPS", "IDS únicamente", "Ninguno"], "answer": 0, "why": "El IPS detecta y además intenta detener la actividad, idealmente antes de que llegue a su objetivo." }
+        {
+          "type": "card",
+          "emoji": "🔔",
+          "text": "Un IDS (sistema de detección de intrusiones) monitorea eventos de red o sistema para encontrar y avisar de accesos no autorizados."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué hace un IDS?",
+          "options": [
+            "Monitorea eventos y avisa de intentos de acceso no autorizado",
+            "Cifra el tráfico",
+            "Hace copias de seguridad"
+          ],
+          "answer": 0,
+          "why": "NIST lo define como un servicio de seguridad que monitorea y analiza eventos para encontrar y avisar de intentos de acceso no autorizado."
+        },
+        {
+          "type": "card",
+          "emoji": "✋",
+          "text": "Un IPS (sistema de prevención de intrusiones) puede detectar actividad intrusiva e intentar detenerla, idealmente antes de que llegue a su objetivo."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Un IPS, además de detectar, puede intentar detener la actividad intrusiva.",
+          "answer": true,
+          "why": "Es la definición de NIST."
+        },
+        {
+          "type": "match",
+          "q": "Une cada sistema con su descripción",
+          "pairs": [
+            {
+              "term": "IDS",
+              "desc": "Busca actividad sospechosa y avisa"
+            },
+            {
+              "term": "IPS",
+              "desc": "Detecta e intenta detener la actividad"
+            },
+            {
+              "term": "Firewall",
+              "desc": "Controla el tráfico entre redes"
+            }
+          ],
+          "why": "Son definiciones de NIST."
+        },
+        {
+          "type": "scenario",
+          "situation": "Quieres un sistema que busque actividad sospechosa y avise a los administradores.",
+          "q": "¿Cuál encaja?",
+          "options": [
+            "Un IDS",
+            "Una VPN",
+            "Una DMZ"
+          ],
+          "answer": 0,
+          "why": "NISTIR 7711 describe el IDS como software que busca actividad sospechosa y alerta a los administradores."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué sistema intenta detener la actividad intrusiva?",
+          "options": [
+            "IPS",
+            "IDS únicamente",
+            "Ninguno"
+          ],
+          "answer": 0,
+          "why": "El IPS detecta y además intenta detener la actividad, idealmente antes de que llegue a su objetivo."
+        }
       ]
     },
     {
@@ -70,13 +250,55 @@
         "https://csrc.nist.gov/pubs/sp/800/113/final"
       ],
       "steps": [
-        { "type": "card", "emoji": "🔐", "text": "Una VPN es una red virtual construida sobre redes físicas existentes que ofrece un mecanismo seguro para comunicar datos." },
-        { "type": "choice", "q": "¿Qué es una VPN, según NIST?", "options": ["Una red virtual sobre redes existentes con comunicación segura de datos", "Un tipo de malware", "Un servidor de nombres"], "answer": 0, "why": "NIST SP 800-77 la define como una red virtual construida sobre redes físicas existentes que ofrece un mecanismo seguro de comunicación." },
-        { "type": "card", "emoji": "🧵", "text": "Esa comunicación segura puede ser entre redes o entre distintos nodos de una misma red." },
-        { "type": "card", "emoji": "🧰", "text": "IPsec es un marco de estándares abiertos para garantizar comunicaciones privadas en redes IP." },
-        { "type": "truefalse", "statement": "IPsec es un marco de estándares abiertos para comunicaciones privadas sobre redes IP.", "answer": true, "why": "Así lo describe NIST SP 800-77 Rev. 1." },
-        { "type": "card", "emoji": "🌍", "text": "Las VPN SSL, según NIST SP 800-113, dan a los usuarios acceso remoto seguro a los recursos de una organización." },
-        { "type": "scenario", "situation": "Una persona trabaja desde casa y necesita acceso remoto seguro a los recursos de su organización.", "q": "¿Qué tecnología encaja?", "options": ["Una VPN", "Un IDS", "Una DMZ"], "answer": 0, "why": "Una VPN (por ejemplo, una VPN SSL) da acceso remoto seguro a los recursos de la organización." }
+        {
+          "type": "card",
+          "emoji": "🔐",
+          "text": "Una VPN es una red virtual construida sobre redes físicas existentes que ofrece un mecanismo seguro para comunicar datos."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué es una VPN, según NIST?",
+          "options": [
+            "Una red virtual sobre redes existentes con comunicación segura de datos",
+            "Un tipo de malware",
+            "Un servidor de nombres"
+          ],
+          "answer": 0,
+          "why": "NIST SP 800-77 la define como una red virtual construida sobre redes físicas existentes que ofrece un mecanismo seguro de comunicación."
+        },
+        {
+          "type": "card",
+          "emoji": "🧵",
+          "text": "Esa comunicación segura puede ser entre redes o entre distintos nodos de una misma red."
+        },
+        {
+          "type": "card",
+          "emoji": "🧰",
+          "text": "IPsec es un marco de estándares abiertos para garantizar comunicaciones privadas en redes IP."
+        },
+        {
+          "type": "truefalse",
+          "statement": "IPsec es un marco de estándares abiertos para comunicaciones privadas sobre redes IP.",
+          "answer": true,
+          "why": "Así lo describe NIST SP 800-77 Rev. 1."
+        },
+        {
+          "type": "card",
+          "emoji": "🌍",
+          "text": "Las VPN SSL, según NIST SP 800-113, dan a los usuarios acceso remoto seguro a los recursos de una organización."
+        },
+        {
+          "type": "scenario",
+          "situation": "Una persona trabaja desde casa y necesita acceso remoto seguro a los recursos de su organización.",
+          "q": "¿Qué tecnología encaja?",
+          "options": [
+            "Una VPN",
+            "Un IDS",
+            "Una DMZ"
+          ],
+          "answer": 0,
+          "why": "Una VPN (por ejemplo, una VPN SSL) da acceso remoto seguro a los recursos de la organización."
+        }
       ]
     },
     {
@@ -86,12 +308,56 @@
         "https://csrc.nist.gov/glossary/term/zero_trust"
       ],
       "steps": [
-        { "type": "card", "emoji": "🛡️", "text": "Confianza cero (zero trust) se centra en proteger recursos, no segmentos de red." },
-        { "type": "choice", "q": "Según NIST SP 800-207, ¿en qué se centra zero trust?", "options": ["En proteger recursos, no segmentos de red", "En confiar en todo lo interno", "En eliminar los usuarios"], "answer": 0, "why": "El resumen de SP 800-207 lo dice: zero trust se centra en proteger recursos, no segmentos de red." },
-        { "type": "card", "emoji": "🔑", "text": "Busca minimizar la incertidumbre al decidir cada acceso, con decisiones de mínimo privilegio por cada solicitud." },
-        { "type": "truefalse", "statement": "Zero trust aplica decisiones de acceso de mínimo privilegio por cada solicitud.", "answer": true, "why": "Así lo define el glosario de NIST (SP 800-207)." },
-        { "type": "scenario", "situation": "Un equipo cree que basta con un buen perímetro de red para estar protegido.", "q": "¿Qué propone zero trust?", "options": ["Proteger los recursos mismos con decisiones de acceso por solicitud", "Confiar en todo lo que esté dentro de la red", "Quitar los firewalls"], "answer": 0, "why": "Zero trust se centra en proteger recursos, no segmentos de red, con decisiones de acceso de mínimo privilegio por solicitud." },
-        { "type": "choice", "q": "¿Qué principio aplica zero trust en cada decisión de acceso?", "options": ["Mínimo privilegio", "Máximo privilegio", "Acceso libre"], "answer": 0, "why": "La definición habla de decisiones de acceso de mínimo privilegio por solicitud." }
+        {
+          "type": "card",
+          "emoji": "🛡️",
+          "text": "Confianza cero (zero trust) se centra en proteger recursos, no segmentos de red."
+        },
+        {
+          "type": "choice",
+          "q": "Según NIST SP 800-207, ¿en qué se centra zero trust?",
+          "options": [
+            "En proteger recursos, no segmentos de red",
+            "En confiar en todo lo interno",
+            "En eliminar los usuarios"
+          ],
+          "answer": 0,
+          "why": "El resumen de SP 800-207 lo dice: zero trust se centra en proteger recursos, no segmentos de red."
+        },
+        {
+          "type": "card",
+          "emoji": "🔑",
+          "text": "Busca minimizar la incertidumbre al decidir cada acceso, con decisiones de mínimo privilegio por cada solicitud."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Zero trust aplica decisiones de acceso de mínimo privilegio por cada solicitud.",
+          "answer": true,
+          "why": "Así lo define el glosario de NIST (SP 800-207)."
+        },
+        {
+          "type": "scenario",
+          "situation": "Un equipo cree que basta con un buen perímetro de red para estar protegido.",
+          "q": "¿Qué propone zero trust?",
+          "options": [
+            "Proteger los recursos mismos con decisiones de acceso por solicitud",
+            "Confiar en todo lo que esté dentro de la red",
+            "Quitar los firewalls"
+          ],
+          "answer": 0,
+          "why": "Zero trust se centra en proteger recursos, no segmentos de red, con decisiones de acceso de mínimo privilegio por solicitud."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué principio aplica zero trust en cada decisión de acceso?",
+          "options": [
+            "Mínimo privilegio",
+            "Máximo privilegio",
+            "Acceso libre"
+          ],
+          "answer": 0,
+          "why": "La definición habla de decisiones de acceso de mínimo privilegio por solicitud."
+        }
       ]
     },
     {
@@ -103,16 +369,70 @@
         "https://csrc.nist.gov/glossary/term/demilitarized_zone"
       ],
       "steps": [
-        { "type": "card", "emoji": "📝", "text": "Repaso: firewalls, segmentación, DMZ, IDS, IPS, VPN y zero trust." },
-        { "type": "match", "q": "Une cada tecnología con su descripción", "pairs": [
-          { "term": "Firewall", "desc": "Controla el tráfico entre redes o equipos" },
-          { "term": "DMZ", "desc": "Segmento perimetral entre red interna y externa" },
-          { "term": "VPN", "desc": "Red virtual con comunicación segura" }
-        ], "why": "Son definiciones del glosario de NIST." },
-        { "type": "choice", "q": "¿Qué diferencia a un IPS de un IDS?", "options": ["El IPS también intenta detener la actividad intrusiva", "El IPS no detecta nada", "No hay ninguna diferencia"], "answer": 0, "why": "El IPS detecta y además intenta detener la actividad; el IDS busca actividad sospechosa y avisa." },
-        { "type": "truefalse", "statement": "La inspección con estado sigue el estado de las conexiones.", "answer": true, "why": "Es la definición de NIST SP 800-41 Rev. 1." },
-        { "type": "scenario", "situation": "Necesitas que una persona remota acceda de forma segura a los recursos de la organización.", "q": "¿Qué usas?", "options": ["Una VPN", "Un IDS", "Una DMZ"], "answer": 0, "why": "Las VPN SSL dan acceso remoto seguro a los recursos de una organización." },
-        { "type": "choice", "q": "¿En qué se centra zero trust?", "options": ["En proteger recursos, no segmentos de red", "En confiar en la red interna", "En dejar todo abierto"], "answer": 0, "why": "Lo dice NIST SP 800-207." }
+        {
+          "type": "card",
+          "emoji": "📝",
+          "text": "Repaso: firewalls, segmentación, DMZ, IDS, IPS, VPN y zero trust."
+        },
+        {
+          "type": "match",
+          "q": "Une cada tecnología con su descripción",
+          "pairs": [
+            {
+              "term": "Firewall",
+              "desc": "Controla el tráfico entre redes o equipos"
+            },
+            {
+              "term": "DMZ",
+              "desc": "Segmento perimetral entre red interna y externa"
+            },
+            {
+              "term": "VPN",
+              "desc": "Red virtual con comunicación segura"
+            }
+          ],
+          "why": "Son definiciones del glosario de NIST."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué diferencia a un IPS de un IDS?",
+          "options": [
+            "El IPS también intenta detener la actividad intrusiva",
+            "El IPS no detecta nada",
+            "No hay ninguna diferencia"
+          ],
+          "answer": 0,
+          "why": "El IPS detecta y además intenta detener la actividad; el IDS busca actividad sospechosa y avisa."
+        },
+        {
+          "type": "truefalse",
+          "statement": "La inspección con estado sigue el estado de las conexiones.",
+          "answer": true,
+          "why": "Es la definición de NIST SP 800-41 Rev. 1."
+        },
+        {
+          "type": "scenario",
+          "situation": "Necesitas que una persona remota acceda de forma segura a los recursos de la organización.",
+          "q": "¿Qué usas?",
+          "options": [
+            "Una VPN",
+            "Un IDS",
+            "Una DMZ"
+          ],
+          "answer": 0,
+          "why": "Las VPN SSL dan acceso remoto seguro a los recursos de una organización."
+        },
+        {
+          "type": "choice",
+          "q": "¿En qué se centra zero trust?",
+          "options": [
+            "En proteger recursos, no segmentos de red",
+            "En confiar en la red interna",
+            "En dejar todo abierto"
+          ],
+          "answer": 0,
+          "why": "Lo dice NIST SP 800-207."
+        }
       ]
     }
   ]
