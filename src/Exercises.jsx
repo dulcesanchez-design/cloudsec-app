@@ -217,6 +217,7 @@ export function Match({ step, onDone }) {
   const [matched, setMatched] = useState([])
   const [flash, setFlash] = useState(null)
   const mistakes = useRef(0) // toques equivocados; se informan para dar puntaje parcial en el examen
+  const wrongTerms = useRef(new Set()) // índices de pares en los que hubo un toque equivocado
 
   const tapTerm = (i) => {
     if (matched.includes(i)) return
@@ -228,9 +229,10 @@ export function Match({ step, onDone }) {
       const nm = [...matched, sel]
       setMatched(nm)
       setSel(null)
-      if (nm.length === step.pairs.length) onDone(mistakes.current === 0, { mistakes: mistakes.current })
+      if (nm.length === step.pairs.length) onDone(mistakes.current === 0, { mistakes: mistakes.current, wrongTerms: [...wrongTerms.current] })
     } else {
       mistakes.current += 1
+      wrongTerms.current.add(sel)
       setFlash(d)
       setSel(null)
       setTimeout(() => setFlash(null), 600)
@@ -462,8 +464,6 @@ export function WordCard({ step }) {
         {step.es}
         {step.alt?.length > 0 && <span className="word-alt"> ({step.alt.join(', ')})</span>}
       </p>
-      <p className="example-en">{step.exampleEn}</p>
-      <p className="example-es">{step.exampleEs}</p>
     </div>
   )
 }

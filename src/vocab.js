@@ -1,4 +1,6 @@
 // Generación de ejercicios de vocabulario a partir de las palabras (no se escriben a mano).
+// Una palabra tiene solo: en, es, emoji y, si aplica, alt (variantes de la traducción).
+// Tipos de ejercicio del curso de inglés: choice, match, listen y type.
 import { shuffle, hasEnglishVoice } from './Exercises'
 
 export { hasEnglishVoice }
@@ -7,16 +9,6 @@ const norm = (s) => s.trim().toLowerCase()
 const pick = (arr, n) => shuffle(arr).slice(0, n)
 
 export const moduleWords = (mod) => mod.data.sessions.flatMap((s) => s.words)
-
-// Busca la palabra exacta (palabra completa, sin importar mayúsculas) en una oración.
-// Devuelve el texto tal como aparece o null (por ejemplo, "passwords" no cuenta para "password").
-function findExact(sentence, word) {
-  const esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const m = sentence.match(new RegExp(`(^|[^A-Za-z])(${esc})(?![A-Za-z])`, 'i'))
-  return m ? { text: m[2], index: m.index + m[1].length } : null
-}
-
-const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
 // Regla de traducciones: "es" es la principal (español de México cuando hay variantes regionales)
 // y es la que se muestra en los ejercicios; "alt" (opcional) son variantes comunes que la tarjeta
@@ -39,27 +31,6 @@ function genChoice(word, pool) {
     answer: 0,
     accept: acceptedEs(word),
     why: `«${word.en}» significa «${word.es}»${altNote(word)}.`,
-  }
-}
-
-function genFill(word, pool) {
-  const found = findExact(word.exampleEn, word.en)
-  if (!found) return null
-  const upper = found.text[0] !== found.text[0].toLowerCase()
-  const wrong = pick(
-    pool.map((w) => w.en).filter((en) => norm(en) !== norm(word.en) && !findExact(word.exampleEn, en)),
-    2,
-  ).map((en) => (upper ? capitalize(en) : en))
-  const code =
-    word.exampleEn.slice(0, found.index) + '___' + word.exampleEn.slice(found.index + found.text.length)
-  return {
-    type: 'fillblank',
-    gen: 'fillblank',
-    q: `Completa la oración: ${word.exampleEs}`,
-    code,
-    options: [found.text, ...wrong],
-    answer: 0,
-    why: `La palabra es «${found.text}» (${word.es}).`,
   }
 }
 
@@ -99,55 +70,92 @@ function genMatch(words) {
   }
 }
 
+// Tarjeta: solo palabra en inglés, traducción (con variante), emoji y audio.
 const wordCard = (w) => ({
   type: 'wordcard',
   emoji: w.emoji,
   en: w.en,
   es: w.es,
   alt: w.alt || [],
-  exampleEn: w.exampleEn,
-  exampleEs: w.exampleEs,
 })
 
-// Sesión de aprendizaje: grupos de 2 tarjetas + 1 ejercicio rápido (nunca más de 2 tarjetas
-// seguidas); al final, repaso de todas las palabras: unir (de 5 en 5) y escribir cada palabra.
+// Ejercicio individual (choice, listen o type) para una palabra.
+function makeSingle(kind, word, pool) {
+  if (kind === 'listen') return genListen(word, pool)
+  if (kind === 'type') return genType(word)
+  return genChoice(word, pool)
+}
+
+// Sesión de aprendizaje: grupos de 2 tarjetas seguidos de 2 ejercicios (uno por palabra, alternando
+// choice, listen y type; nunca más de 2 tarjetas seguidas) y, al final, unir de 5 en 5 con todas las
+// palabras. Cada palabra se practica al menos dos veces: su ejercicio individual y su unir.
 export function buildSessionSteps(session, mod, voice = hasEnglishVoice()) {
   const pool = moduleWords(mod)
   const words = session.words
-  const cycle = voice ? ['choice', 'fillblank', 'listen'] : ['choice', 'fillblank']
+  const cycle = voice ? ['choice', 'listen', 'type'] : ['choice', 'type']
   const steps = []
+  let n = 0
   for (let g = 0; g * 2 < words.length; g++) {
     const group = words.slice(g * 2, g * 2 + 2)
     group.forEach((w) => steps.push(wordCard(w)))
-    const target = group[g % group.length]
-    const kind = cycle[g % cycle.length]
-    const ex =
-      (kind === 'fillblank' && genFill(target, pool)) ||
-      (kind === 'listen' && genListen(target, pool)) ||
-      genChoice(target, pool)
-    steps.push(ex)
+    group.forEach((w) => steps.push(makeSingle(cycle[n++ % cycle.length], w, pool)))
   }
-  for (let i = 0; i < words.length; i += 5) {
-    const chunk = words.slice(i, i + 5)
-    if (chunk.length >= 3) steps.push(genMatch(chunk))
+  const chunks = []
+  for (let i = 0; i < words.length; i += 5) chunks.push(words.slice(i, i + 5))
+  if (chunks.length > 1 && chunks[chunks.length - 1].length < 3) {
+    chunks[chunks.length - 2].push(...chunks.pop())
   }
-  shuffle(words).forEach((w) => steps.push(genType(w)))
+  chunks.forEach((c) => steps.push(genMatch(c)))
   return steps
 }
 
-// Un ejercicio para repasar una palabra; evita repetir el tipo usado la vez anterior.
-export function buildReviewStep(word, mod, last, voice = hasEnglishVoice()) {
-  const pool = moduleWords(mod)
-  const makers = {
-    choice: () => genChoice(word, pool),
-    fillblank: () => genFill(word, pool),
-    listen: () => (voice ? genListen(word, pool) : null),
-    type: () => genType(word),
+// Repaso por palabra. entries: [{ id, word, mod, last }] (last = tipo usado la vez anterior).
+// A cada palabra le toca un tipo distinto del anterior (choice, listen, type o match). Las que
+// reciben «unir» se agrupan (de 3 a 5 palabras, sin traducciones repetidas ni cruzadas); si una
+// agrupación queda con menos de 3, esas palabras pasan a choice.
+// Devuelve ítems { id, step, modTitle } o, para unir, { ids, step, modTitle }.
+export function buildReviewItems(entries, voice = hasEnglishVoice()) {
+  const kinds = voice ? ['choice', 'listen', 'type', 'match'] : ['choice', 'type', 'match']
+  const planned = entries.map((e) => {
+    const options = kinds.filter((k) => k !== e.last)
+    return { ...e, kind: pick(options.length ? options : kinds, 1)[0] }
+  })
+
+  const groups = []
+  for (const p of planned.filter((x) => x.kind === 'match')) {
+    const names = acceptedEs(p.word).map(norm)
+    const target = groups.find(
+      (g) => g.members.length < 5 && !names.some((nm) => g.names.has(nm)),
+    )
+    if (target) {
+      target.members.push(p)
+      names.forEach((nm) => target.names.add(nm))
+    } else {
+      groups.push({ members: [p], names: new Set(names) })
+    }
   }
-  const available = Object.keys(makers).filter((k) => makers[k]() !== null)
-  const options = available.filter((k) => k !== last)
-  const kind = pick(options.length ? options : available, 1)[0]
-  return makers[kind]()
+
+  const items = []
+  for (const g of groups) {
+    if (g.members.length >= 3) {
+      items.push({
+        ids: g.members.map((m) => m.id),
+        step: genMatch(g.members.map((m) => m.word)),
+        modTitle: 'Vocabulario',
+      })
+    } else {
+      g.members.forEach((m) => (m.kind = 'choice'))
+    }
+  }
+  for (const p of planned) {
+    if (p.kind === 'match' && groups.some((g) => g.members.length >= 3 && g.members.includes(p))) continue
+    items.push({
+      id: p.id,
+      step: makeSingle(p.kind === 'match' ? 'choice' : p.kind, p.word, moduleWords(p.mod)),
+      modTitle: p.mod.title,
+    })
+  }
+  return items
 }
 
 // ---------- Examen de nivel ----------
@@ -191,16 +199,13 @@ export function buildExam(entries, voice = hasEnglishVoice(), size = 20) {
   }
 
   const rest = chosen.filter((c) => !matchEntries.includes(c))
-  const cycle = voice ? ['choice', 'listen', 'type', 'fillblank'] : ['choice', 'type', 'fillblank']
+  const cycle = voice ? ['choice', 'listen', 'type'] : ['choice', 'type']
   rest.forEach((c, i) => {
-    const pool = moduleWords(c.mod)
-    const kind = cycle[i % cycle.length]
-    const step =
-      (kind === 'listen' && genListen(c.word, pool)) ||
-      (kind === 'type' && genType(c.word)) ||
-      (kind === 'fillblank' && genFill(c.word, pool)) ||
-      genChoice(c.word, pool)
-    items.push({ step, weight: 1, modTitle: c.mod.title })
+    items.push({
+      step: makeSingle(cycle[i % cycle.length], c.word, moduleWords(c.mod)),
+      weight: 1,
+      modTitle: c.mod.title,
+    })
   })
   return shuffle(items)
 }

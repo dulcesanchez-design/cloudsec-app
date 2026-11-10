@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import course from './data/course.json'
 import { Card, Lab, WordCard, exerciseComponents, shuffle } from './Exercises'
-import { buildExam, buildReviewStep, buildSessionSteps, hasEnglishVoice } from './vocab'
+import { buildExam, buildReviewItems, buildSessionSteps, hasEnglishVoice } from './vocab'
 
 const moduleFiles = import.meta.glob('./data/modules/*.json', {
   eager: true,
@@ -880,8 +880,22 @@ function ReviewPlayer({ items, progress, onAnswer, onFinish, onExit, kind = 'exe
   const [finished, setFinished] = useState(false)
 
   const item = items[idx]
+  // Un «unir» de repaso cubre varias palabras (item.ids); cada una cuenta por separado.
+  const total = items.reduce((n, it) => n + (it.ids ? it.ids.length : 1), 0)
 
-  const handleDone = (ok) => {
+  const handleDone = (ok, detail) => {
+    if (item.ids) {
+      const wrong = new Set(detail?.wrongTerms ?? (ok ? [] : item.ids.map((_, i) => i)))
+      let good = 0
+      item.ids.forEach((id, i) => {
+        const right = !wrong.has(i)
+        if (right) good += 1
+        onAnswer(id, right, 'match') // cada palabra guarda su propio resultado
+      })
+      setAnswer({ ok: wrong.size === 0, good, of: item.ids.length })
+      setHits((h) => h + good)
+      return
+    }
     setAnswer({ ok })
     if (ok) setHits((h) => h + 1)
     onAnswer(item.id, ok, item.step.gen) // la caja y la fecha se guardan en cada respuesta
@@ -904,7 +918,7 @@ function ReviewPlayer({ items, progress, onAnswer, onFinish, onExit, kind = 'exe
           <Stats progress={progress} />
           <h2>¡Repaso completado!</h2>
           <p className="score">
-            {hits} / {items.length}
+            {hits} / {total}
           </p>
           <p>aciertos</p>
           <p className="xp-earned">
@@ -915,8 +929,8 @@ function ReviewPlayer({ items, progress, onAnswer, onFinish, onExit, kind = 'exe
           </p>
           <p>
             {isWord
-              ? `Avanzaron de intervalo: ${hits} (las que acertaron el de +14 días salen de la cola). Vuelven a +2 días: ${items.length - hits}.`
-              : `Subieron de caja: ${hits}. Volverán a la caja inicial: ${items.length - hits}.`}
+              ? `Avanzaron de intervalo: ${hits} (las que acertaron el de +14 días salen de la cola). Vuelven a +2 días: ${total - hits}.`
+              : `Subieron de caja: ${hits}. Volverán a la caja inicial: ${total - hits}.`}
           </p>
           <button className="btn primary" onClick={onExit}>
             Volver al inicio
@@ -949,7 +963,13 @@ function ReviewPlayer({ items, progress, onAnswer, onFinish, onExit, kind = 'exe
           <>
             <div className={`feedback ${answer.ok ? 'ok' : 'bad'}`}>
               <strong>
-                {answer.ok ? '¡Correcto!' : isWord ? 'Casi. Volverá a salir en 2 días.' : 'Casi. Volverá a salir mañana.'}
+                {answer.ok
+                  ? '¡Correcto!'
+                  : answer.of
+                    ? `${answer.good} de ${answer.of} bien. Las demás volverán a salir en 2 días.`
+                    : isWord
+                      ? 'Casi. Volverá a salir en 2 días.'
+                      : 'Casi. Volverá a salir mañana.'}
               </strong>
               <p>{s.why}</p>
             </div>
@@ -1071,13 +1091,14 @@ function App() {
 
   const startWordReview = () => {
     const voice = hasEnglishVoice()
-    const items = pendingWords(progress)
+    // Las más atrasadas primero; los «unir» agrupan varias palabras en un solo ejercicio.
+    const entries = pendingWords(progress)
       .slice(0, WORD_SESSION_SIZE)
       .map((id) => {
         const { mod: m, word } = resolveWord(id)
-        const step = buildReviewStep(word, m, progress.words[id].last, voice)
-        return { id, step, modTitle: m.title }
+        return { id, word, mod: m, last: progress.words[id].last }
       })
+    const items = buildReviewItems(entries, voice)
     if (items.length === 0) return
     setView({ name: 'wordreview', items: shuffle(items), nonce: Date.now() })
   }

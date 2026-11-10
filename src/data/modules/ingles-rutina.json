@@ -10,16 +10,12 @@
         {
           "en": "breakfast",
           "es": "desayuno",
-          "emoji": "🍳",
-          "exampleEn": "I eat breakfast at seven.",
-          "exampleEs": "Desayuno a las siete."
+          "emoji": "🍳"
         },
         {
           "en": "shower",
           "es": "regadera",
           "emoji": "🚿",
-          "exampleEn": "The shower is in the bathroom.",
-          "exampleEs": "La regadera está en el baño.",
           "alt": [
             "ducha"
           ]
@@ -27,30 +23,22 @@
         {
           "en": "clothes",
           "es": "ropa",
-          "emoji": "👕",
-          "exampleEn": "He puts on his clothes quickly.",
-          "exampleEs": "Él se pone la ropa rápido."
+          "emoji": "👕"
         },
         {
           "en": "morning",
           "es": "mañana",
-          "emoji": "🌅",
-          "exampleEn": "The morning is quiet at home.",
-          "exampleEs": "La mañana es tranquila en casa."
+          "emoji": "🌅"
         },
         {
           "en": "coffee",
           "es": "café",
-          "emoji": "☕",
-          "exampleEn": "My father drinks coffee with milk.",
-          "exampleEs": "Mi padre toma café con leche."
+          "emoji": "☕"
         },
         {
           "en": "bus",
           "es": "camión",
           "emoji": "🚌",
-          "exampleEn": "The bus arrives at eight.",
-          "exampleEs": "El camión llega a las ocho.",
           "alt": [
             "autobús"
           ]
@@ -58,30 +46,22 @@
         {
           "en": "work",
           "es": "trabajo",
-          "emoji": "💼",
-          "exampleEn": "I go to work by train.",
-          "exampleEs": "Voy al trabajo en tren."
+          "emoji": "💼"
         },
         {
           "en": "shoes",
           "es": "zapatos",
-          "emoji": "👟",
-          "exampleEn": "Her shoes are by the door.",
-          "exampleEs": "Sus zapatos están junto a la puerta."
+          "emoji": "👟"
         },
         {
           "en": "key",
           "es": "llave",
-          "emoji": "🔑",
-          "exampleEn": "I cannot find my key.",
-          "exampleEs": "No encuentro mi llave."
+          "emoji": "🔑"
         },
         {
           "en": "door",
           "es": "puerta",
-          "emoji": "🚪",
-          "exampleEn": "Please close the door.",
-          "exampleEs": "Por favor, cierra la puerta."
+          "emoji": "🚪"
         }
       ]
     },
@@ -92,8 +72,6 @@
           "en": "lunch",
           "es": "comida",
           "emoji": "🥪",
-          "exampleEn": "Lunch is at noon.",
-          "exampleEs": "La comida es al mediodía.",
           "alt": [
             "almuerzo"
           ]
@@ -101,44 +79,32 @@
         {
           "en": "office",
           "es": "oficina",
-          "emoji": "🏢",
-          "exampleEn": "My office is on the second floor.",
-          "exampleEs": "Mi oficina está en el segundo piso."
+          "emoji": "🏢"
         },
         {
           "en": "meeting",
           "es": "reunión",
-          "emoji": "🗓️",
-          "exampleEn": "The meeting starts at ten.",
-          "exampleEs": "La reunión empieza a las diez."
+          "emoji": "🗓️"
         },
         {
           "en": "school",
           "es": "escuela",
-          "emoji": "🏫",
-          "exampleEn": "The children walk to school.",
-          "exampleEs": "Los niños caminan a la escuela."
+          "emoji": "🏫"
         },
         {
           "en": "lesson",
           "es": "lección",
-          "emoji": "📚",
-          "exampleEn": "Today's lesson is easy.",
-          "exampleEs": "La lección de hoy es fácil."
+          "emoji": "📚"
         },
         {
           "en": "friend",
           "es": "amigo",
-          "emoji": "🧑‍🤝‍🧑",
-          "exampleEn": "My friend calls me every week.",
-          "exampleEs": "Mi amigo me llama cada semana."
+          "emoji": "🧑‍🤝‍🧑"
         },
         {
           "en": "phone",
           "es": "celular",
           "emoji": "📱",
-          "exampleEn": "Your phone is on the table.",
-          "exampleEs": "Tu celular está sobre la mesa.",
           "alt": [
             "teléfono"
           ]
@@ -146,23 +112,17 @@
         {
           "en": "bag",
           "es": "bolsa",
-          "emoji": "🎒",
-          "exampleEn": "She puts her books in the bag.",
-          "exampleEs": "Ella pone sus libros en la bolsa."
+          "emoji": "🎒"
         },
         {
           "en": "street",
           "es": "calle",
-          "emoji": "🛣️",
-          "exampleEn": "The street is very busy.",
-          "exampleEs": "La calle está muy concurrida."
+          "emoji": "🛣️"
         },
         {
           "en": "afternoon",
           "es": "tarde",
-          "emoji": "🌇",
-          "exampleEn": "I study in the afternoon.",
-          "exampleEs": "Estudio por la tarde."
+          "emoji": "🌇"
         }
       ]
     },
@@ -172,72 +132,52 @@
         {
           "en": "dinner",
           "es": "cena",
-          "emoji": "🍽️",
-          "exampleEn": "Dinner is ready.",
-          "exampleEs": "La cena está lista."
+          "emoji": "🍽️"
         },
         {
           "en": "kitchen",
           "es": "cocina",
-          "emoji": "🧑‍🍳",
-          "exampleEn": "My mother is in the kitchen.",
-          "exampleEs": "Mi madre está en la cocina."
+          "emoji": "🧑‍🍳"
         },
         {
           "en": "tired",
           "es": "cansado",
-          "emoji": "😴",
-          "exampleEn": "I am tired after work.",
-          "exampleEs": "Estoy cansado después del trabajo."
+          "emoji": "😴"
         },
         {
           "en": "sleep",
           "es": "dormir",
-          "emoji": "💤",
-          "exampleEn": "I sleep eight hours.",
-          "exampleEs": "Duermo ocho horas."
+          "emoji": "💤"
         },
         {
           "en": "bed",
           "es": "cama",
-          "emoji": "🛏️",
-          "exampleEn": "The bed is very comfortable.",
-          "exampleEs": "La cama es muy cómoda."
+          "emoji": "🛏️"
         },
         {
           "en": "night",
           "es": "noche",
-          "emoji": "🌙",
-          "exampleEn": "It is cold at night.",
-          "exampleEs": "Hace frío por la noche."
+          "emoji": "🌙"
         },
         {
           "en": "music",
           "es": "música",
-          "emoji": "🎵",
-          "exampleEn": "We listen to music after dinner.",
-          "exampleEs": "Escuchamos música después de la cena."
+          "emoji": "🎵"
         },
         {
           "en": "book",
           "es": "libro",
-          "emoji": "📖",
-          "exampleEn": "He reads a book before bed.",
-          "exampleEs": "Él lee un libro antes de dormir."
+          "emoji": "📖"
         },
         {
           "en": "television",
           "es": "televisión",
-          "emoji": "📺",
-          "exampleEn": "The television is on.",
-          "exampleEs": "La televisión está encendida."
+          "emoji": "📺"
         },
         {
           "en": "table",
           "es": "mesa",
-          "emoji": "🪑",
-          "exampleEn": "We eat at the table.",
-          "exampleEs": "Comemos en la mesa."
+          "emoji": "🪑"
         }
       ]
     }
