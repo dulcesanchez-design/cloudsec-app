@@ -104,6 +104,24 @@
           "title": "06 Identidades y accesos",
           "description": "Mínimo privilegio, separación de funciones, cuentas privilegiadas y contraseñas según NIST.",
           "file": "ciber-identidades-accesos.json"
+        },
+        {
+          "id": "ciber-riesgo-marcos",
+          "title": "07 Riesgo y marcos de trabajo",
+          "description": "Gestión de riesgos, probabilidad e impacto, respuesta al riesgo y NIST CSF 2.0.",
+          "file": "ciber-riesgo-marcos.json"
+        },
+        {
+          "id": "ciber-deteccion-respuesta",
+          "title": "08 Detección y respuesta a incidentes",
+          "description": "Logs, SIEM, incidentes, etapas de la respuesta y comunicación.",
+          "file": "ciber-deteccion-respuesta.json"
+        },
+        {
+          "id": "ciber-endpoints-backups",
+          "title": "09 Endpoints y copias de seguridad",
+          "description": "Endpoints, antivirus y EDR, cifrado de disco, actualizaciones y copias de seguridad.",
+          "file": "ciber-endpoints-backups.json"
         }
       ]
     },

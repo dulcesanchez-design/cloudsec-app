@@ -1,0 +1,110 @@
+{
+  "title": "Riesgo y marcos de trabajo",
+  "lessons": [
+    {
+      "title": "Gestión de riesgos",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/risk_management",
+        "https://csrc.nist.gov/glossary/term/risk_assessment"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "⚙️", "text": "Gestión de riesgos: el proceso de identificar, evaluar y responder al riesgo." },
+        { "type": "choice", "q": "Según NIST, ¿qué abarca la gestión de riesgos?", "options": ["Identificar, evaluar y responder al riesgo", "Solo comprar software", "Solo apagar equipos"], "answer": 0, "why": "NISTIR 8170 la define como el proceso de identificar, evaluar y responder al riesgo." },
+        { "type": "card", "emoji": "🔍", "text": "Evaluación de riesgos: un examen sistemático del riesgo mediante procesos, métodos y herramientas disciplinados." },
+        { "type": "truefalse", "statement": "La evaluación de riesgos forma parte de la gestión de riesgos.", "answer": true, "why": "NIST SP 800-39 y SP 800-30 la describen como parte del proceso de gestión de riesgos." },
+        { "type": "card", "emoji": "👀", "text": "FIPS 200 añade dos tareas: responder al riesgo una vez determinado y vigilarlo a lo largo del tiempo." },
+        { "type": "order", "q": "Ordena las actividades de la gestión de riesgos", "items": ["Identificar el riesgo", "Evaluar el riesgo", "Responder al riesgo"], "why": "Es el orden de la definición de NISTIR 8170: identificar, evaluar y responder." },
+        { "type": "scenario", "situation": "Un equipo examina de forma sistemática qué podría salir mal en un sistema nuevo.", "q": "¿Qué actividad realiza?", "options": ["Evaluación de riesgos", "Respuesta a un incidente", "Parcheo"], "answer": 0, "why": "Un examen sistemático del riesgo con procesos y métodos disciplinados es una evaluación de riesgos." }
+      ]
+    },
+    {
+      "title": "Probabilidad e impacto",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/likelihood",
+        "https://csrc.nist.gov/glossary/term/impact"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "↩️", "text": "En «Panorama de amenazas» viste que el riesgo depende del impacto adverso y de la probabilidad. Aquí, qué significa cada uno." },
+        { "type": "card", "emoji": "🎲", "text": "Probabilidad (likelihood): la posibilidad de que algo ocurra." },
+        { "type": "choice", "q": "¿Qué es la probabilidad en gestión de riesgos?", "options": ["La posibilidad de que algo ocurra", "El tamaño del daño", "El costo de una licencia"], "answer": 0, "why": "NIST SP 800-160 la define como la posibilidad de que algo ocurra." },
+        { "type": "card", "emoji": "💥", "text": "Impacto: el efecto sobre las operaciones y los activos de la organización y sobre las personas." },
+        { "type": "truefalse", "statement": "El impacto es la magnitud del daño que cabe esperar de las consecuencias de un evento.", "answer": true, "why": "Así lo describe NIST SP 800-34 Rev. 1." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Probabilidad", "desc": "Posibilidad de que algo ocurra" },
+          { "term": "Impacto", "desc": "Efecto sobre operaciones, activos y personas" },
+          { "term": "Riesgo", "desc": "Medida según impacto y probabilidad" }
+        ], "why": "Son definiciones del glosario de NIST." },
+        { "type": "scenario", "situation": "Un fallo es muy poco probable, pero si ocurriera dañaría gravemente las operaciones.", "q": "¿Qué dos factores describe?", "options": ["Baja probabilidad y alto impacto", "Alta probabilidad y bajo impacto", "Ninguno de los dos"], "answer": 0, "why": "Es poco probable (baja probabilidad) y de consecuencias graves (alto impacto)." }
+      ]
+    },
+    {
+      "title": "Tratamiento del riesgo",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/risk_response",
+        "https://csrc.nist.gov/glossary/term/risk_mitigation",
+        "https://csrc.nist.gov/glossary/term/risk_treatment"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🧭", "text": "Respuesta al riesgo, según NIST: aceptar, evitar, mitigar, compartir o transferir el riesgo." },
+        { "type": "choice", "q": "¿Cuál es una respuesta al riesgo que cita NIST?", "options": ["Mitigarlo", "Fingir que no existe", "Borrar la evidencia"], "answer": 0, "why": "El glosario de NIST define la respuesta al riesgo como aceptar, evitar, mitigar, compartir o transferir el riesgo." },
+        { "type": "card", "emoji": "🛡️", "text": "Mitigar: priorizar, evaluar e implementar los controles o contramedidas apropiados que reducen el riesgo. Es un subconjunto de la respuesta al riesgo." },
+        { "type": "card", "emoji": "🧩", "text": "NISTIR 8286 resume que los riesgos negativos pueden aceptarse, transferirse, mitigarse o evitarse." },
+        { "type": "scenario", "situation": "La organización decide no realizar la actividad que genera el riesgo.", "q": "¿Qué respuesta al riesgo es?", "options": ["Evitarlo", "Aceptarlo", "Transferirlo"], "answer": 0, "why": "Evitar el riesgo es no emprender la actividad que lo genera." },
+        { "type": "scenario", "situation": "La dirección decide asumir un riesgo pequeño y no aplicar controles adicionales.", "q": "¿Qué respuesta al riesgo es?", "options": ["Aceptarlo", "Evitarlo", "Mitigarlo"], "answer": 0, "why": "Aceptar es asumir el riesgo de forma consciente, sin controles adicionales." },
+        { "type": "scenario", "situation": "Una organización traslada la responsabilidad del riesgo a un tercero.", "q": "¿Qué respuesta al riesgo es?", "options": ["Transferirlo", "Evitarlo", "Aceptarlo"], "answer": 0, "why": "Transferir es trasladar el riesgo a otra parte. NIST lo lista junto con compartir." },
+        { "type": "choice", "q": "Según ISO Guide 73 (citada por NIST), ¿qué es el tratamiento del riesgo?", "options": ["El proceso para modificar el riesgo", "El proceso para ignorar el riesgo", "Un tipo de copia de seguridad"], "answer": 0, "why": "El glosario de NIST (SP 800-160) lo define como «proceso para modificar el riesgo»." }
+      ]
+    },
+    {
+      "title": "NIST Cybersecurity Framework 2.0",
+      "source": [
+        "https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final",
+        "https://www.nist.gov/news-events/news/2024/02/nist-releases-version-20-landmark-cybersecurity-framework"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🧭", "text": "El NIST CSF 2.0, publicado en versión final el 26 de febrero de 2024, ofrece una taxonomía de resultados de ciberseguridad de alto nivel." },
+        { "type": "choice", "q": "¿Qué ofrece el CSF 2.0?", "options": ["Una taxonomía de resultados de ciberseguridad de alto nivel para cualquier organización", "Un antivirus", "Un producto de nube"], "answer": 0, "why": "Es la descripción del resumen oficial de CSWP 29." },
+        { "type": "card", "emoji": "🚫", "text": "El CSF no prescribe cómo deben lograrse los resultados." },
+        { "type": "truefalse", "statement": "El CSF prescribe paso a paso cómo lograr cada resultado.", "answer": false, "why": "El resumen oficial dice que el CSF no prescribe cómo deben lograrse los resultados." },
+        { "type": "card", "emoji": "🧱", "text": "Funciones del CSF 2.0: Govern (nueva), Identify, Protect, Detect, Respond y Recover." },
+        { "type": "choice", "q": "¿Qué función se añadió en el CSF 2.0?", "options": ["Govern", "Backup", "Encrypt"], "answer": 0, "why": "NIST habla de la «función Govern, recién añadida» del CSF 2.0. Abarca cómo las organizaciones toman y ejecutan decisiones informadas sobre estrategia de ciberseguridad." },
+        { "type": "order", "q": "Ordena las cinco funciones originales del ciclo", "items": ["Identify", "Protect", "Detect", "Respond", "Recover"], "why": "NCSC cita el ciclo del marco de NIST en este orden: Identify, Protect, Detect, Respond, Recover." },
+        { "type": "truefalse", "statement": "El CSF 2.0 añadió la función Govern.", "answer": true, "why": "Lo indica el comunicado de NIST sobre la versión 2.0." }
+      ]
+    },
+    {
+      "title": "Tolerancia al riesgo",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/risk_tolerance"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🎚️", "text": "Tolerancia al riesgo: el nivel de riesgo que una entidad está dispuesta a asumir para lograr un resultado deseado." },
+        { "type": "choice", "q": "¿Qué es la tolerancia al riesgo?", "options": ["El nivel de riesgo que una entidad está dispuesta a asumir", "El número de empleados", "El tipo de antivirus"], "answer": 0, "why": "Es la definición del glosario de NIST (SP 800-137)." },
+        { "type": "card", "emoji": "📐", "text": "Otra definición de NIST: el nivel de riesgo o grado de incertidumbre que es aceptable para una organización." },
+        { "type": "truefalse", "statement": "La tolerancia al riesgo es el nivel de riesgo o incertidumbre aceptable para una organización.", "answer": true, "why": "Lo indica el glosario de NIST (SP 800-53 Rev. 5, de SP 800-39)." },
+        { "type": "scenario", "situation": "Un riesgo supera el nivel que la organización considera aceptable.", "q": "¿Qué conviene hacer?", "options": ["Responder al riesgo para llevarlo a un nivel aceptable", "Ignorarlo", "Ocultarlo"], "answer": 0, "why": "La tolerancia fija qué nivel es aceptable; por encima, se responde al riesgo (mitigar, evitar, transferir, compartir)." },
+        { "type": "choice", "q": "¿Qué relación tiene la tolerancia con aceptar un riesgo?", "options": ["Marca hasta dónde la organización puede aceptarlo", "Ninguna", "Impide gestionar el riesgo"], "answer": 0, "why": "Aceptar un riesgo tiene sentido dentro del nivel que la organización está dispuesta a asumir." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/risk_management",
+        "https://csrc.nist.gov/glossary/term/risk_response",
+        "https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: gestión de riesgos, probabilidad, impacto, respuesta al riesgo y NIST CSF 2.0." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Gestión de riesgos", "desc": "Identificar, evaluar y responder al riesgo" },
+          { "term": "Mitigar", "desc": "Implementar controles que reducen el riesgo" },
+          { "term": "Tolerancia", "desc": "Nivel de riesgo que se está dispuesto a asumir" }
+        ], "why": "Son definiciones del glosario de NIST." },
+        { "type": "order", "q": "Ordena las actividades de la gestión de riesgos", "items": ["Identificar", "Evaluar", "Responder"], "why": "Es el orden de la definición de NISTIR 8170." },
+        { "type": "scenario", "situation": "Una organización instala controles para reducir un riesgo alto.", "q": "¿Qué respuesta al riesgo es?", "options": ["Mitigarlo", "Aceptarlo", "Evitarlo"], "answer": 0, "why": "Mitigar es implementar controles o contramedidas que reducen el riesgo." },
+        { "type": "choice", "q": "¿Qué dice el CSF sobre cómo lograr los resultados?", "options": ["No prescribe cómo lograrlos", "Lo prescribe todo", "Prohíbe lograrlos"], "answer": 0, "why": "El resumen de CSWP 29 lo indica." },
+        { "type": "truefalse", "statement": "El CSF 2.0 incluye la función Govern.", "answer": true, "why": "Fue añadida en la versión 2.0." }
+      ]
+    }
+  ]
+}

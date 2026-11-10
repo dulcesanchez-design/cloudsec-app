@@ -8,12 +8,51 @@
         "https://www.cisa.gov/news-events/news/understanding-patches-and-software-updates"
       ],
       "steps": [
-        { "type": "card", "emoji": "↩️", "text": "En «Panorama de amenazas» viste la definición: una vulnerabilidad es una debilidad en un sistema, sus procedimientos, controles o implementación." },
-        { "type": "choice", "q": "Según NIST SP 800-221, una vulnerabilidad es…", "options": ["Una condición que permite que ocurra un evento de amenaza", "Una copia de seguridad", "Un tipo de contraseña"], "answer": 0, "why": "Es la definición alternativa del glosario de NIST." },
-        { "type": "card", "emoji": "🩹", "text": "Los parches son actualizaciones de software y sistemas operativos que corrigen vulnerabilidades de seguridad de un programa o producto." },
-        { "type": "truefalse", "statement": "Un parche corrige vulnerabilidades de seguridad de un programa o producto.", "answer": true, "why": "Es la definición de CISA." },
-        { "type": "scenario", "situation": "Se publica un parche para una vulnerabilidad en un programa que usas.", "q": "¿Qué recomienda CISA?", "options": ["Instalar la actualización lo antes posible", "Ignorarla", "Desactivar las actualizaciones"], "answer": 0, "why": "CISA aconseja instalar las actualizaciones lo antes posible para proteger el dispositivo contra atacantes." },
-        { "type": "truefalse", "statement": "Mantener el software al día es la mejor defensa contra quienes explotan vulnerabilidades ya corregidas.", "answer": true, "why": "Lo afirma CISA." }
+        {
+          "type": "card",
+          "emoji": "↩️",
+          "text": "En «Panorama de amenazas» viste la definición: una vulnerabilidad es una debilidad en un sistema, sus procedimientos, controles o implementación."
+        },
+        {
+          "type": "choice",
+          "q": "Según NIST SP 800-221, una vulnerabilidad es…",
+          "options": [
+            "Una condición que permite que ocurra un evento de amenaza",
+            "Una copia de seguridad",
+            "Un tipo de contraseña"
+          ],
+          "answer": 0,
+          "why": "Es la definición alternativa del glosario de NIST."
+        },
+        {
+          "type": "card",
+          "emoji": "🩹",
+          "text": "Los parches son actualizaciones de software y sistemas operativos que corrigen vulnerabilidades de seguridad de un programa o producto."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Un parche corrige vulnerabilidades de seguridad de un programa o producto.",
+          "answer": true,
+          "why": "Es la definición de CISA."
+        },
+        {
+          "type": "scenario",
+          "situation": "Se publica un parche para una vulnerabilidad en un programa que usas.",
+          "q": "¿Qué recomienda CISA?",
+          "options": [
+            "Instalar la actualización lo antes posible",
+            "Ignorarla",
+            "Desactivar las actualizaciones"
+          ],
+          "answer": 0,
+          "why": "CISA aconseja instalar las actualizaciones lo antes posible para proteger el dispositivo contra atacantes."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Mantener el software al día es la mejor defensa contra quienes explotan vulnerabilidades ya corregidas.",
+          "answer": true,
+          "why": "Lo afirma CISA."
+        }
       ]
     },
     {
@@ -23,17 +62,69 @@
         "https://www.cisa.gov/known-exploited-vulnerabilities-catalog/reducing-significant-risk-known-exploited-vulnerabilities"
       ],
       "steps": [
-        { "type": "card", "emoji": "🆔", "text": "CVE es una lista de entradas, cada una con un número de identificación único, una descripción y al menos una referencia pública." },
-        { "type": "choice", "q": "¿Qué contiene cada registro de la lista CVE?", "options": ["Un identificador único, una descripción y al menos una referencia pública", "Solo una contraseña", "El código fuente del programa"], "answer": 0, "why": "Es la definición del glosario de NIST." },
-        { "type": "card", "emoji": "🏷️", "text": "Un CVE ID es un identificador único y común para una vulnerabilidad de ciberseguridad conocida públicamente." },
-        { "type": "truefalse", "statement": "Un CVE ID identifica de forma única una vulnerabilidad conocida públicamente.", "answer": true, "why": "Así lo describe CISA, citando las preguntas frecuentes de CVE." },
-        { "type": "card", "emoji": "🗄️", "text": "La lista CVE alimenta la Base de Datos Nacional de Vulnerabilidades (NVD). Según CISA, las actualizaciones de CVE aparecen de inmediato en la NVD." },
-        { "type": "match", "q": "Une cada elemento con su descripción", "pairs": [
-          { "term": "CVE", "desc": "Lista de vulnerabilidades públicas con identificador" },
-          { "term": "CVE ID", "desc": "Identificador único de una vulnerabilidad" },
-          { "term": "NVD", "desc": "Base de datos alimentada por la lista CVE" }
-        ], "why": "Son descripciones del glosario de NIST y de CISA." },
-        { "type": "scenario", "situation": "Dos equipos hablan de la misma vulnerabilidad con nombres distintos.", "q": "¿Qué les ayuda a referirse a ella sin ambigüedad?", "options": ["Su CVE ID", "Su color", "El nombre del servidor"], "answer": 0, "why": "El CVE ID es un identificador único y común para una vulnerabilidad conocida." }
+        {
+          "type": "card",
+          "emoji": "🆔",
+          "text": "CVE es una lista de entradas, cada una con un número de identificación único, una descripción y al menos una referencia pública."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué contiene cada registro de la lista CVE?",
+          "options": [
+            "Un identificador único, una descripción y al menos una referencia pública",
+            "Solo una contraseña",
+            "El código fuente del programa"
+          ],
+          "answer": 0,
+          "why": "Es la definición del glosario de NIST."
+        },
+        {
+          "type": "card",
+          "emoji": "🏷️",
+          "text": "Un CVE ID es un identificador único y común para una vulnerabilidad de ciberseguridad conocida públicamente."
+        },
+        {
+          "type": "truefalse",
+          "statement": "Un CVE ID identifica de forma única una vulnerabilidad conocida públicamente.",
+          "answer": true,
+          "why": "Así lo describe CISA, citando las preguntas frecuentes de CVE."
+        },
+        {
+          "type": "card",
+          "emoji": "🗄️",
+          "text": "La lista CVE alimenta la Base de Datos Nacional de Vulnerabilidades (NVD). Según CISA, las actualizaciones de CVE aparecen de inmediato en la NVD."
+        },
+        {
+          "type": "match",
+          "q": "Une cada elemento con su descripción",
+          "pairs": [
+            {
+              "term": "CVE",
+              "desc": "Lista de vulnerabilidades públicas con identificador"
+            },
+            {
+              "term": "CVE ID",
+              "desc": "Identificador único de una vulnerabilidad"
+            },
+            {
+              "term": "NVD",
+              "desc": "Base de datos alimentada por la lista CVE"
+            }
+          ],
+          "why": "Son descripciones del glosario de NIST y de CISA."
+        },
+        {
+          "type": "scenario",
+          "situation": "Dos equipos hablan de la misma vulnerabilidad con nombres distintos.",
+          "q": "¿Qué les ayuda a referirse a ella sin ambigüedad?",
+          "options": [
+            "Su CVE ID",
+            "Su color",
+            "El nombre del servidor"
+          ],
+          "answer": 0,
+          "why": "El CVE ID es un identificador único y común para una vulnerabilidad conocida."
+        }
       ]
     },
     {
@@ -44,13 +135,70 @@
         "https://csrc.nist.gov/glossary/term/common_vulnerability_scoring_system"
       ],
       "steps": [
-        { "type": "card", "emoji": "📊", "text": "CVSS permite capturar las características principales de una vulnerabilidad y producir una puntuación numérica." },
-        { "type": "choice", "q": "¿Qué es CVSS?", "options": ["Una forma de capturar las características de una vulnerabilidad y producir una puntuación", "Un antivirus", "Un tipo de firewall"], "answer": 0, "why": "Así lo describe FIRST." },
-        { "type": "card", "emoji": "⚖️", "text": "NIST lo define como una especificación para comunicar las características de las vulnerabilidades y medir su gravedad relativa." },
-        { "type": "card", "emoji": "🎚️", "text": "La puntuación base mide la gravedad, no el riesgo, y no debe usarse sola para evaluar el riesgo." },
-        { "type": "truefalse", "statement": "La puntuación CVSS Base mide por sí sola el riesgo completo de una organización.", "answer": false, "why": "La guía de FIRST aclara que mide la gravedad, no el riesgo, y no debe usarse sola para evaluarlo." },
-        { "type": "card", "emoji": "🧱", "text": "CVSS 4.0 tiene cuatro grupos de métricas: Base, Amenaza (Threat), Entorno (Environmental) y Suplementarias." },
-        { "type": "choice", "q": "¿Cuál NO es un grupo de métricas de CVSS 4.0?", "options": ["Contraseñas", "Base", "Entorno"], "answer": 0, "why": "Los grupos son Base, Threat, Environmental y Supplemental." }
+        {
+          "type": "card",
+          "emoji": "📊",
+          "text": "CVSS permite capturar las características principales de una vulnerabilidad y producir una puntuación numérica."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué es CVSS?",
+          "options": [
+            "Una forma de capturar las características de una vulnerabilidad y producir una puntuación",
+            "Un antivirus",
+            "Un tipo de firewall"
+          ],
+          "answer": 0,
+          "why": "Así lo describe FIRST."
+        },
+        {
+          "type": "card",
+          "emoji": "⚖️",
+          "text": "NIST lo define como una especificación para comunicar las características de las vulnerabilidades y medir su gravedad relativa."
+        },
+        {
+          "type": "card",
+          "emoji": "🎚️",
+          "text": "La puntuación base mide la gravedad, no el riesgo, y no debe usarse sola para evaluar el riesgo."
+        },
+        {
+          "type": "truefalse",
+          "statement": "La puntuación CVSS Base mide por sí sola el riesgo completo de una organización.",
+          "answer": false,
+          "why": "La guía de FIRST aclara que mide la gravedad, no el riesgo, y no debe usarse sola para evaluarlo."
+        },
+        {
+          "type": "card",
+          "emoji": "🧱",
+          "text": "CVSS 4.0 tiene cuatro grupos de métricas: Base, Amenaza (Threat), Entorno (Environmental) y Suplementarias."
+        },
+        {
+          "type": "choice",
+          "q": "¿Cuál NO es un grupo de métricas de CVSS 4.0?",
+          "options": [
+            "Contraseñas",
+            "Base",
+            "Entorno"
+          ],
+          "answer": 0,
+          "why": "Los grupos son Base, Threat, Environmental y Supplemental."
+        },
+        {
+          "type": "card",
+          "emoji": "🌡️",
+          "text": "Según la guía de FIRST, por ejemplo: de 9.0 a 10.0 es gravedad crítica y de 7.0 a 8.9 es alta."
+        },
+        {
+          "type": "choice",
+          "q": "Según la guía de FIRST, ¿qué rango corresponde a gravedad crítica?",
+          "options": [
+            "9.0 a 10.0",
+            "0.1 a 3.9",
+            "4.0 a 6.9"
+          ],
+          "answer": 0,
+          "why": "La guía de usuario de CVSS 4.0 da como ejemplo 9.0 a 10.0 para crítica y 7.0 a 8.9 para alta."
+        }
       ]
     },
     {
@@ -61,17 +209,69 @@
         "https://www.first.org/epss/"
       ],
       "steps": [
-        { "type": "card", "emoji": "🎯", "text": "CVSS puede ser entrada de un proceso de gestión de vulnerabilidades que además considere factores ajenos a CVSS." },
-        { "type": "choice", "q": "¿Debe usarse la puntuación CVSS como única medida para priorizar?", "options": ["No: debe combinarse con otros factores", "Sí, siempre", "No se usa nunca"], "answer": 0, "why": "La especificación de CVSS indica usarla como entrada de un proceso que también considere otros factores." },
-        { "type": "card", "emoji": "🔥", "text": "El catálogo KEV de CISA es una fuente autorizada de vulnerabilidades explotadas en la práctica. CISA recomienda usarlo como entrada para priorizar." },
-        { "type": "truefalse", "statement": "CISA recomienda usar el catálogo KEV como entrada de la priorización de vulnerabilidades.", "answer": true, "why": "Está en la introducción del catálogo." },
-        { "type": "card", "emoji": "📈", "text": "EPSS estima la probabilidad de que un CVE publicado sea explotado en el mundo real en los próximos 30 días." },
-        { "type": "match", "q": "Une cada herramienta con lo que aporta", "pairs": [
-          { "term": "CVSS", "desc": "Gravedad de una vulnerabilidad" },
-          { "term": "KEV", "desc": "Vulnerabilidades explotadas en la práctica" },
-          { "term": "EPSS", "desc": "Probabilidad de explotación en 30 días" }
-        ], "why": "Son las descripciones de FIRST y de CISA." },
-        { "type": "scenario", "situation": "Dos vulnerabilidades tienen una gravedad similar, pero una figura en el catálogo KEV.", "q": "¿Cuál conviene priorizar?", "options": ["La que figura en KEV, porque ya se explota", "La que no figura en KEV", "Da igual"], "answer": 0, "why": "KEV lista vulnerabilidades explotadas en la práctica y CISA pide priorizar su remediación." }
+        {
+          "type": "card",
+          "emoji": "🎯",
+          "text": "CVSS puede ser entrada de un proceso de gestión de vulnerabilidades que además considere factores ajenos a CVSS."
+        },
+        {
+          "type": "choice",
+          "q": "¿Debe usarse la puntuación CVSS como única medida para priorizar?",
+          "options": [
+            "No: debe combinarse con otros factores",
+            "Sí, siempre",
+            "No se usa nunca"
+          ],
+          "answer": 0,
+          "why": "La especificación de CVSS indica usarla como entrada de un proceso que también considere otros factores."
+        },
+        {
+          "type": "card",
+          "emoji": "🔥",
+          "text": "El catálogo KEV de CISA es una fuente autorizada de vulnerabilidades explotadas en la práctica. CISA recomienda usarlo como entrada para priorizar."
+        },
+        {
+          "type": "truefalse",
+          "statement": "CISA recomienda usar el catálogo KEV como entrada de la priorización de vulnerabilidades.",
+          "answer": true,
+          "why": "Está en la introducción del catálogo."
+        },
+        {
+          "type": "card",
+          "emoji": "📈",
+          "text": "EPSS estima la probabilidad de que un CVE publicado sea explotado en el mundo real en los próximos 30 días."
+        },
+        {
+          "type": "match",
+          "q": "Une cada herramienta con lo que aporta",
+          "pairs": [
+            {
+              "term": "CVSS",
+              "desc": "Gravedad de una vulnerabilidad"
+            },
+            {
+              "term": "KEV",
+              "desc": "Vulnerabilidades explotadas en la práctica"
+            },
+            {
+              "term": "EPSS",
+              "desc": "Probabilidad de explotación en 30 días"
+            }
+          ],
+          "why": "Son las descripciones de FIRST y de CISA."
+        },
+        {
+          "type": "scenario",
+          "situation": "Dos vulnerabilidades tienen una gravedad similar, pero una figura en el catálogo KEV.",
+          "q": "¿Cuál conviene priorizar?",
+          "options": [
+            "La que figura en KEV, porque ya se explota",
+            "La que no figura en KEV",
+            "Da igual"
+          ],
+          "answer": 0,
+          "why": "KEV lista vulnerabilidades explotadas en la práctica y CISA pide priorizar su remediación."
+        }
       ]
     },
     {
@@ -81,12 +281,57 @@
         "https://www.cisa.gov/news-events/news/understanding-patches-and-software-updates"
       ],
       "steps": [
-        { "type": "card", "emoji": "🛠️", "text": "NIST SP 800-40 presenta el parcheo como parte clave del mantenimiento preventivo de la tecnología." },
-        { "type": "choice", "q": "Según NIST SP 800-40 Rev. 4, ¿qué es la gestión de parches?", "options": ["Identificar, priorizar, adquirir, instalar y verificar la instalación de parches", "Solo descargar parches", "Apagar los equipos"], "answer": 0, "why": "Es la definición que da la publicación." },
-        { "type": "order", "q": "Ordena el proceso de gestión de parches", "items": ["Identificar", "Priorizar", "Adquirir", "Instalar", "Verificar la instalación"], "why": "Es el orden en que la definición de NIST SP 800-40 Rev. 4 lista las actividades." },
-        { "type": "card", "emoji": "🛡️", "text": "Según NIST, el mantenimiento preventivo mediante la gestión de parches ayuda a prevenir intrusiones y brechas de datos, y reduce el riesgo." },
-        { "type": "truefalse", "statement": "La gestión de parches incluye verificar que el parche quedó instalado.", "answer": true, "why": "Verificar la instalación es parte de la definición." },
-        { "type": "scenario", "situation": "Tu equipo instala parches pero nunca comprueba después si se aplicaron correctamente.", "q": "¿Qué actividad del proceso falta?", "options": ["Verificar la instalación", "Identificar el parche", "Adquirir el parche"], "answer": 0, "why": "La definición de NIST termina con verificar la instalación de los parches." }
+        {
+          "type": "card",
+          "emoji": "🛠️",
+          "text": "NIST SP 800-40 presenta el parcheo como parte clave del mantenimiento preventivo de la tecnología."
+        },
+        {
+          "type": "choice",
+          "q": "Según NIST SP 800-40 Rev. 4, ¿qué es la gestión de parches?",
+          "options": [
+            "Identificar, priorizar, adquirir, instalar y verificar la instalación de parches",
+            "Solo descargar parches",
+            "Apagar los equipos"
+          ],
+          "answer": 0,
+          "why": "Es la definición que da la publicación."
+        },
+        {
+          "type": "order",
+          "q": "Ordena el proceso de gestión de parches",
+          "items": [
+            "Identificar",
+            "Priorizar",
+            "Adquirir",
+            "Instalar",
+            "Verificar la instalación"
+          ],
+          "why": "Es el orden en que la definición de NIST SP 800-40 Rev. 4 lista las actividades."
+        },
+        {
+          "type": "card",
+          "emoji": "🛡️",
+          "text": "Según NIST, el mantenimiento preventivo mediante la gestión de parches ayuda a prevenir intrusiones y brechas de datos, y reduce el riesgo."
+        },
+        {
+          "type": "truefalse",
+          "statement": "La gestión de parches incluye verificar que el parche quedó instalado.",
+          "answer": true,
+          "why": "Verificar la instalación es parte de la definición."
+        },
+        {
+          "type": "scenario",
+          "situation": "Tu equipo instala parches pero nunca comprueba después si se aplicaron correctamente.",
+          "q": "¿Qué actividad del proceso falta?",
+          "options": [
+            "Verificar la instalación",
+            "Identificar el parche",
+            "Adquirir el parche"
+          ],
+          "answer": 0,
+          "why": "La definición de NIST termina con verificar la instalación de los parches."
+        }
       ]
     },
     {
@@ -97,16 +342,70 @@
         "https://csrc.nist.gov/pubs/sp/800/40/r4/final"
       ],
       "steps": [
-        { "type": "card", "emoji": "📝", "text": "Repaso: vulnerabilidades, CVE, NVD, CVSS, priorización y gestión de parches." },
-        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
-          { "term": "Parche", "desc": "Actualización que corrige vulnerabilidades" },
-          { "term": "CVE", "desc": "Lista con identificador único por vulnerabilidad" },
-          { "term": "CVSS", "desc": "Mide la gravedad de una vulnerabilidad" }
-        ], "why": "Son definiciones de CISA, NIST y FIRST." },
-        { "type": "choice", "q": "¿Qué mide la puntuación CVSS Base?", "options": ["La gravedad, no el riesgo", "El riesgo completo", "El tamaño del parche"], "answer": 0, "why": "La guía de FIRST: mide la gravedad y no debe usarse sola para evaluar el riesgo." },
-        { "type": "truefalse", "statement": "El catálogo KEV de CISA lista vulnerabilidades explotadas en la práctica.", "answer": true, "why": "Es su descripción oficial." },
-        { "type": "scenario", "situation": "Tu organización quiere un proceso formal para tener los parches al día.", "q": "¿Qué guía de NIST puede consultar?", "options": ["SP 800-40 Rev. 4 (gestión de parches)", "SP 800-63B (contraseñas)", "Ninguna"], "answer": 0, "why": "SP 800-40 Rev. 4 es la guía de NIST para planificar la gestión de parches empresarial." },
-        { "type": "choice", "q": "¿Qué estima EPSS?", "options": ["La probabilidad de explotación en los próximos 30 días", "La velocidad de la red", "El costo de un parche"], "answer": 0, "why": "Es la descripción de FIRST." }
+        {
+          "type": "card",
+          "emoji": "📝",
+          "text": "Repaso: vulnerabilidades, CVE, NVD, CVSS, priorización y gestión de parches."
+        },
+        {
+          "type": "match",
+          "q": "Une cada concepto con su descripción",
+          "pairs": [
+            {
+              "term": "Parche",
+              "desc": "Actualización que corrige vulnerabilidades"
+            },
+            {
+              "term": "CVE",
+              "desc": "Lista con identificador único por vulnerabilidad"
+            },
+            {
+              "term": "CVSS",
+              "desc": "Mide la gravedad de una vulnerabilidad"
+            }
+          ],
+          "why": "Son definiciones de CISA, NIST y FIRST."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué mide la puntuación CVSS Base?",
+          "options": [
+            "La gravedad, no el riesgo",
+            "El riesgo completo",
+            "El tamaño del parche"
+          ],
+          "answer": 0,
+          "why": "La guía de FIRST: mide la gravedad y no debe usarse sola para evaluar el riesgo."
+        },
+        {
+          "type": "truefalse",
+          "statement": "El catálogo KEV de CISA lista vulnerabilidades explotadas en la práctica.",
+          "answer": true,
+          "why": "Es su descripción oficial."
+        },
+        {
+          "type": "scenario",
+          "situation": "Tu organización quiere un proceso formal para tener los parches al día.",
+          "q": "¿Qué guía de NIST puede consultar?",
+          "options": [
+            "SP 800-40 Rev. 4 (gestión de parches)",
+            "SP 800-63B (contraseñas)",
+            "Ninguna"
+          ],
+          "answer": 0,
+          "why": "SP 800-40 Rev. 4 es la guía de NIST para planificar la gestión de parches empresarial."
+        },
+        {
+          "type": "choice",
+          "q": "¿Qué estima EPSS?",
+          "options": [
+            "La probabilidad de explotación en los próximos 30 días",
+            "La velocidad de la red",
+            "El costo de un parche"
+          ],
+          "answer": 0,
+          "why": "Es la descripción de FIRST."
+        }
       ]
     }
   ]

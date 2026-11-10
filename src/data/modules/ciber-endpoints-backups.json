@@ -1,0 +1,116 @@
+{
+  "title": "Endpoints y copias de seguridad",
+  "lessons": [
+    {
+      "title": "Qué es un endpoint",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/endpoint"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "💻", "text": "Un endpoint es cualquier dispositivo usado para acceder a una identidad digital en una red, como laptops y computadoras de escritorio." },
+        { "type": "choice", "q": "Según NIST SP 800-63-4, ¿qué es un endpoint?", "options": ["Un dispositivo usado para acceder a una identidad digital en una red", "Un tipo de cable", "Un servidor de nombres"], "answer": 0, "why": "Es la definición del glosario de NIST." },
+        { "type": "truefalse", "statement": "Una laptop usada para acceder a una red es un endpoint.", "answer": true, "why": "La definición de NIST cita laptops y computadoras de escritorio como ejemplos." },
+        { "type": "card", "emoji": "🧰", "text": "Proteger los endpoints combina antivirus, EDR, cifrado de disco, actualizaciones y copias de seguridad, que verás en este módulo." },
+        { "type": "scenario", "situation": "Un empleado accede a la red corporativa desde su laptop.", "q": "¿Cómo se llama ese dispositivo?", "options": ["Endpoint", "Firewall", "Hipervisor"], "answer": 0, "why": "Un endpoint es un dispositivo usado para acceder a una identidad digital en una red." },
+        { "type": "truefalse", "statement": "Una computadora de escritorio puede ser un endpoint.", "answer": true, "why": "Está entre los ejemplos de la definición de NIST." }
+      ]
+    },
+    {
+      "title": "Antivirus y EDR",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/antivirus_software",
+        "https://www.ncsc.gov.uk/collection/device-security-guidance/policies-and-settings/antivirus-and-other-security-software",
+        "https://www.cisa.gov/stopransomware/ransomware-guide"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🛡️", "text": "Antivirus: programa que monitorea un equipo o red para identificar los principales tipos de malware y prevenir o contener incidentes." },
+        { "type": "choice", "q": "Según NIST SP 800-83, ¿qué hace un antivirus?", "options": ["Identifica los principales tipos de malware y previene o contiene incidentes", "Cifra el disco", "Hace copias de seguridad"], "answer": 0, "why": "Es la definición del glosario de NIST." },
+        { "type": "card", "emoji": "🔄", "text": "CISA aconseja usar actualizaciones automáticas para el antivirus, el antimalware y sus firmas." },
+        { "type": "truefalse", "statement": "CISA aconseja usar actualizaciones automáticas para el antivirus y sus firmas.", "answer": true, "why": "Está en la guía de CISA." },
+        { "type": "card", "emoji": "🧰", "text": "NCSC describe estas herramientas como las que intentan detectar, poner en cuarentena o bloquear la ejecución de malware en los dispositivos." },
+        { "type": "card", "emoji": "🔎", "text": "CISA recomienda usar listas de aplicaciones permitidas (allowlisting) y/o soluciones EDR (detección y respuesta en endpoints)." },
+        { "type": "scenario", "situation": "Quieres que los dispositivos solo ejecuten aplicaciones aprobadas.", "q": "¿Qué práctica recomienda CISA?", "options": ["Lista de aplicaciones permitidas (allowlisting)", "Desactivar el antivirus", "Compartir contraseñas"], "answer": 0, "why": "CISA menciona el uso de listas de aplicaciones permitidas y/o soluciones EDR." }
+      ]
+    },
+    {
+      "title": "Cifrado de disco",
+      "source": [
+        "https://csrc.nist.gov/pubs/sp/800/111/final"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "💽", "text": "NIST SP 800-111 describe soluciones de cifrado de almacenamiento: cifrado de disco completo, de volumen y de disco virtual." },
+        { "type": "choice", "q": "¿Qué tipos de solución describe NIST SP 800-111?", "options": ["Cifrado de disco completo, de volumen y de disco virtual", "Solo antivirus", "Solo firewalls"], "answer": 0, "why": "Es lo que dice el resumen de la publicación." },
+        { "type": "card", "emoji": "🔐", "text": "El cifrado y la autenticación restringen el acceso y el uso de la información almacenada." },
+        { "type": "truefalse", "statement": "El cifrado y la autenticación restringen el acceso y el uso de la información almacenada.", "answer": true, "why": "Es la descripción del resumen de NIST SP 800-111." },
+        { "type": "card", "emoji": "⚠️", "text": "NIST advierte que la información almacenada en estos dispositivos podría ser accedida por partes no autorizadas." },
+        { "type": "scenario", "situation": "Una laptop con datos de clientes se pierde.", "q": "¿Qué medida reduce el riesgo de que terceros lean los datos?", "options": ["Cifrado de disco completo", "Un fondo de pantalla nuevo", "Más memoria RAM"], "answer": 0, "why": "El cifrado restringe el acceso y el uso de la información almacenada." }
+      ]
+    },
+    {
+      "title": "Actualizaciones",
+      "source": [
+        "https://www.cisa.gov/news-events/news/understanding-patches-and-software-updates",
+        "https://www.cisa.gov/stopransomware/ransomware-guide"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "↩️", "text": "En «Vulnerabilidades y parches» viste la gestión de parches. En un endpoint, la regla de CISA es mantener el software al día." },
+        { "type": "truefalse", "statement": "Mantener el software actualizado es la mejor defensa contra quienes explotan vulnerabilidades ya corregidas.", "answer": true, "why": "Lo afirma CISA." },
+        { "type": "card", "emoji": "📥", "text": "CISA aconseja instalar las actualizaciones cuanto antes para proteger tu computadora, teléfono u otro dispositivo." },
+        { "type": "scenario", "situation": "Tu laptop ofrece una actualización de seguridad.", "q": "¿Qué haces?", "options": ["Instalarla lo antes posible", "Ignorarla", "Desactivar las actualizaciones"], "answer": 0, "why": "CISA aconseja instalar las actualizaciones cuanto antes." },
+        { "type": "choice", "q": "¿Qué corrigen los parches?", "options": ["Vulnerabilidades de seguridad de un programa o producto", "El color de la interfaz", "El tamaño del disco"], "answer": 0, "why": "Es la definición de CISA." },
+        { "type": "card", "emoji": "🛡️", "text": "También conviene actualizar automáticamente el antivirus, el antimalware y sus firmas." }
+      ]
+    },
+    {
+      "title": "Copias de seguridad",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/backup",
+        "https://www.cisa.gov/stopransomware/ransomware-guide"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "💾", "text": "Una copia de seguridad es una copia de archivos y programas hecha para facilitar la recuperación si es necesario." },
+        { "type": "choice", "q": "Según NIST, ¿para qué sirve una copia de seguridad?", "options": ["Para facilitar la recuperación si es necesario", "Para acelerar la red", "Para cifrar contraseñas"], "answer": 0, "why": "Es la definición del glosario de NIST." },
+        { "type": "card", "emoji": "📴", "text": "CISA indica que las copias deben mantenerse fuera de línea, porque muchas variantes de ransomware intentan encontrarlas y borrarlas." },
+        { "type": "truefalse", "statement": "Las copias fuera de línea protegen frente al ransomware que intenta borrar copias.", "answer": true, "why": "Es la razón que da la guía de CISA." },
+        { "type": "card", "emoji": "🔒", "text": "CISA recomienda mantener copias cifradas y fuera de línea de los datos críticos." },
+        { "type": "findbug", "q": "¿Qué práctica contradice las recomendaciones de CISA?", "hint": "Toca la práctica que no debería estar", "lines": ["Copias cifradas de los datos críticos", "Copias mantenidas fuera de línea", "Copias siempre conectadas a la misma red que los equipos", "Pruebas periódicas de las copias"], "answer": 2, "why": "CISA recomienda copias fuera de línea; el ransomware puede intentar borrar las que están accesibles." },
+        { "type": "scenario", "situation": "Un ransomware cifra los equipos y también los discos de respaldo que estaban conectados.", "q": "¿Qué habría ayudado?", "options": ["Mantener copias fuera de línea", "Tener más antivirus", "Reiniciar los equipos"], "answer": 0, "why": "Las copias fuera de línea no pueden ser alcanzadas por el ransomware en la red." }
+      ]
+    },
+    {
+      "title": "Probar las restauraciones",
+      "source": [
+        "https://www.cisa.gov/stopransomware/ransomware-guide",
+        "https://csrc.nist.gov/glossary/term/recovery"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "✅", "text": "CISA recomienda probar con regularidad la disponibilidad y la integridad de las copias de seguridad en un escenario de recuperación ante desastres." },
+        { "type": "choice", "q": "¿Qué recomienda CISA sobre las copias de seguridad?", "options": ["Probar con regularidad su disponibilidad e integridad", "Guardarlas sin revisarlas", "Borrarlas cada día"], "answer": 0, "why": "Lo indica la guía #StopRansomware." },
+        { "type": "card", "emoji": "🔁", "text": "También: probar los procedimientos de copia de seguridad de forma periódica." },
+        { "type": "truefalse", "statement": "Basta con tener copias; no hace falta probar que se pueden restaurar.", "answer": false, "why": "CISA pide probar con regularidad su disponibilidad e integridad." },
+        { "type": "card", "emoji": "🧭", "text": "La recuperación consiste en ejecutar las actividades del plan de contingencia para restaurar las misiones y funciones de la organización." },
+        { "type": "scenario", "situation": "Tu organización hace copias cada día, pero nunca ha intentado restaurarlas.", "q": "¿Qué recomienda CISA?", "options": ["Probar con regularidad su disponibilidad e integridad", "Esperar a un desastre", "Dejar de hacer copias"], "answer": 0, "why": "Las pruebas regulares comprueban que las copias están disponibles y íntegras." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/antivirus_software",
+        "https://csrc.nist.gov/glossary/term/backup",
+        "https://www.cisa.gov/stopransomware/ransomware-guide"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: endpoints, antivirus, EDR, cifrado de disco, actualizaciones y copias de seguridad." },
+        { "type": "match", "q": "Une cada medida con su propósito", "pairs": [
+          { "term": "Antivirus", "desc": "Identificar malware y prevenir incidentes" },
+          { "term": "Cifrado de disco", "desc": "Restringir el acceso a la información almacenada" },
+          { "term": "Copia de seguridad", "desc": "Facilitar la recuperación" }
+        ], "why": "Son definiciones de NIST." },
+        { "type": "choice", "q": "¿Por qué mantener copias fuera de línea?", "options": ["Porque el ransomware intenta encontrar y borrar las copias accesibles", "Porque ocupan menos espacio", "Porque son más baratas"], "answer": 0, "why": "Es la razón que da CISA." },
+        { "type": "truefalse", "statement": "Las copias de seguridad deben probarse con regularidad.", "answer": true, "why": "CISA recomienda probar su disponibilidad e integridad." },
+        { "type": "scenario", "situation": "Una laptop con datos sensibles se pierde en un viaje.", "q": "¿Qué medida habría reducido el riesgo?", "options": ["Cifrado de disco completo", "Un monitor nuevo", "Más memoria"], "answer": 0, "why": "El cifrado restringe el acceso y el uso de la información almacenada." },
+        { "type": "choice", "q": "¿Qué aconseja CISA sobre las actualizaciones?", "options": ["Instalarlas cuanto antes", "Ignorarlas", "Desactivarlas"], "answer": 0, "why": "Para proteger el dispositivo contra atacantes." }
+      ]
+    }
+  ]
+}

@@ -93,7 +93,9 @@
         "https://csrc.nist.gov/glossary/term/threat_actor",
         "https://csrc.nist.gov/glossary/term/insider_threat",
         "https://www.cisa.gov/topics/physical-security/insider-threat-mitigation",
-        "https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends"
+        "https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends",
+        "https://www.cisa.gov/topics/cyber-threats-and-advisories/nation-state-cyber-actors",
+        "https://csrc.nist.gov/glossary/term/advanced_persistent_threat"
       ],
       "steps": [
         {
@@ -114,17 +116,6 @@
         },
         {
           "type": "card",
-          "emoji": "🎯",
-          "text": "Otras definiciones de NIST: la fuente de riesgo que puede causar un impacto dañino, o quien instiga riesgos con capacidad de hacer daño."
-        },
-        {
-          "type": "truefalse",
-          "statement": "Un actor de amenaza puede ser un grupo, no solo una persona.",
-          "answer": true,
-          "why": "La definición de NIST habla de un individuo o un grupo."
-        },
-        {
-          "type": "card",
           "emoji": "🇪🇺",
           "text": "ENISA señala que las organizaciones de la UE seguirán enfrentando una combinación de ciberdelincuencia, ciberespionaje y actividad hacktivista."
         },
@@ -138,6 +129,30 @@
           ],
           "answer": 0,
           "why": "Es la formulación de la página de ENISA sobre amenazas y tendencias (Threat Landscape 2026)."
+        },
+        {
+          "type": "card",
+          "emoji": "🏛️",
+          "text": "Actores estatales: CISA indica que los actores estatales y las entidades patrocinadas por estados representan una amenaza elevada para la seguridad nacional."
+        },
+        {
+          "type": "match",
+          "q": "Une cada tipo de actor con su descripción",
+          "pairs": [
+            {
+              "term": "Actor estatal",
+              "desc": "Amenaza elevada para la seguridad nacional (CISA)"
+            },
+            {
+              "term": "APT",
+              "desc": "Adversario con gran experiencia y recursos (NIST)"
+            },
+            {
+              "term": "Hacktivismo",
+              "desc": "Actividad ideológica, p. ej. campañas de DDoS (ENISA)"
+            }
+          ],
+          "why": "CISA: los actores APT cuentan con muchos recursos y realizan actividad cibernética maliciosa sofisticada. NIST define un APT como un adversario con niveles sofisticados de experiencia y recursos significativos."
         },
         {
           "type": "card",

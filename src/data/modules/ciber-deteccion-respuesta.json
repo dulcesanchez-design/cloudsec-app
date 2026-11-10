@@ -1,0 +1,119 @@
+{
+  "title": "Detección y respuesta a incidentes",
+  "lessons": [
+    {
+      "title": "Logs: por qué importan",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/log",
+        "https://csrc.nist.gov/glossary/term/log_management",
+        "https://csrc.nist.gov/pubs/sp/800/92/final",
+        "https://www.cisa.gov/resources-tools/resources/best-practices-event-logging-and-threat-detection"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📜", "text": "Un log (registro) es un registro de los eventos que ocurren en los sistemas y redes de una organización." },
+        { "type": "choice", "q": "Según NIST, ¿qué es un log?", "options": ["Un registro de los eventos de los sistemas y redes de una organización", "Un tipo de contraseña", "Un firewall"], "answer": 0, "why": "Es la definición de NIST SP 800-92." },
+        { "type": "card", "emoji": "🗂️", "text": "Gestión de logs: el proceso de generar, transmitir, almacenar, analizar y desechar los datos de registro." },
+        { "type": "order", "q": "Ordena las actividades de la gestión de logs", "items": ["Generar", "Transmitir", "Almacenar", "Analizar", "Desechar"], "why": "Es el orden en que NIST SP 800-92 las enumera." },
+        { "type": "card", "emoji": "👁️", "text": "CISA y la ASD indican que el registro de eventos mejora la seguridad y la resiliencia al dar visibilidad de la red." },
+        { "type": "truefalse", "statement": "El registro de eventos da visibilidad de la red.", "answer": true, "why": "Así lo indica la guía conjunta de CISA y ASD sobre registro de eventos." },
+        { "type": "scenario", "situation": "Una organización no registra lo que ocurre en sus sistemas.", "q": "¿Qué pierde?", "options": ["Visibilidad para detectar y analizar lo ocurrido", "Velocidad de Internet", "Licencias de software"], "answer": 0, "why": "El registro de eventos permite la visibilidad de la red, como indican CISA y ASD." }
+      ]
+    },
+    {
+      "title": "Eventos y SIEM",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/event",
+        "https://csrc.nist.gov/glossary/term/security_information_and_event_management"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "🔔", "text": "Un evento es cualquier suceso observable que involucra activos informáticos." },
+        { "type": "choice", "q": "Según NIST SP 800-61 Rev. 3, ¿qué es un evento?", "options": ["Cualquier suceso observable que involucra activos informáticos", "Solo un ataque", "Solo un error de hardware"], "answer": 0, "why": "Es la definición del glosario de NIST." },
+        { "type": "card", "emoji": "🧮", "text": "Un SIEM es un programa que ofrece capacidades de registro centralizado para una variedad de tipos de logs." },
+        { "type": "truefalse", "statement": "Un SIEM ofrece registro centralizado para varios tipos de logs.", "answer": true, "why": "Es la definición de NIST SP 800-92." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Evento", "desc": "Suceso observable con activos informáticos" },
+          { "term": "Log", "desc": "Registro de eventos de sistemas y redes" },
+          { "term": "SIEM", "desc": "Registro centralizado de varios tipos de logs" }
+        ], "why": "Son definiciones del glosario de NIST." },
+        { "type": "scenario", "situation": "Un equipo quiere reunir en un solo lugar los logs de muchos sistemas distintos.", "q": "¿Qué herramienta encaja?", "options": ["Un SIEM", "Una VPN", "Un antivirus"], "answer": 0, "why": "Un SIEM ofrece registro centralizado para varios tipos de logs." }
+      ]
+    },
+    {
+      "title": "Qué es un incidente",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/incident",
+        "https://csrc.nist.gov/glossary/term/incident_response_plan"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "⚠️", "text": "Incidente: un suceso que compromete, real o potencialmente, la confidencialidad, integridad o disponibilidad de un sistema de información." },
+        { "type": "choice", "q": "Según FIPS 200, ¿qué es un incidente?", "options": ["Un suceso que real o potencialmente compromete la confidencialidad, integridad o disponibilidad", "Cualquier cambio de configuración", "Una actualización normal"], "answer": 0, "why": "Es la definición del glosario de NIST (FIPS 200). Esos tres conceptos se explican en «Seguridad básica»." },
+        { "type": "truefalse", "statement": "Todo evento es un incidente.", "answer": false, "why": "Un evento es cualquier suceso observable; un incidente es el que compromete, real o potencialmente, la confidencialidad, integridad o disponibilidad." },
+        { "type": "scenario", "situation": "Se detecta que alguien accedió sin autorización a datos confidenciales.", "q": "¿Qué es?", "options": ["Un incidente", "Un evento sin importancia", "Un parche"], "answer": 0, "why": "Compromete la confidencialidad de un sistema de información." },
+        { "type": "card", "emoji": "📘", "text": "Plan de respuesta a incidentes: instrucciones predeterminadas para detectar, responder y limitar las consecuencias de un incidente." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "Evento", "desc": "Suceso observable" },
+          { "term": "Incidente", "desc": "Compromete la confidencialidad, integridad o disponibilidad" },
+          { "term": "Plan de respuesta", "desc": "Instrucciones para detectar, responder y limitar" }
+        ], "why": "Son definiciones del glosario de NIST." }
+      ]
+    },
+    {
+      "title": "Fases de la respuesta",
+      "source": [
+        "https://www.ncsc.gov.uk/collection/incident-management",
+        "https://www.ncsc.gov.uk/collection/incident-management/cyber-incident-response-processes",
+        "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📌", "text": "Según la guía de NCSC, lo único que ayuda a manejar bien un incidente cibernético es una buena preparación." },
+        { "type": "card", "emoji": "🗺️", "text": "Etapas de NCSC: analizar, contener o mitigar, remediar o erradicar, recuperar, y revisión posterior con lecciones aprendidas." },
+        { "type": "order", "q": "Ordena las etapas de la respuesta", "items": ["Preparar el plan", "Analizar", "Contener / mitigar", "Remediar / erradicar", "Recuperar", "Revisión posterior"], "why": "Es el orden en que la guía de NCSC presenta las etapas." },
+        { "type": "match", "q": "Une cada etapa con su objetivo", "pairs": [
+          { "term": "Contener", "desc": "Bloquear actividad, aislar sistemas y restablecer cuentas" },
+          { "term": "Erradicar", "desc": "Eliminar por completo la amenaza de la red y los sistemas" },
+          { "term": "Recuperar", "desc": "Volver a la «operación normal»" }
+        ], "why": "Son las descripciones de la guía de NCSC." },
+        { "type": "scenario", "situation": "Un sistema está comprometido y la actividad maliciosa continúa.", "q": "¿Qué etapa corresponde ahora?", "options": ["Contener: bloquear actividad y aislar sistemas", "Revisión posterior", "Declarar la recuperación"], "answer": 0, "why": "Contener es bloquear la actividad, aislar sistemas y restablecer cuentas." },
+        { "type": "findbug", "q": "¿Qué práctica contradice el orden de las etapas?", "hint": "Toca la práctica incorrecta", "lines": ["Tener un plan de respuesta y practicarlo", "Aislar los sistemas afectados", "Eliminar por completo la amenaza antes de volver a la normalidad", "Declarar todo recuperado sin haber eliminado la amenaza"], "answer": 3, "why": "Según NCSC, remediar busca eliminar por completo la amenaza antes de recuperar la operación normal." },
+        { "type": "card", "emoji": "ℹ️", "text": "NIST SP 800-61 Rev. 2 fue retirada en abril de 2025. La Rev. 3 la sustituye y se alinea con CSF 2.0." },
+        { "type": "truefalse", "statement": "NIST SP 800-61 Rev. 3 sustituye a la Rev. 2.", "answer": true, "why": "La página de NIST indica que Rev. 3 sustituye a Rev. 2 (retirada el 3 de abril de 2025)." }
+      ]
+    },
+    {
+      "title": "Plan y comunicación",
+      "source": [
+        "https://www.cisa.gov/stopransomware/ransomware-guide",
+        "https://www.ncsc.gov.uk/collection/incident-management/cyber-incident-response-processes"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📋", "text": "CISA recomienda crear, mantener y ejercitar con regularidad un plan de respuesta a incidentes y un plan de comunicaciones asociado." },
+        { "type": "choice", "q": "¿Qué recomienda CISA sobre el plan de respuesta?", "options": ["Ejercitarlo con regularidad", "Guardarlo sin usarlo", "Compartirlo sin revisar"], "answer": 0, "why": "La guía #StopRansomware pide crear, mantener y ejercitar con regularidad el plan." },
+        { "type": "card", "emoji": "📣", "text": "Incluye procedimientos de comunicación y plantillas de declaraciones iniciales, y acuerda cuánto detalle compartir dentro de la organización y con el público." },
+        { "type": "truefalse", "statement": "Conviene tener plantillas de declaraciones iniciales para un incidente.", "answer": true, "why": "La guía de CISA recomienda incluirlas en los procedimientos de comunicación." },
+        { "type": "scenario", "situation": "Ocurre un incidente y nadie sabe qué decir ni a quién avisar.", "q": "¿Qué habría ayudado?", "options": ["Un plan de comunicaciones con procedimientos y plantillas", "Ningún plan", "Apagar el teléfono"], "answer": 0, "why": "La guía recomienda un plan de comunicaciones asociado al de respuesta." },
+        { "type": "card", "emoji": "🇺🇸", "text": "CISA aconseja contactar con la oficina local del FBI para obtener una lista de contactos ante un incidente cibernético (guía para EE. UU.)." },
+        { "type": "truefalse", "statement": "Las notificaciones a las autoridades suelen depender de requisitos legales y regulatorios.", "answer": true, "why": "NCSC trata la notificación dentro de los requisitos legales y regulatorios." }
+      ]
+    },
+    {
+      "title": "Repaso final",
+      "source": [
+        "https://csrc.nist.gov/glossary/term/incident",
+        "https://www.ncsc.gov.uk/collection/incident-management/cyber-incident-response-processes",
+        "https://www.cisa.gov/stopransomware/ransomware-guide"
+      ],
+      "steps": [
+        { "type": "card", "emoji": "📝", "text": "Repaso: logs, SIEM, incidentes, etapas de la respuesta, plan y comunicación." },
+        { "type": "match", "q": "Une cada concepto con su descripción", "pairs": [
+          { "term": "SIEM", "desc": "Registro centralizado de varios tipos de logs" },
+          { "term": "Incidente", "desc": "Compromete confidencialidad, integridad o disponibilidad" },
+          { "term": "Erradicar", "desc": "Eliminar por completo la amenaza" }
+        ], "why": "Son definiciones de NIST y de NCSC." },
+        { "type": "order", "q": "Ordena estas etapas de la respuesta", "items": ["Analizar", "Contener", "Erradicar", "Recuperar"], "why": "Es el orden en que NCSC las presenta." },
+        { "type": "truefalse", "statement": "Un plan de respuesta debe ejercitarse con regularidad.", "answer": true, "why": "Lo recomienda CISA." },
+        { "type": "scenario", "situation": "Detectas actividad maliciosa en un servidor.", "q": "¿Qué haces primero tras analizar?", "options": ["Contener: aislar el sistema y bloquear la actividad", "Esperar", "Cerrar el caso"], "answer": 0, "why": "Contener sigue al análisis en las etapas de NCSC." },
+        { "type": "choice", "q": "¿Qué da el registro de eventos, según CISA y ASD?", "options": ["Visibilidad de la red", "Menos logs", "Más contraseñas"], "answer": 0, "why": "Mejora la seguridad y la resiliencia al dar visibilidad de la red." }
+      ]
+    }
+  ]
+}
